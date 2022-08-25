@@ -1,0 +1,40 @@
+$dark-blue: #354052;
+
+.sidebar {
+    @apply flex flex-col bg-blue text-white w-max overflow-hidden cursor-pointer;
+
+    transition: all .5s;
+    width: 3.5rem;
+    animation: .5s closesidebar;
+
+    @keyframes closesidebar {
+        from {
+            width: 12.5rem;
+        }
+
+        to {
+            width: 3.5rem;
+        }
+    }
+
+    &:hover {
+        width: 12.5rem;
+    }
+
+    &__item {
+        @apply flex items-center cursor-pointer font-extralight relative text-sm;
+
+        padding: 0.9375rem 0.625rem;
+        border-bottom: 0.0625rem solid #2b3443;
+
+        &:hover {
+            background-color: darken($dark-blue, 5);
+        }
+    }
+
+    &__icon {
+        @apply block text-center;
+
+        width: 1.875rem;
+    }
+}
