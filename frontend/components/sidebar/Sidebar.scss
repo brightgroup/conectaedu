@@ -5,17 +5,7 @@ $dark-blue: #354052;
 
     transition: all .5s;
     width: 3.5rem;
-    animation: .5s closesidebar;
-
-    @keyframes closesidebar {
-        from {
-            width: 12.5rem;
-        }
-
-        to {
-            width: 3.5rem;
-        }
-    }
+    animation: .3s closesidebar;
 
     &:hover {
         width: 12.5rem;
@@ -36,5 +26,15 @@ $dark-blue: #354052;
         @apply block text-center;
 
         width: 1.875rem;
+    }
+}
+
+@keyframes closesidebar {
+    from {
+        width: 12.5rem;
+    }
+
+    to {
+        width: 3.5rem;
     }
 }

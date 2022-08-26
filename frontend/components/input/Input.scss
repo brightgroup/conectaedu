@@ -1,0 +1,25 @@
+.input {
+    @apply outline-none w-full py-1 px-2  text-black text-sm;
+
+    &:focus, &:valid {
+        ~ .input__label {
+            transform: translateY(-16px);
+
+            @apply text-tiny text-blue;
+        }
+
+        ~ .input__label-error {
+            @apply text-red-600;
+        }
+    }
+
+    &__label {
+        @apply text-sm absolute top-1 transition-all;
+
+        left: 38px;
+
+        &-error {
+            @apply text-red-600;
+        }
+    }
+}

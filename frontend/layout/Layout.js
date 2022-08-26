@@ -56,8 +56,12 @@
 import Head from 'next/head'
 import { Header } from 'components/header'
 import { Sidebar } from 'components/sidebar'
+import { Loader } from 'components/loader'
+import { useSelector } from 'react-redux'
 
 export const Layout = ({ children }) => {
+  const { showLoader } = useSelector(state => state.loader)
+
   return (
     <div className="flex flex-col h-screen">
       <Head>
@@ -73,6 +77,7 @@ export const Layout = ({ children }) => {
         />
       </Head>
       <main className="flex h-full flex-1">
+        {showLoader && <Loader />}
         <Sidebar />
         <div className="flex flex-col flex-1">
           <Header />

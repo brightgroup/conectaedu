@@ -14,6 +14,10 @@ module.exports = {
           dark: '#028268',
         },
         blue: { DEFAULT: '#354052' },
+        error: 'rgb(220,38,38)',
+      },
+      fontSize: {
+        tiny: '0.625rem', //10px
       },
     },
   },
