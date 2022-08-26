@@ -1,3 +1,21 @@
+
 {
-  "extends": ["next/babel","next/core-web-vitals"]
+  "extends": ["next/babel","next/core-web-vitals"],
+  "rules": {
+    "@next/next/no-document-import-in-page": "off",
+    "@next/next/no-img-element": "off",
+    "react-hooks/exhaustive-deps": "off",
+    "react/display-name": "off"
+  },
+  "ignorePatterns": [
+    ".next",
+    "coverage",
+    "*.config.js",
+    "*.setup.js",
+    "public/assets/*",
+    ".storybook",
+    "github",
+    ".babelrc",
+    "tsconfig.json"
+  ]
 }

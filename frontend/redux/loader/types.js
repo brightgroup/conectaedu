@@ -1,0 +1,1 @@
+export const SET_LOADER_STATUS = 'SET_LOADER_STATUS'
