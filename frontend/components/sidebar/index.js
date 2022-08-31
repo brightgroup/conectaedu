@@ -7,22 +7,22 @@ export const NAV_ITEMS = [
     icon: 'fa-house-chimney',
   },
   {
-    route: '/courses',
+    route: '/cursos',
     label: 'Cursos',
     icon: 'fa-people-group',
   },
   {
-    route: '/students',
+    route: '/estudiantes',
     label: 'Estudiantes',
     icon: 'fa-person ',
   },
   {
-    route: '/notes',
+    route: '/notas',
     label: 'Notas',
     icon: 'fa-file-pen',
   },
   {
-    route: '/upload-notes',
+    route: '/subir-notas',
     label: 'Subir notas',
     icon: 'fa-upload',
   },

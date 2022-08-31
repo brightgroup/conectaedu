@@ -1,0 +1,21 @@
+.paginator {
+    @apply flex justify-end gap-2 mt-2;
+
+    &__arrow {
+        @apply w-6 h-6 flex items-center justify-center rounded-sm cursor-pointer text-sm bg-blue text-white transition-all;
+    }
+
+    &__page {
+        @apply w-6 h-6 flex items-center justify-center rounded-sm text-sm cursor-pointer;
+    }
+
+    .enabled {
+        @apply cursor-pointer;
+    }
+
+    .disabled {
+        @apply cursor-default;
+
+        opacity: .5;
+    }
+}

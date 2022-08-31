@@ -1,10 +1,10 @@
 import { Layout } from 'layout/Layout'
-import { Home } from 'views/home'
+import { UploadNotes } from 'views/upload-notes'
 
 const Page = () => {
   return (
     <Layout>
-      <Home />
+      <UploadNotes />
     </Layout>
   )
 }
