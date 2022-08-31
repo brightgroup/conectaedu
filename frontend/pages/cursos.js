@@ -1,10 +1,10 @@
 import { Layout } from 'layout/Layout'
-import { Home } from 'views/home'
+import { Courses } from 'views/courses/Courses'
 
 const Page = () => {
   return (
     <Layout>
-      <Home />
+      <Courses />
     </Layout>
   )
 }

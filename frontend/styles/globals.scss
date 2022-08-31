@@ -18,6 +18,50 @@
     height: 4.375rem;
 }
 
+.table {
+    border-collapse: collapse;
+    font-size: 0.875rem;
+
+    &-container {
+        border-radius: 0.25rem 0.25rem 0 0;
+    }
+
+    thead tr {
+        @apply text-white text-left;
+    }
+
+    th, td {
+        // padding: 12px 0.9375rem;
+        @apply px-2;
+
+        height: 2.8125rem;
+    }
+
+    tbody tr {
+        border-bottom: 0.0625rem solid #dddddd;
+    }
+
+    tbody tr:nth-of-type(even) {
+        background-color: #f3f3f3;
+    }
+
+    tbody tr:last-of-type {
+        border-bottom: 2px solid #354052;
+    }
+}
+
+input, select {
+    outline: none;
+}
+
 .text-left {
     text-align: left !important;
+}
+
+.button-icon {
+    @apply transition-all w-6 h-6 rounded-full inline-flex items-center justify-center cursor-pointer;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.2);
+    }
 }
