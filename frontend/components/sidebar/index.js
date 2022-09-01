@@ -7,9 +7,9 @@ export const NAV_ITEMS = [
     icon: 'fa-house-chimney',
   },
   {
-    route: '/cursos',
-    label: 'Cursos',
-    icon: 'fa-people-group',
+    route: '/materias',
+    label: 'Materias',
+    icon: 'fa-book-bookmark',
   },
   {
     route: '/estudiantes',

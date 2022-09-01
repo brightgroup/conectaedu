@@ -6,7 +6,7 @@ import { Paginator } from 'components/paginator'
 import { sortArray } from 'utils/Array'
 import { TableHeader } from '.'
 
-export const Courses = () => {
+export const Subjects = () => {
   const dispatch = useDispatch()
   const { courses } = useSelector(state => state.courses)
   const [data, setData] = useState([])
@@ -26,7 +26,7 @@ export const Courses = () => {
 
   return (
     <div className="courses m-auto w-max mt-12">
-      <h3 className="mb-4 text-3xl font-black text-center text-blue">Cursos</h3>
+      <h3 className="mb-4 text-3xl font-black text-center text-blue">Materias</h3>
       {!!tableData?.length && (
         <div className="table-container overflow-y-auto">
           <table className="table overflow-hidden z-50">
