@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { TOKEN } from 'constants/Auth'
 import { setLoaderStatus } from 'redux/loader/actions'
+import { toast } from 'react-toastify'
 import { SET_SESSION, SET_ERROR } from './types'
 
 export const setSession = status => ({
@@ -22,9 +23,14 @@ export const login = ({ email: user, password }) => {
         localStorage.setItem(TOKEN, data)
         dispatch(setSession(true))
       }
+      toast('Bienvenido')
+      dispatch(setLoaderStatus(false))
     } catch (error) {
+      toast(error.message)
+      console.log('error', error)
       dispatch(setError(error))
       dispatch(setSession(false))
+      dispatch(setLoaderStatus(false))
     }
     dispatch(setLoaderStatus(false))
   }

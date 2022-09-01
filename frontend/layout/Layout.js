@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+import { ToastContainer } from 'react-toastify'
 import Head from 'next/head'
 import Router from 'next/router'
 import { Header } from 'components/header'
@@ -5,7 +7,7 @@ import { Sidebar } from 'components/sidebar'
 import { Loader } from 'components/loader'
 import { useSelector } from 'react-redux'
 import { TOKEN } from 'constants/Auth'
-import { useEffect } from 'react'
+import 'react-toastify/dist/ReactToastify.css'
 
 export const Layout = ({ children }) => {
   const { showLoader } = useSelector(state => state.loader)
@@ -31,6 +33,7 @@ export const Layout = ({ children }) => {
         />
       </Head>
       <main className="flex flex-1">
+        <ToastContainer />
         {showLoader && <Loader />}
         {isAuthenticated && <Sidebar />}
         <div className="flex flex-col flex-1">
