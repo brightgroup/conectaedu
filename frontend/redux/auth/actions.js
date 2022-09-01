@@ -28,6 +28,7 @@ export const login = ({ email: user, password }) => {
     } catch (error) {
       toast(error.message)
       console.log('error', error)
+      console.log('STRINGIY', JSON.stringify(error))
       dispatch(setError(error))
       dispatch(setSession(false))
       dispatch(setLoaderStatus(false))
