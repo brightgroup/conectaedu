@@ -26,7 +26,7 @@ export const Header = () => {
         <section className="flex items-center gap-4">
           <input className="border" />
           <div className="w-10 h-10 rounded-full flex items-center justify-center cursor-pointer bg-blue text-white relative">
-            A
+            {localStorage['user']?.toUpperCase() || 'A'}
           </div>
           <i className="fa-solid fa-right-to-bracket cursor-pointer text-xl" onClick={signOff} />
         </section>

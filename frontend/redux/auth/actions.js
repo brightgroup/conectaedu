@@ -22,8 +22,9 @@ export const login = ({ email: user, password }) => {
       if (data) {
         localStorage.setItem(TOKEN, data)
         dispatch(setSession(true))
+        toast('Bienvenido')
+        localStorage.setItem('user', user[0])
       }
-      toast('Bienvenido')
       dispatch(setLoaderStatus(false))
     } catch (error) {
       toast(error.message)
