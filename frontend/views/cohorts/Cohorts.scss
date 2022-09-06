@@ -1,0 +1,21 @@
+.cohorts {
+    &__standard-field {
+        width: 12.5rem;
+        min-width: 12.5rem;
+    }
+
+    &__cohort-field {
+        width: 18.75rem;
+        min-width: 18.75rem;
+    }
+
+    &__student-field {
+        width: 20rem;
+        min-width: 20rem;
+    }
+
+    &__course-field {
+        width: 25rem;
+        min-width: 25rem;
+    }
+}

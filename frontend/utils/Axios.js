@@ -1,5 +1,8 @@
 import axios from 'axios'
+import { toast } from 'react-toastify'
 import { TOKEN } from 'constants/Auth'
+import { TOKEN_ERRORS } from 'constants/Error'
+import { logout } from 'redux/auth/actions'
 import { setLoaderStatus } from 'redux/loader/actions'
 import { store } from 'redux/store'
 
@@ -20,11 +23,13 @@ export const Axios = async (endpoint, data = {}, method = 'GET', contentType = '
         store.dispatch(setLoaderStatus(false))
         return res?.data || res
       } catch (error) {
+        if (TOKEN_ERRORS.includes(error.response.data)) {
+          clearSession()
+          toast('Token inválido')
+        }
         store.dispatch(setLoaderStatus(false))
       }
     } else {
-      console.log('ELSE')
-
       try {
         const res = await axios(url, {
           method,
@@ -42,4 +47,10 @@ export const Axios = async (endpoint, data = {}, method = 'GET', contentType = '
       }
     }
   }
+}
+
+export const clearSession = () => {
+  store.dispatch(logout())
+  store.dispatch(setLoaderStatus(false))
+  window.location.href = '/'
 }

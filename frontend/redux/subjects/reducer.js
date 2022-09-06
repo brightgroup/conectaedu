@@ -1,16 +1,16 @@
-import { SET_COURSES } from './types'
+import { SET_SUBJECTS } from './types'
 
 const initialState = {
-  courses: [],
+  subjects: [],
   error: '',
 }
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_COURSES:
+    case SET_SUBJECTS:
       return {
         ...state,
-        courses: action.payload,
+        subjects: action.payload,
       }
     default:
       return state

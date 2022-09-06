@@ -1,7 +1,7 @@
 import axios from 'axios'
+import { toast } from 'react-toastify'
 import { TOKEN } from 'constants/Auth'
 import { setLoaderStatus } from 'redux/loader/actions'
-import { toast } from 'react-toastify'
 import { SET_SESSION, SET_ERROR } from './types'
 
 export const setSession = status => ({
@@ -27,8 +27,6 @@ export const login = ({ email: user, password }) => {
       dispatch(setLoaderStatus(false))
     } catch (error) {
       toast(error.message)
-      console.log('error', error)
-      console.log('STRINGIY', JSON.stringify(error))
       dispatch(setError(error))
       dispatch(setSession(false))
       dispatch(setLoaderStatus(false))
@@ -40,6 +38,7 @@ export const login = ({ email: user, password }) => {
 export const logout = () => {
   return async dispatch => {
     dispatch(setSession(false))
+    dispatch(setLoaderStatus(false))
     localStorage.removeItem(TOKEN)
   }
 }

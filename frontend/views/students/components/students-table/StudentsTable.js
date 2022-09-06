@@ -26,8 +26,8 @@ export const StudentsTable = () => {
             <tbody>
               {students.map((item, index) => (
                 <tr key={`student${index}`}>
-                  <td className="courses__course-field text-center leading-4">{item['Display Name']}</td>
-                  <td className="courses__view-field text-center">
+                  <td className="subjects__table-field text-center leading-4">{item['Display Name']}</td>
+                  <td className="subjects__view-field text-center">
                     <p className="flex items-center justify-center w-max m-auto cursor-pointer">
                       <i className="fa-solid fa-eye mr-2" />
                       <small className="text-sm" onClick={() => getStudentInformation(item['Display Name'])}>

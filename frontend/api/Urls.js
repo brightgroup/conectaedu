@@ -1,5 +1,8 @@
 export const URLS = {
-  getCourses: 'get-courses',
+  getSubjects: 'get-courses',
   getStudents: 'get-achievements',
   getStudentInformation: 'get-info-student',
+  getCohorts: 'get-cohorts',
+  getStudentsByCohort: 'get-getstudentbycohorts',
+  getCoursesByCohort: 'get-getcoursesbycohorts',
 }
