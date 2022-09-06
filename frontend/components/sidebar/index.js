@@ -12,9 +12,14 @@ export const NAV_ITEMS = [
     icon: 'fa-book-bookmark',
   },
   {
+    route: '/cohortes',
+    label: 'Cohortes',
+    icon: 'fa-people-group',
+  },
+  {
     route: '/estudiantes',
     label: 'Estudiantes',
-    icon: 'fa-person ',
+    icon: 'fa-person',
   },
   {
     route: '/notas',

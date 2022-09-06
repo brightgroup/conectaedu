@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Router from 'next/router'
-import { getCourses } from 'redux/courses/actions'
+import { getSubjects } from 'redux/subjects/actions'
 import { Paginator } from 'components/paginator'
 import { sortArray } from 'utils/Array'
 import { TableHeader } from '.'
 
 export const Subjects = () => {
   const dispatch = useDispatch()
-  const { courses } = useSelector(state => state.courses)
+  const { subjects } = useSelector(state => state.subjects)
   const [data, setData] = useState([])
   const [isAscending, setIsAscending] = useState(true)
   const [tableData, setTableData] = useState()
 
   useEffect(() => {
-    dispatch(getCourses())
+    dispatch(getSubjects())
   }, [])
 
-  useEffect(() => setTableData(courses), [courses])
+  useEffect(() => setTableData(subjects), [subjects])
 
   const toggleSort = () => {
     setIsAscending(!isAscending)
@@ -25,7 +25,7 @@ export const Subjects = () => {
   }
 
   return (
-    <div className="courses m-auto w-max mt-12">
+    <div className="subjects m-auto w-max mt-12">
       <h3 className="mb-4 text-3xl font-black text-center text-blue">Materias</h3>
       {!!tableData?.length && (
         <div className="table-container overflow-y-auto">
@@ -33,9 +33,9 @@ export const Subjects = () => {
             <TableHeader toggleSort={toggleSort} isAscending={isAscending} />
             <tbody>
               {data.map(({ name = '' }, index) => (
-                <tr key={`course${index}`}>
-                  <td className="courses__course-field text-center leading-4">{name}</td>
-                  <td className="courses__view-field text-center">
+                <tr key={`matter${index}`}>
+                  <td className="subjects__table-field text-center leading-4">{name}</td>
+                  <td className="subjects__view-field text-center">
                     <p
                       className="flex items-center justify-center w-max m-auto cursor-pointer"
                       onClick={() => Router.push('/estudiantes')}
