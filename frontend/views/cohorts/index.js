@@ -1,3 +1,4 @@
+import { sortArray } from 'utils/Array'
 import { firstLetterToUpperCase } from 'utils/Text'
 
 export * from './Cohorts'
@@ -36,7 +37,7 @@ export const getStudentSubjects = data => {
   return result
 }
 
-export const getAveragesAndFaults = data => getStudentSubjects(data)
+export const getAveragesAndFaults = data => sortArray(getStudentSubjects(data), { key: 'student', isAscending: true })
 
 export const getSubjects = data => {
   const [studentKey] = Object.keys(data)

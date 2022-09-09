@@ -1,105 +1,168 @@
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
+import { Select } from 'components/select'
+import { getAverage, sortArray } from 'utils/Array'
 import { toInteger } from 'utils/Number'
-import { TableHeader, INDICATORS, FAILURE_KEYS, PERIOD_KEYS } from '.'
+import { removeAccents } from 'utils/Text'
+import { ALL, DEFAULT_VALUE } from 'constants/Select'
+import { TableHeader, INDICATORS, PERIODS } from '.'
 
-export const SummaryTable = ({ subjects = [], data = [] }) => {
-  const getValue = (array, key) => array?.find(item => item.item.toLowerCase() === key.toLowerCase())?.grade || '-'
+export const SummaryTable = ({ subjects = [], data = [], setData = [] }) => {
+  const [periods, setPeriods] = useState(PERIODS)
+
+  const getValue = (array, key) => array?.find(({ item }) => item.toLowerCase() === key.toLowerCase())?.grade || '-'
 
   const getTotalFailures = array => {
-    return FAILURE_KEYS.map(fail => toInteger(getValue(array, fail), true))?.reduce((total, item) => (total += item), 0)
+    return periods
+      .map(({ label: fail }) => toInteger(getValue(array, `fallas acumuladas ${removeAccents(fail)}`), true))
+      ?.reduce((total, item) => (total += item), 0)
   }
 
+  const getNoteAverage = notes => {
+    const data = notes.filter(note => !isNaN(note))
+    return data.length ? getAverage(data).toFixed(2) : '-'
+  }
+
+  const handleChangeOption = ({ target }) => {
+    const { value } = target
+    if (value === ALL) return setPeriods(PERIODS)
+    if (value !== DEFAULT_VALUE) setPeriods(PERIODS.filter(({ value: option }) => option === value))
+  }
+
+  const toggleSort = isAscending => setData(sortArray(data, { key: 'student', isAscending }))
+
   return (
-    <div className="table-container overflow-y-auto">
-      <table className="table overflow-hidden z-50">
-        <TableHeader subjects={subjects} />
-        <tbody>
-          {data.map(({ student, ...item }, index) => {
-            return (
-              <tr key={`item${index}`}>
-                <td className="text-center">{student}</td>
-                {subjects.map(subject => {
-                  const subjectResults = item[subject]
-                  const failure = getTotalFailures(subjectResults)
-                  return (
-                    <Fragment key={`subject${subject}`}>
-                      {PERIOD_KEYS.map(period => (
-                        <Fragment key={period}>
-                          <td className="text-center">{getValue(subjectResults, period)}</td>
-                        </Fragment>
-                      ))}
-                      {FAILURE_KEYS.map(fail => (
-                        <Fragment key={fail}>
-                          <td className="text-center">{toInteger(getValue(subjectResults, fail))}</td>
-                        </Fragment>
-                      ))}
-                      <td className={`text-center ${failure ? 'bg-red-600 text-white' : ''}`}>{failure}</td>
-                      {INDICATORS.map(indicator => (
-                        <Fragment key={indicator}>
-                          <td className="text-center">{getValue(subjectResults, indicator)}</td>
-                        </Fragment>
-                      ))}
-                    </Fragment>
-                  )
-                })}
-              </tr>
-            )
-          })}
-        </tbody>
-      </table>
+    <div>
+      <div className="flex justify-end my-2">
+        <Select options={PERIODS} initialValue="Filtrar por período" handleChange={handleChangeOption} />
+      </div>
+      <div className="table-container overflow-y-auto">
+        <table className="table overflow-hidden z-50">
+          <TableHeader subjects={subjects} periods={periods} toggleSort={toggleSort} />
+          <tbody>
+            {data.map(({ student, ...item }, index) => {
+              return (
+                <tr key={`item${index}`}>
+                  <td className="text-center">{student}</td>
+                  {subjects.map(subject => {
+                    const subjectResults = item[subject]
+                    const failures = getTotalFailures(subjectResults)
+                    const notes = periods.map(({ value: period }) => getValue(subjectResults, period))
+
+                    return (
+                      <Fragment key={`subject${subject}`}>
+                        {periods.map(({ value }) => (
+                          <Fragment key={value}>
+                            <td className="text-center">{getValue(subjectResults, value)}</td>
+                          </Fragment>
+                        ))}
+                        <td className="text-center">{getNoteAverage(notes)}</td>
+                        {periods.map(({ label: fail }, index) => (
+                          <Fragment key={`failure${index}`}>
+                            <td className="text-center">
+                              {toInteger(getValue(subjectResults, `fallas acumuladas ${removeAccents(fail)}`))}
+                            </td>
+                          </Fragment>
+                        ))}
+                        <td className={`text-center ${failures ? 'bg-red-600 text-white' : ''}`}>{failures}</td>
+                        {INDICATORS.map(indicator => (
+                          <Fragment key={indicator}>
+                            <td className="text-center">{getValue(subjectResults, indicator)}</td>
+                          </Fragment>
+                        ))}
+                      </Fragment>
+                    )
+                  })}
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 }
 
-// import { Fragment } from 'react'
+// import { Fragment, useState } from 'react'
+// import { Select } from 'components/select'
+// import { getAverage } from 'utils/Array'
 // import { toInteger } from 'utils/Number'
-// import { TableHeader, INDICATORS, FAILURE_KEYS, PERIOD_KEYS } from '.'
+// import { removeAccents } from 'utils/Text'
+// import { ALL, DEFAULT_VALUE } from 'constants/Select'
+// import { TableHeader, INDICATORS, PERIODS } from '.'
 
 // export const SummaryTable = ({ subjects = [], data = [] }) => {
-//   const getValue = (array, key) => array?.find(item => item.item.toLowerCase() === key.toLowerCase())?.grade || '-'
+//   const [periods, setPeriods] = useState(PERIODS)
+//   const [tableData, setTableData] = useState([])
+
+//   const getValue = (array, key) => array?.find(({ item }) => item.toLowerCase() === key.toLowerCase())?.grade || '-'
 
 //   const getTotalFailures = array => {
-//     return FAILURE_KEYS.map(fail => toInteger(getValue(array, fail), true))?.reduce((total, item) => (total += item), 0)
+//     return periods
+//       .map(({ label: fail }) => toInteger(getValue(array, `fallas acumuladas ${removeAccents(fail)}`), true))
+//       ?.reduce((total, item) => (total += item), 0)
 //   }
 
+//   const getNoteAverage = notes => {
+//     const data = notes.filter(note => !isNaN(note))
+//     return data.length ? getAverage(data).toFixed(2) : '-'
+//   }
+
+//   const handleChangeOption = ({ target }) => {
+//     const { value } = target
+//     if (value === ALL) return setPeriods(PERIODS)
+//     if (value !== DEFAULT_VALUE) setPeriods(PERIODS.filter(({ value: option }) => option === value))
+//   }
+
+//   const toggleSort = () => {}
+
 //   return (
-//     <div className="table-container overflow-y-auto">
-//       <table className="table overflow-hidden z-50">
-//         <TableHeader subjects={subjects} />
-//         <tbody>
-//           {data.map(({ student, ...item }, index) => {
-//             return (
-//               <tr key={`item${index}`}>
-//                 <td className="text-center">{student}</td>
-//                 {subjects.map(subject => {
-//                   const subjectResults = item[subject]
-//                   const failure = getTotalFailures(subjectResults)
-//                   return (
-//                     <Fragment key={`subject${subject}`}>
-//                       {PERIOD_KEYS.map(period => (
-//                         <Fragment key={period}>
-//                           <td className="text-center">{getValue(subjectResults, period)}</td>
-//                         </Fragment>
-//                       ))}
-//                       {FAILURE_KEYS.map(fail => (
-//                         <Fragment key={fail}>
-//                           <td className="text-center">{toInteger(getValue(subjectResults, fail))}</td>
-//                         </Fragment>
-//                       ))}
-//                       <td className={`text-center ${failure ? 'bg-red-600 text-white' : ''}`}>{failure}</td>
-//                       {INDICATORS.map(indicator => (
-//                         <Fragment key={indicator}>
-//                           <td className="text-center">{getValue(subjectResults, indicator)}</td>
-//                         </Fragment>
-//                       ))}
-//                     </Fragment>
-//                   )
-//                 })}
-//               </tr>
-//             )
-//           })}
-//         </tbody>
-//       </table>
+//     <div>
+//       <div className="flex justify-end my-2">
+//         <Select options={PERIODS} initialValue="Filtrar por período" handleChange={handleChangeOption} />
+//       </div>
+//       <div className="table-container overflow-y-auto">
+//         <table className="table overflow-hidden z-50">
+//           <TableHeader subjects={subjects} periods={periods} />
+//           <tbody>
+//             {data.map(({ student, ...item }, index) => {
+//               return (
+//                 <tr key={`item${index}`}>
+//                   <td className="text-center">{student}</td>
+//                   {subjects.map(subject => {
+//                     const subjectResults = item[subject]
+//                     const failures = getTotalFailures(subjectResults)
+//                     const notes = periods.map(({ value: period }) => getValue(subjectResults, period))
+
+//                     return (
+//                       <Fragment key={`subject${subject}`}>
+//                         {periods.map(({ value }) => (
+//                           <Fragment key={value}>
+//                             <td className="text-center">{getValue(subjectResults, value)}</td>
+//                           </Fragment>
+//                         ))}
+//                         <td className="text-center">{getNoteAverage(notes)}</td>
+//                         {periods.map(({ label: fail }, index) => (
+//                           <Fragment key={`failure${index}`}>
+//                             <td className="text-center">
+//                               {toInteger(getValue(subjectResults, `fallas acumuladas ${removeAccents(fail)}`))}
+//                             </td>
+//                           </Fragment>
+//                         ))}
+//                         <td className={`text-center ${failures ? 'bg-red-600 text-white' : ''}`}>{failures}</td>
+//                         {INDICATORS.map(indicator => (
+//                           <Fragment key={indicator}>
+//                             <td className="text-center">{getValue(subjectResults, indicator)}</td>
+//                           </Fragment>
+//                         ))}
+//                       </Fragment>
+//                     )
+//                   })}
+//                 </tr>
+//               )
+//             })}
+//           </tbody>
+//         </table>
+//       </div>
 //     </div>
 //   )
 // }

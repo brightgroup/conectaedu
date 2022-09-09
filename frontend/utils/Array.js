@@ -11,3 +11,7 @@ export const sortArray = (array, { key, isAscending = true }) => {
     return firstValue < secondValue ? 1 : firstValue > secondValue ? -1 : 0
   })
 }
+
+export const getAverage = array => {
+  return array.length ? array.reduce((total = 0, item) => (total += Number(item)), 0) / array.length : 0
+}

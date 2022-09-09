@@ -3,14 +3,4 @@ export const firstLetterToUpperCase = value => {
   return newValue[0].toUpperCase() + newValue.slice(1)
 }
 
-const removeAccents = (str = '') => (str ? str.normalize('NFD').replace(/[\u0300-\u036f]/g, '') : '')
-
-const getAcronym = subject =>
-  removeAccents(
-    subject
-      .split(' ')
-      .slice(0, subject.split(' ').length - 2)
-      .map(item => item[0])
-      .join('')
-      .toLowerCase()
-  )
+export const removeAccents = (str = '') => (str ? str.normalize('NFD').replace(/[\u0300-\u036f]/g, '') : '')

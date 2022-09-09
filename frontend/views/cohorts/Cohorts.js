@@ -22,7 +22,7 @@ export const Cohorts = () => {
   const [averagesTable, setAveragesTable] = useState([])
 
   useEffect(() => {
-    if (!table) dispatch(getCohorts())
+    // if (!table) dispatch(getCohorts())
   }, [])
 
   useEffect(() => formatData(), [scores])
@@ -42,7 +42,7 @@ export const Cohorts = () => {
     <div className="cohorts m-auto w-max mt-12">
       <TableTitle title={getTitle(table)} includesArrow={!!table} backRoute="/cohortes" />
       {table ? (
-        currentTable[table] || <SummaryTable subjects={subjects} data={averagesTable} />
+        currentTable[table] || <SummaryTable subjects={subjects} data={averagesTable} setData={setAveragesTable} />
       ) : (
         <CohortsTable data={cohortsTable} setData={setCohortsTable} initialData={cohorts} />
       )}

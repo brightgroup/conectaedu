@@ -69,3 +69,35 @@ input, select {
         background: rgba(255, 255, 255, 0.2);
     }
 }
+
+.select {
+    @apply relative flex overflow-hidden text-white text-sm;
+
+    width: 20em;
+    height: 3em;
+    border-radius: .25em;
+
+    &::after {
+        @apply absolute top-0 right-0 pointer-events-none;
+
+        content: '\25BC';
+        padding: 1em;
+        background-color: #395167;
+        transition: .25s all ease;
+    }
+
+    select {
+        @apply bg-blue border-0 outline-0 appearance-none shadow-none flex-1 text-white cursor-pointer;
+
+        padding: 0 1em;
+        background-image: none;
+
+        &::-ms-expand {
+            @apply hidden;
+        }
+    }
+
+    .fa-eye {
+        @apply cursor-pointer;
+    }
+}

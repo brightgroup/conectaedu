@@ -16,7 +16,7 @@ export const CoursesTable = ({ initialData = [] }) => {
   const toggleSort = isAscending => setTableData(sortArray(initialData, { key: 'fullname', isAscending }))
 
   const viewCourse = async fullname => {
-    // await dispatch(getStudentScores())
+    await dispatch(getStudentScores())
     Router.push(`?tabla=estudiantes-de-${fullname.toLowerCase()}`)
   }
 
