@@ -4,9 +4,11 @@ export const createArray = items => {
   return array
 }
 
+const getValue = value => (isNaN(value) ? value.toLowerCase() : value)
+
 export const sortArray = (array, { key, isAscending = true }) => {
   return [...array].sort((a, b) => {
-    const [firstValue, secondValue] = [a[key].toLowerCase(), b[key].toLowerCase()]
+    const [firstValue, secondValue] = [getValue(a[key]), getValue(b[key])]
     if (isAscending) return firstValue < secondValue ? -1 : firstValue > secondValue ? 1 : 0
     return firstValue < secondValue ? 1 : firstValue > secondValue ? -1 : 0
   })

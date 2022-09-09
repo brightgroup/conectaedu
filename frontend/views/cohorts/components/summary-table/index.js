@@ -26,6 +26,17 @@ export const PERIODS = [
   },
 ]
 
+export const SORTING_KEYS = [
+  {
+    value: 'student',
+    label: 'Ordenas por apellido',
+  },
+  {
+    value: 'position',
+    label: 'Ordenas por posición',
+  },
+]
+
 export const FAILURE_KEYS = [
   'fallas acumuladas primer periodo',
   'fallas acumuladas segundo periodo',

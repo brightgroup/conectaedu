@@ -29,7 +29,7 @@ export const CoursesTable = ({ initialData = [] }) => {
             <tr key={`course${index}`}>
               <td className="text-center leading-4">{course}</td>
               <td className="text-center">
-                <i className="fa-solid fa-eye" onClick={() => viewCourse(course)} />
+                <i className="fa-solid fa-eye cursor-pointer" onClick={() => viewCourse(course)} />
               </td>
             </tr>
           ))}

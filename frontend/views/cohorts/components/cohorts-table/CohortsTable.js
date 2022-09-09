@@ -16,7 +16,7 @@ export const CohortsTable = ({ data = [], setData = [], initialData = [] }) => {
   const toggleSort = isAscending => setTableData(sortArray(initialData, { key: 'name', isAscending }))
 
   const viewTable = viewStudentsTable => {
-    // dispatch(viewStudentsTable ? getStudentsByCohort() : getCoursesByCohort())
+    dispatch(viewStudentsTable ? getStudentsByCohort() : getCoursesByCohort())
     Router.push(`?tabla=${viewStudentsTable ? 'estudiantes' : 'cursos'}`)
   }
 
@@ -29,10 +29,10 @@ export const CohortsTable = ({ data = [], setData = [], initialData = [] }) => {
             <tr key={`cohort${index}`}>
               <td className="text-center leading-4">{name}</td>
               <td className="text-center">
-                <i className="fa-solid fa-eye" onClick={() => viewTable(true)} />
+                <i className="fa-solid fa-eye cursor-pointer" onClick={() => viewTable(true)} />
               </td>
               <td className="text-center">
-                <i className="fa-solid fa-eye" onClick={() => viewTable(false)} />
+                <i className="fa-solid fa-eye cursor-pointer" onClick={() => viewTable(false)} />
               </td>
             </tr>
           ))}

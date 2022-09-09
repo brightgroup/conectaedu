@@ -4,7 +4,7 @@ import { getAverage, sortArray } from 'utils/Array'
 import { toInteger } from 'utils/Number'
 import { removeAccents } from 'utils/Text'
 import { ALL, DEFAULT_VALUE } from 'constants/Select'
-import { TableHeader, INDICATORS, PERIODS } from '.'
+import { TableHeader, INDICATORS, PERIODS, SORTING_KEYS } from '.'
 
 export const SummaryTable = ({ subjects = [], data = [], setData = [] }) => {
   const [periods, setPeriods] = useState(PERIODS)
@@ -22,32 +22,35 @@ export const SummaryTable = ({ subjects = [], data = [], setData = [] }) => {
     return data.length ? getAverage(data).toFixed(2) : '-'
   }
 
-  const handleChangeOption = ({ target }) => {
+  const sortByPeriod = ({ target }) => {
     const { value } = target
     if (value === ALL) return setPeriods(PERIODS)
     if (value !== DEFAULT_VALUE) setPeriods(PERIODS.filter(({ value: option }) => option === value))
   }
 
-  const toggleSort = isAscending => setData(sortArray(data, { key: 'student', isAscending }))
+  // const toggleSort = isAscending => setData(sortArray(data, { key: 'student', isAscending }))
+
+  const sortByPosition = ({ target }) => setData(sortArray(data, { key: target.value }))
 
   return (
     <div>
-      <div className="flex justify-end my-2">
-        <Select options={PERIODS} initialValue="Filtrar por período" handleChange={handleChangeOption} />
+      <div className="flex justify-end my-2 gap-2">
+        <Select options={PERIODS} initialValue="Filtrar por período" handleChange={sortByPeriod} lastOption />
+        <Select options={SORTING_KEYS} initialValue="Ordenar por..." handleChange={sortByPosition} />
       </div>
       <div className="table-container overflow-y-auto">
         <table className="table overflow-hidden z-50">
-          <TableHeader subjects={subjects} periods={periods} toggleSort={toggleSort} />
+          <TableHeader subjects={subjects} periods={periods} />
           <tbody>
-            {data.map(({ student, ...item }, index) => {
+            {data.map(({ student, position, ...item }, index) => {
               return (
                 <tr key={`item${index}`}>
                   <td className="text-center">{student}</td>
+                  <td className="text-center">{position}</td>
                   {subjects.map(subject => {
                     const subjectResults = item[subject]
                     const failures = getTotalFailures(subjectResults)
                     const notes = periods.map(({ value: period }) => getValue(subjectResults, period))
-
                     return (
                       <Fragment key={`subject${subject}`}>
                         {periods.map(({ value }) => (
@@ -84,15 +87,14 @@ export const SummaryTable = ({ subjects = [], data = [], setData = [] }) => {
 
 // import { Fragment, useState } from 'react'
 // import { Select } from 'components/select'
-// import { getAverage } from 'utils/Array'
+// import { getAverage, sortArray } from 'utils/Array'
 // import { toInteger } from 'utils/Number'
 // import { removeAccents } from 'utils/Text'
 // import { ALL, DEFAULT_VALUE } from 'constants/Select'
 // import { TableHeader, INDICATORS, PERIODS } from '.'
 
-// export const SummaryTable = ({ subjects = [], data = [] }) => {
+// export const SummaryTable = ({ subjects = [], data = [], setData = [] }) => {
 //   const [periods, setPeriods] = useState(PERIODS)
-//   const [tableData, setTableData] = useState([])
 
 //   const getValue = (array, key) => array?.find(({ item }) => item.toLowerCase() === key.toLowerCase())?.grade || '-'
 
@@ -113,7 +115,7 @@ export const SummaryTable = ({ subjects = [], data = [], setData = [] }) => {
 //     if (value !== DEFAULT_VALUE) setPeriods(PERIODS.filter(({ value: option }) => option === value))
 //   }
 
-//   const toggleSort = () => {}
+//   const toggleSort = isAscending => setData(sortArray(data, { key: 'student', isAscending }))
 
 //   return (
 //     <div>
@@ -122,7 +124,7 @@ export const SummaryTable = ({ subjects = [], data = [], setData = [] }) => {
 //       </div>
 //       <div className="table-container overflow-y-auto">
 //         <table className="table overflow-hidden z-50">
-//           <TableHeader subjects={subjects} periods={periods} />
+//           <TableHeader subjects={subjects} periods={periods} toggleSort={toggleSort} />
 //           <tbody>
 //             {data.map(({ student, ...item }, index) => {
 //               return (

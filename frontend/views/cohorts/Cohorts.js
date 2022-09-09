@@ -22,7 +22,7 @@ export const Cohorts = () => {
   const [averagesTable, setAveragesTable] = useState([])
 
   useEffect(() => {
-    // if (!table) dispatch(getCohorts())
+    if (!table) dispatch(getCohorts())
   }, [])
 
   useEffect(() => formatData(), [scores])

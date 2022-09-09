@@ -1,4 +1,4 @@
-export const Select = ({ options = [], initialValue = '', handleChange = () => {} }) => (
+export const Select = ({ options = [], initialValue = '', handleChange = () => {}, lastOption = false }) => (
   <div className="select">
     <select onChange={handleChange}>
       <option value="defaultValue">{initialValue}</option>
@@ -7,7 +7,7 @@ export const Select = ({ options = [], initialValue = '', handleChange = () => {
           {label}
         </option>
       ))}
-      <option value="all">Todos los períodos</option>
+      {lastOption && <option value="all">Todos los períodos</option>}
     </select>
   </div>
 )

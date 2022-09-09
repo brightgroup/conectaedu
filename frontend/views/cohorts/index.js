@@ -37,7 +37,37 @@ export const getStudentSubjects = data => {
   return result
 }
 
-export const getAveragesAndFaults = data => sortArray(getStudentSubjects(data), { key: 'student', isAscending: true })
+const getStudentRanking = data => {
+  const averages = data.map(item => {
+    let notesTotal = 0
+
+    for (const key in item) {
+      if (key !== 'student') {
+        const subjectTotal = item[key]?.find(({ item }) => item.toLowerCase() === 'final')?.grade
+        notesTotal += Number(subjectTotal) || 0
+      }
+    }
+
+    return {
+      ...item,
+      average: (notesTotal / Object.keys(item).length - 1).toFixed(2),
+    }
+  })
+
+  const organizedRanking = sortArray(averages, { key: 'average', isAscending: false })
+
+  return averages.map(item => ({
+    ...item,
+    position: organizedRanking.findIndex(({ student }) => student === item.student) + 1,
+  }))
+}
+
+export const getAveragesAndFaults = data => {
+  const newData = sortArray(getStudentSubjects(data), { key: 'student', isAscending: true })
+  return getStudentRanking(newData)
+}
+
+// export const getAveragesAndFaults = data => sortArray(getStudentSubjects(data), { key: 'student', isAscending: true })
 
 export const getSubjects = data => {
   const [studentKey] = Object.keys(data)
