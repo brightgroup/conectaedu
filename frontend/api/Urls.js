@@ -5,4 +5,5 @@ export const URLS = {
   getCohorts: 'get-cohorts',
   getStudentsByCohort: 'get-getstudentbycohorts',
   getCoursesByCohort: 'get-getcoursesbycohorts',
+  getStudentScores: 'getfulldata',
 }

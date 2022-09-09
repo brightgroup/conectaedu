@@ -24,7 +24,7 @@ export const Header = () => {
       <h3 className="text-3xl font-black">Conecta edu</h3>
       {session ? (
         <section className="flex items-center gap-4">
-          <input className="border" />
+          {/* <input className="border" /> */}
           <div className="w-10 h-10 rounded-full flex items-center justify-center cursor-pointer bg-blue text-white relative">
             {localStorage['user']?.toUpperCase() || 'A'}
           </div>

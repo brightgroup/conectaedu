@@ -1,7 +1,8 @@
 import { URLS } from 'api/Urls'
 import { Axios } from 'utils/Axios'
+import { getAveragesAndFaults, getStudentNotes, getSubjects } from 'views/cohorts'
 import { getInitials } from 'views/students'
-import { SET_STUDENTS, SET_STUDENT_DATA, SET_ERROR } from './types'
+import { SET_STUDENTS, SET_STUDENT_DATA, SET_STUDENT_SCORES, SET_ERROR } from './types'
 
 export const setStudents = courses => ({
   type: SET_STUDENTS,
@@ -11,6 +12,11 @@ export const setStudents = courses => ({
 export const setStudentData = information => ({
   type: SET_STUDENT_DATA,
   payload: information,
+})
+
+export const setStudentScores = scores => ({
+  type: SET_STUDENT_SCORES,
+  payload: scores,
 })
 
 export const setError = error => ({
@@ -39,3 +45,29 @@ export const getStudentData = () => {
     }
   }
 }
+
+export const getStudentScores = () => {
+  return async dispatch => {
+    try {
+      const { data } = await Axios(URLS.getStudentScores)
+      if (data) {
+        const scores = getStudentNotes(data)
+        dispatch(setStudentScores({ subjects: getSubjects(scores), data: getAveragesAndFaults(scores) }))
+      }
+    } catch (error) {
+      dispatch(setStudentScores([]))
+    }
+  }
+}
+
+// export const getStudentScores = () => {
+//   return async dispatch => {
+//     try {
+//       const { data } = await Axios(URLS.getStudentScores)
+//       console.log('la dataaa')
+//       if (data) dispatch(setStudentScores(data))
+//     } catch (error) {
+//       dispatch(setStudentScores([]))
+//     }
+//   }
+// }

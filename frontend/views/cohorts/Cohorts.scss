@@ -1,21 +1,32 @@
+@mixin field-width($width) {
+    width: $width;
+    min-width: $width;
+}
+
 .cohorts {
     &__standard-field {
-        width: 12.5rem;
-        min-width: 12.5rem;
+        @include field-width(12.5rem);
     }
 
     &__cohort-field {
-        width: 18.75rem;
-        min-width: 18.75rem;
+        @include field-width(18.75rem);
     }
 
     &__student-field {
-        width: 20rem;
-        min-width: 20rem;
+        @include field-width(20rem);
     }
 
     &__course-field {
-        width: 25rem;
-        min-width: 25rem;
+        @include field-width(25rem);
+    }
+
+    &__resume-field {
+        @include field-width(12.5rem);
+    }
+
+    &__subject-field {
+        @apply leading-4;
+
+        @include field-width(18.75rem);
     }
 }
