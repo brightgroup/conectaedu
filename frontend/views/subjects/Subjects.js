@@ -36,13 +36,7 @@ export const Subjects = () => {
                 <tr key={`matter${index}`}>
                   <td className="subjects__table-field text-center leading-4">{name}</td>
                   <td className="subjects__view-field text-center">
-                    <p
-                      className="flex items-center justify-center w-max m-auto cursor-pointer"
-                      onClick={() => Router.push('/estudiantes')}
-                    >
-                      <i className="fa-solid fa-eye mr-2" />
-                      <small className="text-sm">Ver</small>
-                    </p>
+                    <i className="fa-solid fa-eye" onClick={() => Router.push('/estudiantes')} />
                   </td>
                 </tr>
               ))}

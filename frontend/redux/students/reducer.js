@@ -1,8 +1,9 @@
-import { SET_STUDENTS, SET_STUDENT_DATA } from './types'
+import { SET_STUDENTS, SET_STUDENT_DATA, SET_STUDENT_SCORES } from './types'
 
 const initialState = {
   students: [],
   student: [],
+  scores: { subjects: [], data: [] },
   error: '',
 }
 
@@ -17,6 +18,11 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         student: action.payload,
+      }
+    case SET_STUDENT_SCORES:
+      return {
+        ...state,
+        scores: action.payload,
       }
     default:
       return state

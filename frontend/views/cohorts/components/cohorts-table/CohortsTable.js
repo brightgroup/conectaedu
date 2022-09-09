@@ -29,22 +29,10 @@ export const CohortsTable = ({ data = [], setData = [], initialData = [] }) => {
             <tr key={`cohort${index}`}>
               <td className="text-center leading-4">{name}</td>
               <td className="text-center">
-                <p
-                  className="flex items-center justify-center w-max m-auto cursor-pointer"
-                  onClick={() => viewTable(true)}
-                >
-                  <i className="fa-solid fa-eye mr-2" />
-                  Ver
-                </p>
+                <i className="fa-solid fa-eye cursor-pointer" onClick={() => viewTable(true)} />
               </td>
               <td className="text-center">
-                <p
-                  className="flex items-center justify-center w-max m-auto cursor-pointer"
-                  onClick={() => viewTable(false)}
-                >
-                  <i className="fa-solid fa-eye mr-2" />
-                  Ver
-                </p>
+                <i className="fa-solid fa-eye cursor-pointer" onClick={() => viewTable(false)} />
               </td>
             </tr>
           ))}

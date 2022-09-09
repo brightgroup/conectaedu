@@ -1,21 +1,26 @@
 import { useEffect } from 'react'
 import { ToastContainer } from 'react-toastify'
+import { useDispatch, useSelector } from 'react-redux'
 import Head from 'next/head'
 import Router from 'next/router'
 import { Header } from 'components/header'
 import { Sidebar } from 'components/sidebar'
 import { Loader } from 'components/loader'
-import { useSelector } from 'react-redux'
 import { TOKEN } from 'constants/Auth'
+import { setLoaderStatus } from 'redux/loader/actions'
 import 'react-toastify/dist/ReactToastify.css'
 
 export const Layout = ({ children }) => {
+  const dispatch = useDispatch()
   const { showLoader } = useSelector(state => state.loader)
 
   const isAuthenticated = !!localStorage[TOKEN]
 
   useEffect(() => {
-    if (window.location.pathname !== '/' && !isAuthenticated) Router.push('/')
+    if (window.location.pathname !== '/' && !isAuthenticated) {
+      Router.push('/')
+      dispatch(setLoaderStatus(false))
+    }
   }, [])
 
   return (

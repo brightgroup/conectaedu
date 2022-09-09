@@ -28,12 +28,7 @@ export const StudentsTable = () => {
                 <tr key={`student${index}`}>
                   <td className="subjects__table-field text-center leading-4">{item['Display Name']}</td>
                   <td className="subjects__view-field text-center">
-                    <p className="flex items-center justify-center w-max m-auto cursor-pointer">
-                      <i className="fa-solid fa-eye mr-2" />
-                      <small className="text-sm" onClick={() => getStudentInformation(item['Display Name'])}>
-                        Ver información
-                      </small>
-                    </p>
+                    <i className="fa-solid fa-eye" onClick={() => getStudentInformation(item['Display Name'])} />
                   </td>
                 </tr>
               ))}
