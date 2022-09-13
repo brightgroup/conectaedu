@@ -17,8 +17,7 @@ export const TableHeader = ({ toggleSort = () => {} }) => {
             <i className={`text-xs fa-solid mx-2 fa-arrow-${isAscending ? 'up' : 'down'}`} />
           </button>
         </th>
-        <th className="cohorts__standard-field text-center">Estudiantes</th>
-        <th className="cohorts__standard-field text-center">Cursos</th>
+        <th className="cohorts__standard-field text-center">Detalle</th>
       </tr>
     </thead>
   )

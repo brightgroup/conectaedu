@@ -6,7 +6,7 @@ import Router from 'next/router'
 import { Header } from 'components/header'
 import { Sidebar } from 'components/sidebar'
 import { Loader } from 'components/loader'
-import { TOKEN } from 'constants/Auth'
+import { isValidToken } from 'utils/Token'
 import { setLoaderStatus } from 'redux/loader/actions'
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -14,14 +14,16 @@ export const Layout = ({ children }) => {
   const dispatch = useDispatch()
   const { showLoader } = useSelector(state => state.loader)
 
-  const isAuthenticated = !!localStorage[TOKEN]
-
   useEffect(() => {
-    if (window.location.pathname !== '/' && !isAuthenticated) {
+    validateSession()
+  }, [])
+
+  const validateSession = () => {
+    if (window.location.pathname !== '/' && !isValidToken()) {
       Router.push('/')
       dispatch(setLoaderStatus(false))
     }
-  }, [])
+  }
 
   return (
     <div className="flex flex-col h-screen">
@@ -40,7 +42,7 @@ export const Layout = ({ children }) => {
       <main className="flex flex-1">
         <ToastContainer />
         {showLoader && <Loader />}
-        {isAuthenticated && <Sidebar />}
+        {isValidToken() && <Sidebar />}
         <div className="flex flex-col flex-1">
           <Header />
           <div className="flex-1 p-6" style={{ background: '#e3e5e6' }}>

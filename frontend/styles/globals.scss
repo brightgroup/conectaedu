@@ -30,12 +30,15 @@
    
     }
 
+    &-title {
+        min-width: 75vw;
+    }
+
     thead tr {
         @apply text-white text-left;
     }
 
     th, td {
-        // padding: 12px 0.9375rem;
         @apply px-2;
 
         height: 2.8125rem;
@@ -100,4 +103,8 @@ input, select {
     .fa-eye {
         @apply cursor-pointer;
     }
+}
+
+.field-error {
+    @apply bg-red-300 text-white;
 }
