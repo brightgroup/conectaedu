@@ -1,5 +1,5 @@
 import { Layout } from 'layout/Layout'
-import { Cohorts } from 'views/cohorts'
+import { Cohorts } from 'views/courses'
 
 const Page = () => {
   return (

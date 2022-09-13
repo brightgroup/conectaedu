@@ -2,22 +2,22 @@ import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import Router from 'next/router'
 import { Paginator } from 'components/paginator'
+import { getSheets } from 'redux/courses/actions'
 import { sortArray } from 'utils/Array'
-import { getStudentScores } from 'redux/students/actions'
 import { TableHeader } from '.'
 
-export const CoursesTable = ({ initialData = [] }) => {
+export const CoursesTable = ({ data = [], setData = [], initialData = [] }) => {
   const dispatch = useDispatch()
+
   const [tableData, setTableData] = useState([])
-  const [data, setData] = useState([])
 
   useEffect(() => setTableData(initialData), [initialData])
 
-  const toggleSort = isAscending => setTableData(sortArray(initialData, { key: 'fullname', isAscending }))
+  const toggleSort = isAscending => setTableData(sortArray(initialData, { key: 'name', isAscending }))
 
-  const viewCourse = async fullname => {
-    await dispatch(getStudentScores())
-    Router.push(`?tabla=estudiantes-de-${fullname.toLowerCase()}`)
+  const viewCourse = async (course, id) => {
+    await dispatch(getSheets(id))
+    Router.push(`?tabla=sabana-${course.toLowerCase()}`)
   }
 
   return (
@@ -25,11 +25,13 @@ export const CoursesTable = ({ initialData = [] }) => {
       <table className="table overflow-hidden z-50">
         <TableHeader toggleSort={toggleSort} />
         <tbody>
-          {data.map(({ fullname: course }, index) => (
-            <tr key={`course${index}`}>
-              <td className="text-center leading-4">{course}</td>
+          {data.map(({ name, id }, index) => (
+            <tr key={`cohort${index}`}>
+              <td className="text-center leading-4">{name}</td>
               <td className="text-center">
-                <i className="fa-solid fa-eye cursor-pointer" onClick={() => viewCourse(course)} />
+                <span className="text-blue underline cursor-pointer" onClick={() => viewCourse(name, id)}>
+                  Ver sabana
+                </span>
               </td>
             </tr>
           ))}

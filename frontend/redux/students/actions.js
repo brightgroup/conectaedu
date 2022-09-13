@@ -1,6 +1,6 @@
 import { URLS } from 'api/Urls'
 import { Axios } from 'utils/Axios'
-import { getAveragesAndFaults, getStudentNotes, getSubjects } from 'views/cohorts'
+import { getAveragesAndFaults, getStudentNotes, getSubjects } from 'views/courses'
 import { getInitials } from 'views/students'
 import { SET_STUDENTS, SET_STUDENT_DATA, SET_STUDENT_SCORES, SET_ERROR } from './types'
 
@@ -59,15 +59,3 @@ export const getStudentScores = () => {
     }
   }
 }
-
-// export const getStudentScores = () => {
-//   return async dispatch => {
-//     try {
-//       const { data } = await Axios(URLS.getStudentScores)
-//       console.log('la dataaa')
-//       if (data) dispatch(setStudentScores(data))
-//     } catch (error) {
-//       dispatch(setStudentScores([]))
-//     }
-//   }
-// }

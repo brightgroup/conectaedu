@@ -29,4 +29,12 @@
 
         @include field-width(18.75rem);
     }
+
+    &__indicator-field {
+        p {
+            @apply truncate;
+
+            max-width: 2.5rem !important;
+        }
+    }
 }

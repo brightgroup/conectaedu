@@ -12,8 +12,8 @@ export const NAV_ITEMS = [
     icon: 'fa-book-bookmark',
   },
   {
-    route: '/cohortes',
-    label: 'Cohortes',
+    route: '/cursos',
+    label: 'Cursos',
     icon: 'fa-people-group',
   },
   {
