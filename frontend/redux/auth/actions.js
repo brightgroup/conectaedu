@@ -20,10 +20,10 @@ export const login = ({ email: user, password }) => {
     try {
       const { data } = await axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, { user, password })
       if (data) {
-        localStorage.setItem(TOKEN, data)
+        localStorage.setItem(TOKEN, data.token)
+        localStorage.setItem('user', user[0])
         dispatch(setSession(true))
         toast('Bienvenido')
-        localStorage.setItem('user', user[0])
       }
       dispatch(setLoaderStatus(false))
     } catch (error) {
