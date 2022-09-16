@@ -48,7 +48,7 @@ const getStudentsRanking = students => {
     ...item,
     position: index + 1,
   }))
-  return sortArray(orderedList, { key: 'student' })
+  return sortArray(orderedList, { key: 'lastname' })
 }
 
 export const getSubjectName = (name, course) => {

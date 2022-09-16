@@ -5,11 +5,13 @@ import { sortArray } from 'utils/Array'
 import { toInteger } from 'utils/Number'
 import { removeAccents, toComparisonKey } from 'utils/Text'
 import { ALL, DEFAULT_VALUE } from 'constants/Select'
+import { IS_ADMIN } from 'constants/LocalStorage'
 import { TableHeader, INDICATORS, PERIODS, SORTING_KEYS, indicatorsByPeriod, getAverageByPeriod } from '.'
 
 export const SummaryTable = ({ subjects = [], data = [], setData = [], initialData = [] }) => {
   const [periods, setPeriods] = useState(PERIODS)
-  const [indicators, setIndicators] = useState(INDICATORS)
+  const [indicators, setIndicators] = useState(JSON.parse(localStorage[IS_ADMIN] || 'false') ? INDICATORS : [])
+  const [sortKey, setSortKey] = useState('lastname')
 
   const sortByPeriod = ({ target }) => {
     const { value } = target
@@ -28,6 +30,7 @@ export const SummaryTable = ({ subjects = [], data = [], setData = [], initialDa
   const sortByOption = ({ target }) => {
     if (target.value === DEFAULT_VALUE) return
     setData(sortArray(data, { key: target.value }))
+    setSortKey(target.value)
   }
 
   const getFailures = array => {
@@ -48,7 +51,7 @@ export const SummaryTable = ({ subjects = [], data = [], setData = [], initialDa
         <>
           <div className="flex justify-end my-2 gap-2">
             <Select options={PERIODS} initialValue="Filtrar por período" handleChange={sortByPeriod} lastOption />
-            <Select options={SORTING_KEYS} initialValue="Ordenar por..." handleChange={sortByOption} />
+            <Select options={SORTING_KEYS} handleChange={sortByOption} value={sortKey} />
           </div>
           <div className="table-container overflow-y-auto">
             <table className="table overflow-hidden z-50">
@@ -114,9 +117,10 @@ export const SummaryTable = ({ subjects = [], data = [], setData = [], initialDa
                             {/* These are the indicators */}
                             {indicators.map(indicator => (
                               <Fragment key={indicator}>
-                                <td className="text-center text-xs cohorts__indicator-field">
-                                  {/* {getValue(notes, indicator, true)} */}
+                                <td className="text-center text-xs cohorts__indicator-field relative">
                                   {ReactHtmlParser(getValue(notes, indicator, true))}
+                                  {/* {getValue(notes, indicator, true)} */}
+                                  {console.log('el value', getValue(notes, indicator, true))}
                                 </td>
                               </Fragment>
                             ))}

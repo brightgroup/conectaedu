@@ -1,7 +1,13 @@
-export const Select = ({ options = [], initialValue = '', handleChange = () => {}, lastOption = false }) => (
+export const Select = ({
+  options = [],
+  initialValue = '',
+  handleChange = () => {},
+  lastOption = false,
+  value = '',
+}) => (
   <div className="select">
-    <select onChange={handleChange}>
-      <option value="defaultValue">{initialValue}</option>
+    <select onChange={handleChange} value={value}>
+      {initialValue && <option value="defaultValue">{initialValue}</option>}
       {options.map(({ value, label }) => (
         <option key={value} value={value}>
           {label}

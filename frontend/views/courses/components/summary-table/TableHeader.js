@@ -41,9 +41,11 @@ export const TableHeader = ({ subjects = [], periods = [], indicators = [] }) =>
             <th className="text-center border border-t-0" colSpan={periods.length + 1}>
               Fallas
             </th>
-            <th className="text-center border border-t-0" colSpan={indicators.length}>
-              Indicadores
-            </th>
+            {!!indicators.length && (
+              <th className="text-center border border-t-0" colSpan={indicators.length}>
+                Indicadores
+              </th>
+            )}
           </Fragment>
         ))}
       </tr>

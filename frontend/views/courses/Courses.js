@@ -25,7 +25,7 @@ export const Cohorts = () => {
   useEffect(() => formatData(), [sheet, table])
 
   useEffect(() => {
-    if (!table) dispatch(getCourses())
+    // if (!table) dispatch(getCourses())
   }, [])
 
   const formatData = () => {
