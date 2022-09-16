@@ -48,6 +48,10 @@ export const SORTING_KEYS = [
     label: 'Ordenas por nombre',
   },
   {
+    value: 'lastname',
+    label: 'Ordenas por apellido',
+  },
+  {
     value: 'position',
     label: 'Ordenas por posición',
   },

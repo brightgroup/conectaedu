@@ -3,6 +3,7 @@ import { toast } from 'react-toastify'
 import { TOKEN } from 'constants/Auth'
 import { setLoaderStatus } from 'redux/loader/actions'
 import { SET_SESSION, SET_ERROR } from './types'
+import { IS_ADMIN, USER } from 'constants/LocalStorage'
 
 export const setSession = status => ({
   type: SET_SESSION,
@@ -21,7 +22,8 @@ export const login = ({ email: user, password }) => {
       const { data } = await axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, { user, password })
       if (data) {
         localStorage.setItem(TOKEN, data.token)
-        localStorage.setItem('user', user[0])
+        localStorage.setItem(USER, user[0])
+        localStorage.setItem(IS_ADMIN, JSON.stringify(data.user?.role === 'admin'))
         dispatch(setSession(true))
         toast('Bienvenido')
       }

@@ -5,6 +5,7 @@ import { Modal } from 'components/modal'
 import { LoginForm } from 'components/login-form'
 import { logout } from 'redux/auth/actions'
 import { isValidToken } from 'utils/Token'
+import { USER } from 'constants/LocalStorage'
 
 export const Header = () => {
   const dispatch = useDispatch()
@@ -24,7 +25,7 @@ export const Header = () => {
       {isValidToken() ? (
         <section className="flex items-center gap-4">
           <div className="w-10 h-10 rounded-full flex items-center justify-center cursor-pointer bg-blue text-white relative">
-            {localStorage['user']?.toUpperCase() || 'A'}
+            {localStorage[USER]?.toUpperCase() || 'U'}
           </div>
           <i className="fa-solid fa-right-to-bracket cursor-pointer text-xl" onClick={signOff} />
         </section>
