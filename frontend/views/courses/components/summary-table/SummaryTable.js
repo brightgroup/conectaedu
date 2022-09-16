@@ -1,5 +1,6 @@
 import { Fragment, useState } from 'react'
 import ReactHtmlParser from 'react-html-parser'
+import ReactHtmlTableToExcel from 'react-html-table-to-excel'
 import { Select } from 'components/select'
 import { sortArray } from 'utils/Array'
 import { toInteger } from 'utils/Number'
@@ -47,6 +48,14 @@ export const SummaryTable = ({ subjects = [], data = [], setData = [], initialDa
 
   return (
     <div>
+      <ReactHtmlTableToExcel
+        id="excelButton"
+        className="border p-2 bg-blue text-white rounded-md"
+        table="table"
+        filename="Sabana de notas"
+        sheet="Página 1"
+        buttonText="Exportar a excel"
+      />
       {data.length ? (
         <>
           <div className="flex justify-end my-2 gap-2">
@@ -54,7 +63,7 @@ export const SummaryTable = ({ subjects = [], data = [], setData = [], initialDa
             <Select options={SORTING_KEYS} handleChange={sortByOption} value={sortKey} />
           </div>
           <div className="table-container overflow-y-auto">
-            <table className="table overflow-hidden z-50">
+            <table className="table overflow-hidden z-50" id="table">
               <TableHeader subjects={subjects} periods={periods} indicators={indicators} />
               <tbody>
                 {data.map(({ student, position, average, lostAverages, ...item }, index) => {
