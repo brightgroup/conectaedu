@@ -34,8 +34,6 @@ export const Cohorts = () => {
 
   const getTitle = table => (table ? `Sabana de notas - ${firstLetterToUpperCase(table.split('-')[1])}` : 'Cursos')
 
-  console.log('THE LAST COURSES')
-
   return (
     <div className="cohorts m-auto w-max mt-12">
       <TableTitle title={getTitle(table)} includesArrow={!!table} backRoute="/cursos" />

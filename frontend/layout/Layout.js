@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { ToastContainer } from 'react-toastify'
 import { useDispatch, useSelector } from 'react-redux'
 import Head from 'next/head'
-import Router from 'next/router'
+import Router, { useRouter } from 'next/router'
 import { Header } from 'components/header'
 import { Sidebar } from 'components/sidebar'
 import { Loader } from 'components/loader'
@@ -10,8 +10,11 @@ import { isValidToken } from 'utils/Token'
 import { setLoaderStatus } from 'redux/loader/actions'
 import 'react-toastify/dist/ReactToastify.css'
 
+export const UNPROTECTED_ROUTES = ['/', '/iniciar-sesion']
+
 export const Layout = ({ children }) => {
   const dispatch = useDispatch()
+  const { push, pathname } = useRouter()
   const { showLoader } = useSelector(state => state.loader)
 
   useEffect(() => {
@@ -19,8 +22,9 @@ export const Layout = ({ children }) => {
   }, [])
 
   const validateSession = () => {
-    if (window.location.pathname !== '/' && !isValidToken()) {
-      Router.push('/')
+    if (UNPROTECTED_ROUTES.includes(pathname)) return
+    if (!isValidToken()) {
+      push('/')
       dispatch(setLoaderStatus(false))
     }
   }
