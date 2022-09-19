@@ -98,3 +98,12 @@ export const getAverageByPeriod = (data, period) => {
 
   return sortArray(orderedList, { key: 'student' })
 }
+
+export const performanceColors = {
+  bajo: 'bg-red-300',
+  básico: 'bg-orange-300',
+  alto: 'bg-green-300',
+  superior: 'bg-green-500',
+}
+
+export const SINGLE_SUBJECT_FIELDS = 3
