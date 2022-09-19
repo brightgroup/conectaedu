@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { TableTitle } from 'components/table-title'
 import { getCourses } from 'redux/courses/actions'
 import { firstLetterToUpperCase } from 'utils/Text'
-import { sortArray } from 'utils/Array'
 import { CoursesTable, SummaryTable, getSubjects, getStudents } from '.'
 
 export const Cohorts = () => {
@@ -21,6 +20,8 @@ export const Cohorts = () => {
   const [cohortsTable, setCohortsTable] = useState([])
   const [subjects, setSubjects] = useState([])
   const [averagesTable, setAveragesTable] = useState([])
+
+  console.log('desde courses')
 
   useEffect(() => formatData(), [sheet, table])
 

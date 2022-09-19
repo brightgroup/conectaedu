@@ -62,6 +62,7 @@ export const getSubjectName = (name, course) => {
 }
 
 export const getSubjects = (item, table) => {
+  console.log('el item', item)
   const course = table.split('-')[1]?.split(' ').join('_')
 
   return Object.keys(item).map(item => ({ label: getSubjectName(item, course), name: item }))
