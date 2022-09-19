@@ -21,8 +21,6 @@ export const Cohorts = () => {
   const [subjects, setSubjects] = useState([])
   const [averagesTable, setAveragesTable] = useState([])
 
-  console.log('desde courses')
-
   useEffect(() => formatData(), [sheet, table])
 
   useEffect(() => {
@@ -35,6 +33,8 @@ export const Cohorts = () => {
   }
 
   const getTitle = table => (table ? `Sabana de notas - ${firstLetterToUpperCase(table.split('-')[1])}` : 'Cursos')
+
+  console.log('THE LAST COURSES')
 
   return (
     <div className="cohorts m-auto w-max mt-12">

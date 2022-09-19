@@ -4,7 +4,7 @@ import { firstLetterToUpperCase } from 'utils/Text'
 export * from './Courses'
 export * from './components'
 
-const getStudentNotes = data => {
+const getStudentNotes = (data = {}) => {
   const students = {}
 
   for (const key in data) {
@@ -20,7 +20,7 @@ const getStudentNotes = data => {
   return students
 }
 
-const createStudentArray = students => {
+const createStudentArray = (students = {}) => {
   const result = []
   for (const key in students) {
     let average = 0
@@ -43,7 +43,7 @@ const createStudentArray = students => {
   return result
 }
 
-const getStudentsRanking = students => {
+const getStudentsRanking = (students = []) => {
   const orderedList = sortArray([...students], { key: 'average', isAscending: false }).map((item, index) => ({
     ...item,
     position: index + 1,
@@ -51,7 +51,7 @@ const getStudentsRanking = students => {
   return sortArray(orderedList, { key: 'lastname' })
 }
 
-export const getSubjectName = (name, course) => {
+export const getSubjectName = (name = '', course) => {
   if (course) {
     const courseName = course.toLowerCase().split('_').join(' ')
     const newName = firstLetterToUpperCase(name.toLowerCase().replace(`_${course}`, '').split('_').join(' '))
@@ -61,14 +61,13 @@ export const getSubjectName = (name, course) => {
   return name.toLowerCase()
 }
 
-export const getSubjects = (item, table) => {
-  console.log('el item', item)
+export const getSubjects = (item = {}, table = '') => {
   const course = table.split('-')[1]?.split(' ').join('_')
 
   return Object.keys(item).map(item => ({ label: getSubjectName(item, course), name: item }))
 }
 
-export const getStudents = data => {
+export const getStudents = (data = {}) => {
   const students = createStudentArray(getStudentNotes(data))
   return getStudentsRanking(students)
 }
