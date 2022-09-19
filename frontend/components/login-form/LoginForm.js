@@ -1,18 +1,29 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import Router from 'next/router'
+import { useRouter } from 'next/router'
 import { Input } from 'components/input'
 import { isValidEmail } from 'utils/Validation'
+import { isValidToken } from 'utils/Token'
 import { login } from 'redux/auth/actions'
 import { TOKEN } from 'constants/Auth'
 
 export const LoginForm = ({ toggleModal = () => {} }) => {
   const dispatch = useDispatch()
+  const { replace, query } = useRouter()
 
   const [user, setUser] = useState({ email: '', password: '' })
   const [validate, setValidate] = useState(false)
 
   const { email, password } = user
+
+  useEffect(() => loginWithToken(), [query])
+
+  const loginWithToken = () => {
+    if (query?.token && isValidToken(query.token)) {
+      localStorage.setItem(TOKEN, query.token)
+      replace('/')
+    }
+  }
 
   const handleChangeUser = ({ target }) => setUser({ ...user, [target.name]: target.value })
 
@@ -21,8 +32,7 @@ export const LoginForm = ({ toggleModal = () => {} }) => {
     setValidate(true)
     if (!isValidEmail(email)) return
     await dispatch(login(user))
-    toggleModal()
-    if (localStorage[TOKEN]) Router.replace('/')
+    if (localStorage[TOKEN]) replace('/')
   }
 
   return (
