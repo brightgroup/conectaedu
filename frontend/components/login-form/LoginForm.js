@@ -6,6 +6,7 @@ import { isValidEmail } from 'utils/Validation'
 import { isValidToken } from 'utils/Token'
 import { login } from 'redux/auth/actions'
 import { TOKEN } from 'constants/Auth'
+import { USER } from 'constants/LocalStorage'
 
 export const LoginForm = ({ toggleModal = () => {} }) => {
   const dispatch = useDispatch()
@@ -21,6 +22,7 @@ export const LoginForm = ({ toggleModal = () => {} }) => {
   const loginWithToken = () => {
     if (query?.token && isValidToken(query.token)) {
       localStorage.setItem(TOKEN, query.token)
+      localStorage.setItem(USER, 'u')
       replace('/')
     }
   }
