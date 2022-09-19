@@ -1,12 +1,14 @@
 import { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import Router from 'next/router'
 import { Input } from 'components/input'
 import { isValidEmail } from 'utils/Validation'
 import { login } from 'redux/auth/actions'
+import { TOKEN } from 'constants/Auth'
 
 export const LoginForm = ({ toggleModal = () => {} }) => {
   const dispatch = useDispatch()
-  const state = useSelector(state => state)
+
   const [user, setUser] = useState({ email: '', password: '' })
   const [validate, setValidate] = useState(false)
 
@@ -14,16 +16,17 @@ export const LoginForm = ({ toggleModal = () => {} }) => {
 
   const handleChangeUser = ({ target }) => setUser({ ...user, [target.name]: target.value })
 
-  const onSubmit = e => {
+  const onSubmit = async e => {
     e.preventDefault()
     setValidate(true)
     if (!isValidEmail(email)) return
-    dispatch(login(user))
+    await dispatch(login(user))
     toggleModal()
+    if (localStorage[TOKEN]) Router.replace('/')
   }
 
   return (
-    <form className="text-center mt-2" onSubmit={onSubmit}>
+    <form className="text-center mt-2 h-max" onSubmit={onSubmit}>
       <h3 className="text-xl mb-2 text-blue">Bienvenido</h3>
       <Input
         name="email"

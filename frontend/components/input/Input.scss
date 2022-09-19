@@ -1,6 +1,8 @@
 .input {
     @apply outline-none w-full py-1 px-2  text-black text-sm;
 
+    min-width: 18.75rem;
+
     &:focus, &:valid {
         ~ .input__label {
             transform: translateY(-16px);
