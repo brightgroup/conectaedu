@@ -2,8 +2,8 @@ export const Select = ({
   options = [],
   initialValue = '',
   handleChange = () => {},
-  lastOption = false,
   value = '',
+  allOption = '',
 }) => (
   <div className="select">
     <select onChange={handleChange} value={value}>
@@ -13,7 +13,7 @@ export const Select = ({
           {label}
         </option>
       ))}
-      {lastOption && <option value="all">Todos los períodos</option>}
+      {allOption && <option value="all">{allOption}</option>}
     </select>
   </div>
 )

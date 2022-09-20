@@ -31,10 +31,30 @@
     }
 
     &__indicator-field {
+        @apply truncate;
+
+        max-width: 3.125rem;
+
         .text_to_html, p, div {
             @apply truncate;
 
             max-width: 2.5rem !important;
+        }
+    }
+
+    .summary-table {
+        tbody {
+            background-color: white !important;
+
+            tr:nth-of-type(even) {
+                @apply bg-white;
+            }
+
+            td {
+                &:first-child {
+                    @apply sticky left-0 z-10 text-blue bg-white;
+                }
+            }
         }
     }
 }

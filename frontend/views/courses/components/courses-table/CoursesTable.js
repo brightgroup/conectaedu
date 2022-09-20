@@ -21,7 +21,7 @@ export const CoursesTable = ({ data = [], setData = [], initialData = [] }) => {
   }
 
   return (
-    <div className="table-container overflow-y-auto">
+    <div className="table-container2 overflow-y-auto">
       <table className="table overflow-hidden z-50">
         <TableHeader toggleSort={toggleSort} />
         <tbody>

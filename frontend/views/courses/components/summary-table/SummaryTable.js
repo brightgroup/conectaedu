@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import ReactHtmlParser from 'react-html-parser'
 import ReactHtmlTableToExcel from 'react-html-table-to-excel'
 import { Select } from 'components/select'
@@ -18,12 +18,16 @@ import {
   subjectAcronyms,
 } from '.'
 
-export const SummaryTable = ({ subjects = [], data = [], setData = [], initialData = [] }) => {
+export const SummaryTable = ({ subjects: allSubjects = [], data = [], setData = [], initialData = [] }) => {
   const isAdmin = JSON.parse(localStorage[IS_ADMIN] || 'false')
 
   const [periods, setPeriods] = useState(PERIODS)
   const [indicators, setIndicators] = useState(isAdmin ? INDICATORS : [])
   const [sortKey, setSortKey] = useState('lastname')
+  const [subjects, setSubjects] = useState([])
+  const [subject, setSubject] = useState('')
+
+  useEffect(() => setSubjects(allSubjects), [allSubjects])
 
   const sortByPeriod = ({ target }) => {
     const { value } = target
@@ -45,6 +49,13 @@ export const SummaryTable = ({ subjects = [], data = [], setData = [], initialDa
     setSortKey(target.value)
   }
 
+  const sortBySubject = ({ target }) => {
+    const { value } = target
+    console.log('el target', target)
+    setSubjects(value === ALL ? allSubjects : allSubjects.filter(({ value: subject }) => subject === value))
+    setSubject(value === ALL ? 'all' : target.value)
+  }
+
   const getFailures = array => {
     return periods
       .map(({ label: fail }) => toInteger(getValue(array, `fallas acumuladas ${removeAccents(fail)}`), true))
@@ -62,7 +73,7 @@ export const SummaryTable = ({ subjects = [], data = [], setData = [], initialDa
     return performance ? performance.split(' ')[1] : '-'
   }
 
-  const getSubjectName = subject => toComparisonKey(subjects?.find(({ name }) => name === subject)?.label || '')
+  const getSubjectName = subject => toComparisonKey(allSubjects?.find(({ name }) => name === subject)?.label || '')
 
   return (
     <div>
@@ -77,17 +88,29 @@ export const SummaryTable = ({ subjects = [], data = [], setData = [], initialDa
       {data.length ? (
         <>
           <div className="flex justify-end my-2 gap-2">
-            <Select options={PERIODS} initialValue="Filtrar por período" handleChange={sortByPeriod} lastOption />
+            <Select
+              options={allSubjects}
+              initialValue="Filtrar por asignatura"
+              handleChange={sortBySubject}
+              allOption="Todas las asignaturas"
+              value={subject}
+            />
+            <Select
+              options={PERIODS}
+              initialValue="Filtrar por período"
+              handleChange={sortByPeriod}
+              allOption="Todos los periodos"
+            />
             <Select options={SORTING_KEYS} handleChange={sortByOption} value={sortKey} />
           </div>
-          <div className="table-container overflow-y-auto">
-            <table className="table overflow-hidden z-50" id="table">
+          <div className="table-container summary-table">
+            <table className="table" id="table">
               <TableHeader subjects={subjects} periods={periods} indicators={indicators} isAdmin={isAdmin} />
               <tbody>
                 {data.map(({ student, position, average, lostAverages, ...item }, index) => {
                   return (
                     <tr key={`item${index}`}>
-                      <td className="text-center">{student}</td>
+                      <td className="text-center hhhhh">{student}</td>
                       <td className="text-center">{position}</td>
                       <td className="text-center">{average}</td>
                       <td className="text-center">
@@ -104,7 +127,7 @@ export const SummaryTable = ({ subjects = [], data = [], setData = [], initialDa
                       <td className={`text-center ${lostAverages.length ? 'field-error' : ''}`}>
                         {lostAverages.length}
                       </td>
-                      {subjects.map(({ label, name }) => {
+                      {subjects?.map(({ label, name }) => {
                         const { notes, average } = item[name]
                         const failures = getFailures(notes)
                         const finalPerformance = getPerformance(notes, 'final')
@@ -155,13 +178,16 @@ export const SummaryTable = ({ subjects = [], data = [], setData = [], initialDa
                             <td className={`text-center ${failures ? 'field-error' : ''}`}>{failures}</td>
 
                             {/* These are the indicators */}
-                            {indicators.map(indicator => (
-                              <Fragment key={indicator}>
-                                <td className="text-center text-xs cohorts__indicator-field relative">
-                                  {ReactHtmlParser(getValue(notes, indicator, true))}
-                                </td>
-                              </Fragment>
-                            ))}
+                            {indicators.map(indicator => {
+                              const value = ReactHtmlParser(getValue(notes, indicator, true))
+                              return (
+                                <Fragment key={indicator}>
+                                  <td className="text-center text-xs cohorts__indicator-field relative" title={value}>
+                                    {value}
+                                  </td>
+                                </Fragment>
+                              )
+                            })}
                           </Fragment>
                         )
                       })}

@@ -39,7 +39,7 @@ export const Cohorts = () => {
       <TableTitle title={getTitle(table)} includesArrow={!!table} backRoute="/cursos" />
       {table ? (
         <SummaryTable
-          subjects={subjects}
+          subjects={subjects?.map(({ label, name }) => ({ label, value: name, name }))}
           data={averagesTable}
           initialData={getStudents(sheet)}
           setData={setAveragesTable}
