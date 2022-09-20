@@ -53,6 +53,8 @@
             td {
                 &:first-child {
                     @apply sticky left-0 z-10 text-blue bg-white;
+
+                    border-bottom: 0.0625rem solid #dddddd;
                 }
             }
         }
