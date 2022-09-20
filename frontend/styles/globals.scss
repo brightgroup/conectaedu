@@ -32,6 +32,10 @@
         min-width: 75vw;
     }
 
+    tbody {
+        background-color: white !important;
+    }
+
     thead tr {
         @apply text-white text-left;
     }
@@ -47,7 +51,8 @@
     }
 
     tbody tr:nth-of-type(even) {
-        background-color: #f3f3f3;
+        // background-color: #f3f3f3;
+   
     }
 
     tbody tr:last-of-type {
