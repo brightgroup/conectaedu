@@ -107,3 +107,16 @@ export const performanceColors = {
 }
 
 export const SINGLE_SUBJECT_FIELDS = 3
+
+export const subjectAcronyms = {
+  'ciencias naturales': 'CIE',
+  'ciencias sociales': 'SOC',
+  'educacion artistica': 'ART',
+  'educacion etica': 'ETI',
+  'educacion fisica': 'ED FIS',
+  'educacion religiosa': 'REL',
+  'humanidades-lengua castellana ': 'HUM',
+  ingles: 'ING',
+  matematicas: 'MAT',
+  'tecnologia e informatica': 'TEC',
+}
