@@ -110,7 +110,7 @@ export const SummaryTable = ({ subjects: allSubjects = [], data = [], setData = 
                 {data.map(({ student, position, average, lostAverages, ...item }, index) => {
                   return (
                     <tr key={`item${index}`}>
-                      <td className="text-center hhhhh">{student}</td>
+                      <td className="text-center">{student}</td>
                       <td className="text-center">{position}</td>
                       <td className="text-center">{average}</td>
                       <td className="text-center">
@@ -128,7 +128,7 @@ export const SummaryTable = ({ subjects: allSubjects = [], data = [], setData = 
                         {lostAverages.length}
                       </td>
                       {subjects?.map(({ label, name }) => {
-                        const { notes, average } = item[name]
+                        const { notes, average } = item[name] || { notes: [], average: 0 }
                         const failures = getFailures(notes)
                         const finalPerformance = getPerformance(notes, 'final')
                         return (
