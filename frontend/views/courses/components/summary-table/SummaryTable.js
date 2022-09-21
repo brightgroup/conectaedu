@@ -154,16 +154,20 @@ export const SummaryTable = ({ subjects: allSubjects = [], data = [], setData = 
                             })}
                             <td
                               className={`text-center ${
-                                (periods.length > 1 ? average : getValue(notes, periods[0]?.value)) < 3
+                                (periods.length > 1 ? average || 5 : getValue(notes, periods[0]?.value)) < 3
                                   ? 'field-error'
                                   : ''
-                              }`}
+                              } `}
                             >
-                              {periods.length > 1 ? average : getValue(notes, periods[0]?.value)}
+                              {periods.length > 1 ? average || '-' : getValue(notes, periods[0]?.value)}
                             </td>
                             {isAdmin && (
-                              <td className={`text-center text-white ${performanceColors[finalPerformance]}`}>
-                                {firstLetterToUpperCase(finalPerformance)}
+                              <td
+                                className={`text-center text-${
+                                  firstLetterToUpperCase(finalPerformance) === '-' ? 'blue' : 'white'
+                                } ${performanceColors[finalPerformance]}`}
+                              >
+                                {firstLetterToUpperCase(finalPerformance) || '-'}
                               </td>
                             )}
 
