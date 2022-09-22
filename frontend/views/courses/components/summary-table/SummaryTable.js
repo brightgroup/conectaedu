@@ -155,13 +155,13 @@ export const SummaryTable = ({ subjects: allSubjects = [], data = [], setData = 
                             })}
                             <td
                               className={`text-center ${
-                                (periods.length > 1 ? average || 5 : getValue(notes, periods[0]?.value)) < 3
+                                (periods.length > 1 ? Number(average) || 5 : getValue(notes, periods[0]?.value)) < 3
                                   ? 'field-error'
                                   : ''
                               }`}
                             >
                               {periods.length > 1
-                                ? average
+                                ? Number(average)
                                   ? Number(average).toFixed(1)
                                   : '-'
                                 : getValue(notes, periods[0]?.value)}
