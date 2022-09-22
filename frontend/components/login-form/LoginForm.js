@@ -39,7 +39,7 @@ export const LoginForm = () => {
   return (
     <form className="text-center mt-2 h-max" onSubmit={onSubmit}>
       <h3 className="text-xl mb-2 text-blue">Bienvenido</h3>
-      <Input name="email" value={email} label="Correo" onChange={handleChangeUser} />
+      <Input name="email" value={email} label="Usuario" onChange={handleChangeUser} />
       <Input
         name="password"
         value={password}
