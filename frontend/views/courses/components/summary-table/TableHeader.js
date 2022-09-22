@@ -8,7 +8,7 @@ export const TableHeader = ({ subjects = [], periods = [], indicators = [], isAd
   return (
     <thead>
       <tr className="bg-blue">
-        <th className="cohorts__course-field text-center" rowSpan={3}>
+        <th className="cohorts__course-field text-center student-title" rowSpan={3}>
           Estudiante
         </th>
         <th className="cohorts__ranking-field text-center border border-r-0 border-b-0 border-t-0" rowSpan={3}>
@@ -17,7 +17,7 @@ export const TableHeader = ({ subjects = [], periods = [], indicators = [], isAd
         <th className="cohorts__ranking-field text-center border border-r-0 border-b-0 border-t-0" rowSpan={3}>
           Promedio
         </th>
-        <th className="cohorts__ranking-field text-center border border-r-0 border-b-0 border-t-0" rowSpan={3}>
+        <th className="cohorts__lost-subjects text-center border border-r-0 border-b-0 border-t-0" rowSpan={3}>
           Asignaturas pérdidas
         </th>
         <th className="cohorts__ranking-field text-center border border-r-0 border-b-0 border-t-0" rowSpan={3}>

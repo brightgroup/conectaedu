@@ -65,7 +65,7 @@ export const SummaryTable = ({ subjects: allSubjects = [], data = [], setData = 
   const getValue = (array, key, isIndicator = false) => {
     const valueKey = isIndicator ? 'Description' : 'Nota'
     const value = array?.find(({ Itemname: name }) => toComparisonKey(name) === toComparisonKey(key))?.[valueKey]
-    return isIndicator ? value || '-' : Number(value) ? Number(value).toFixed(2) : '-'
+    return isIndicator ? value || '-' : Number(value) ? Number(value).toFixed(1) : '-'
   }
 
   const getPerformance = (array, key) => {
@@ -157,9 +157,11 @@ export const SummaryTable = ({ subjects: allSubjects = [], data = [], setData = 
                                 (periods.length > 1 ? average || 5 : getValue(notes, periods[0]?.value)) < 3
                                   ? 'field-error'
                                   : ''
-                              } `}
+                              }`}
                             >
-                              {periods.length > 1 ? average || '-' : getValue(notes, periods[0]?.value)}
+                              {periods.length > 1
+                                ? Number(average).toFixed(1) || '-'
+                                : getValue(notes, periods[0]?.value)}
                             </td>
                             {isAdmin && (
                               <td
@@ -179,7 +181,7 @@ export const SummaryTable = ({ subjects: allSubjects = [], data = [], setData = 
                                 </td>
                               </Fragment>
                             ))}
-                            <td className={`text-center ${failures ? 'field-error' : ''}`}>{failures}</td>
+                            <td className="text-center">{failures}</td>
 
                             {/* These are the indicators */}
                             {indicators.map(indicator => {

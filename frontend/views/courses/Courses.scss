@@ -42,6 +42,10 @@
         }
     }
 
+    &__lost-subjects {
+        @include field-width(10.3125rem);
+    }
+
     .summary-table {
         tbody {
             background-color: white !important;
@@ -56,6 +60,14 @@
 
                     border-bottom: 0.0625rem solid #dddddd;
                 }
+            }
+        }
+
+        .student-title {
+            &:first-child {
+                @apply sticky left-0 z-10 bg-blue;
+
+                border-bottom: 0.0625rem solid #dddddd;
             }
         }
     }

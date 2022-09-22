@@ -35,7 +35,7 @@ const createStudentArray = (students = {}) => {
     result.push({
       ...subjects,
       student: key,
-      average: (average / Object.keys(subjects).length).toFixed(2),
+      average: (average / Object.keys(subjects).length).toFixed(1),
       lostAverages,
       lastname,
     })

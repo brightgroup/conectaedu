@@ -85,7 +85,7 @@ export const getAverageByPeriod = (data, period) => {
 
     return {
       ...item,
-      average: (total / Object.keys(item).length).toFixed(2),
+      average: (total / Object.keys(item).length).toFixed(1),
       lostAverages: lostItems,
       student,
     }
