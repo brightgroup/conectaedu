@@ -21,15 +21,14 @@ export const login = ({ email: user, password }) => {
     try {
       const { data } = await axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, { user, password })
       if (data) {
+        toast('Bienvenido')
         localStorage.setItem(TOKEN, data.token)
         localStorage.setItem(USER, user[0])
         localStorage.setItem(IS_ADMIN, JSON.stringify(data.user?.role === 'admin'))
         dispatch(setSession(true))
-        toast('Bienvenido')
       }
       dispatch(setLoaderStatus(false))
     } catch (error) {
-      toast(error.message)
       dispatch(setError(error))
       dispatch(setSession(false))
       dispatch(setLoaderStatus(false))
