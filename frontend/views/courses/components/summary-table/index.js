@@ -45,15 +45,15 @@ export const PERIODS = [
 export const SORTING_KEYS = [
   {
     value: 'student',
-    label: 'Ordenas por nombre',
+    label: 'Ordenar por nombre',
   },
   {
     value: 'lastname',
-    label: 'Ordenas por apellido',
+    label: 'Ordenar por apellido',
   },
   {
     value: 'position',
-    label: 'Ordenas por posición',
+    label: 'Ordenar por posición',
   },
 ]
 
