@@ -19,8 +19,7 @@ import {
 } from '.'
 
 export const SummaryTable = ({ subjects: allSubjects = [], data = [], setData = [], initialData = [] }) => {
-  // const isAdmin = JSON.parse(localStorage[IS_ADMIN] || 'false')
-  const isAdmin = false
+  const isAdmin = JSON.parse(localStorage[IS_ADMIN] || 'false')
 
   const [periods, setPeriods] = useState(PERIODS)
   const [indicators, setIndicators] = useState(isAdmin ? INDICATORS : [])
