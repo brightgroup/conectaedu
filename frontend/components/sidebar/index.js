@@ -21,11 +21,11 @@ export const NAV_ITEMS = [
     label: 'Estudiantes',
     icon: 'fa-person',
   },
-  // {
-  //   route: '/estadisticas',
-  //   label: 'Estadísticas',
-  //   icon: 'fa-chart-line',
-  // },
+  {
+    route: '/estadisticas',
+    label: 'Estadísticas',
+    icon: 'fa-chart-line',
+  },
   // {
   //   route: '/notas',
   //   label: 'Notas',

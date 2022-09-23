@@ -1,0 +1,22 @@
+@mixin field-width($width) {
+    width: $width;
+    min-width: $width;
+}
+
+.statistics {
+    &__area-field {
+        @include field-width(12.5rem);
+    }
+
+    &__course-field {
+        @include field-width(160px);
+    }
+
+    .note-title {
+        &:first-child {
+            @apply sticky left-0 z-10 bg-blue;
+
+            border-bottom: 0.0625rem solid #dddddd;
+        }
+    }
+}

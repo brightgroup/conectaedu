@@ -111,3 +111,23 @@ input, select {
 .field-error {
     @apply bg-red-300 text-white;
 }
+
+.lock-column {
+    @apply text-xs;
+
+    tbody {
+        background-color: white !important;
+
+        tr:nth-of-type(even) {
+            @apply bg-white;
+        }
+
+        td {
+            &:first-child {
+                @apply sticky left-0 z-10 text-blue bg-white;
+
+                border-bottom: 0.0625rem solid #dddddd;
+            }
+        }
+    }
+}

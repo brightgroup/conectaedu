@@ -25,6 +25,8 @@ export const Axios = async (endpoint, data = {}, method = 'get', contentType = '
         return res?.data || res
       } catch (error) {
         if (TOKEN_ERRORS.includes(error.response.data)) {
+          store.dispatch(setLoaderStatus(false))
+
           clearSession()
           toast('Token inválido')
         }

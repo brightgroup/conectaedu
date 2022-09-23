@@ -21,7 +21,7 @@ export const Header = () => {
 
   return (
     <header className="header flex justify-between items-center bg-white border-l w-full px-4">
-      <h3 className="text-3xl font-black" onClick={() => Router.push('/')}>
+      <h3 className="text-3xl font-black text-blue" onClick={() => Router.push('/')}>
         Conecta edu
       </h3>
       {isValidToken() ? (

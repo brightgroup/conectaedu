@@ -7,4 +7,5 @@ export const URLS = {
   getCoursesByCohort: 'get-getcoursesbycohorts',
   getStudentScores: 'getfulldata',
   getSheets: 'getfulldata',
+  getFullData: 'getfulldataByReport',
 }
