@@ -1,11 +1,10 @@
 import { Layout } from 'layout/Layout'
-import { Cohorts } from 'views/courses'
+import { Statistics } from 'views/statistics'
 
 const Page = () => {
   return (
     <Layout>
-      {/* <Cohorts /> */}
-      statics
+      <Statistics />
     </Layout>
   )
 }
