@@ -51,7 +51,6 @@ export const SummaryTable = ({ subjects: allSubjects = [], data = [], setData = 
 
   const sortBySubject = ({ target }) => {
     const { value } = target
-    console.log('el target', target)
     setSubjects(value === ALL ? allSubjects : allSubjects.filter(({ value: subject }) => subject === value))
     setSubject(value === ALL ? 'all' : target.value)
   }
@@ -74,6 +73,12 @@ export const SummaryTable = ({ subjects: allSubjects = [], data = [], setData = 
   }
 
   const getSubjectName = subject => toComparisonKey(allSubjects?.find(({ name }) => name === subject)?.label || '')
+
+  const getBehaviour = notes => {
+    return (
+      notes?.find(({ Description = '' }) => toComparisonKey(Description).includes('calificacion'))?.Desempenio || '-'
+    )
+  }
 
   return (
     <div>
@@ -200,6 +205,7 @@ export const SummaryTable = ({ subjects: allSubjects = [], data = [], setData = 
                                 </Fragment>
                               )
                             })}
+                            <td className="text-center">{getBehaviour(notes)}</td>
                           </Fragment>
                         )
                       })}

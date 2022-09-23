@@ -5,4 +5,4 @@ export const firstLetterToUpperCase = value => {
 
 export const removeAccents = (str = '') => (str ? str.normalize('NFD').replace(/[\u0300-\u036f]/g, '') : '')
 
-export const toComparisonKey = (key = '') => removeAccents(key.trim().toLowerCase())
+export const toComparisonKey = (key = '') => removeAccents(key ? key.trim().toLowerCase() : key)

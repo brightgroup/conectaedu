@@ -27,8 +27,8 @@ export const TableHeader = ({ subjects = [], periods = [], indicators = [], isAd
           <th
             key={`subject${index}`}
             className="cohorts__subject-field text-center border"
-            // (notes + failures + performance) + indicators + single fields
-            colSpan={periods.length * (isAdmin ? 3 : 2) + indicators.length + (isAdmin ? SINGLE_SUBJECT_FIELDS : 2)}
+            // (notes + failures + performance) + indicators + single fields + behaviour field
+            colSpan={periods.length * (isAdmin ? 3 : 2) + indicators.length + (isAdmin ? SINGLE_SUBJECT_FIELDS : 2) + 1}
           >
             {label}
           </th>
@@ -48,6 +48,9 @@ export const TableHeader = ({ subjects = [], periods = [], indicators = [], isAd
                 Indicadores
               </th>
             )}
+            <th className="text-center border border-b-0" rowSpan={2}>
+              Comportamiento
+            </th>
           </Fragment>
         ))}
       </tr>
@@ -81,6 +84,7 @@ export const TableHeader = ({ subjects = [], periods = [], indicators = [], isAd
                 {indicator}
               </th>
             ))}
+            {/* <th className="text-center border ">Comportamiento</th> */}
           </Fragment>
         ))}
       </tr>

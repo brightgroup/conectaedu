@@ -22,6 +22,11 @@ export const NAV_ITEMS = [
     icon: 'fa-person',
   },
   // {
+  //   route: '/estadisticas',
+  //   label: 'Estadísticas',
+  //   icon: 'fa-chart-line',
+  // },
+  // {
   //   route: '/notas',
   //   label: 'Notas',
   //   icon: 'fa-file-pen',
