@@ -4,10 +4,10 @@ import { TableHeader } from './TableHeader'
 import { BarChart } from 'components/chart'
 import { getChartLabel } from 'utils/Chart'
 import { CHART_COLORS } from 'constants/Chart'
-import { COURSES, TABLE_TITLE } from '../..'
+import { COURSES } from '../..'
 import { TABLE_ROWS } from '.'
 
-export const LostAreasTable = ({ data = {}, period = '', statistics }) => {
+export const PercentageLostAreasTable = ({ data = {}, period = '', statistics }) => {
   const getFailCount = (failedStudents, areas) => {
     let count = 0
 
@@ -20,10 +20,13 @@ export const LostAreasTable = ({ data = {}, period = '', statistics }) => {
   const getFailRate = (course, areas) => {
     const failedStudents = statistics.failuresNumber[course]
 
-    return failedStudents ? getFailCount(failedStudents, areas) : 0
-  }
+    if (failedStudents) {
+      const students = getFailCount(failedStudents, areas)
+      return ((students * 100) / Object.keys(failedStudents).length).toFixed(1)
+    }
 
-  const getFailedByCourse = course => Object.keys(statistics.failuresNumber[course] || {}).length
+    return 0
+  }
 
   const getChartData = () => {
     return {
@@ -48,7 +51,7 @@ export const LostAreasTable = ({ data = {}, period = '', statistics }) => {
   return (
     <>
       <section>
-        <h2 className="text-blue text-center font-black text-xl mb-2">ÁREAS PERDIDAS {TABLE_TITLE[period]}</h2>
+        <h2 className="text-blue text-center font-black text-xl mb-2">PORCENTAJE DE REPROBACIÓN POR Nº DE ÁREAS</h2>
         <div className="table-container overflow-y-auto bg-transparent">
           <table className="table m-auto lock-column">
             <TableHeader />
@@ -66,8 +69,8 @@ export const LostAreasTable = ({ data = {}, period = '', statistics }) => {
               <tr>
                 <td className="text-center">TOTAL</td>
                 {COURSES.map((course, index) => (
-                  <td className="text-center" key={`total${index}`}>
-                    {getFailedByCourse(course)}
+                  <td className="text-center" key={`${index}${course}`}>
+                    100
                   </td>
                 ))}
               </tr>

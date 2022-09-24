@@ -66,9 +66,12 @@
         .student-title {
             &:first-child {
                 @apply sticky left-0 z-10 bg-blue;
-
-                border-bottom: 0.0625rem solid #dddddd;
             }
         }
+    }
+
+    .retired-field {
+        background-color: #fca5a5 !important;
+        color: white !important;
     }
 }

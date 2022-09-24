@@ -79,6 +79,8 @@ export const SummaryTable = ({ subjects: allSubjects = [], data = [], setData = 
     return !isNaN(Note) ? (Number(Note) ? Number(Note).toFixed(1) : '-' || '-') : '-'
   }
 
+  console.log('la data', data)
+
   return (
     <div>
       <ReactHtmlTableToExcel
@@ -111,10 +113,11 @@ export const SummaryTable = ({ subjects: allSubjects = [], data = [], setData = 
             <table className="table" id="table">
               <TableHeader subjects={subjects} periods={periods} indicators={indicators} isAdmin={isAdmin} />
               <tbody>
-                {data.map(({ student, position, average, lostAverages, ...item }, index) => {
+                {data.map(({ student, position, average, lostAverages, isRetired = false, ...item }, index) => {
                   return (
                     <tr key={`item${index}`}>
-                      <td className="text-center">{student}</td>
+                      <td className={`text-center ${isRetired ? 'retired-field' : ''}`}>{student}</td>
+                      <td className={`text-center ${isRetired ? 'retired-field' : ''}`}>{isRetired ? 'Si' : 'No'}</td>
                       <td className="text-center">{position}</td>
                       <td className="text-center">{average}</td>
                       <td className="text-center">
