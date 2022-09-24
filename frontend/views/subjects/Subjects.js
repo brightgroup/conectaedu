@@ -28,8 +28,8 @@ export const Subjects = () => {
     <div className="subjects m-auto w-max mt-12">
       <h3 className="mb-4 text-3xl font-black text-center text-blue">Materias</h3>
       {!!tableData?.length && (
-        <div className="table-container overflow-y-auto">
-          <table className="table overflow-hidden z-50">
+        <div className="overflow-hidden">
+          <table className="table overflow-hidden z-50 ">
             <TableHeader toggleSort={toggleSort} isAscending={isAscending} />
             <tbody>
               {data.map(({ name = '' }, index) => (

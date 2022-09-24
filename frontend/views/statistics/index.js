@@ -66,6 +66,42 @@ export const COURSES = [
   '1101',
 ]
 
+export const PERIODS = [
+  {
+    value: 'Notas finales Primer periodo',
+    label: 'Primer período',
+    acronym: 'P1',
+  },
+  {
+    value: 'Notas finales Segundo periodo',
+    label: 'Segundo período',
+    acronym: 'P2',
+  },
+  {
+    value: 'Notas finales Tercer periodo',
+    label: 'Tercer período',
+    acronym: 'P3',
+  },
+  {
+    value: 'Notas finales Cuarto periodo',
+    label: 'Cuarto período',
+    acronym: 'P4',
+  },
+  {
+    value: 'Final',
+    label: 'Final',
+    acronym: 'Final',
+  },
+]
+
+export const TABLE_TITLE = {
+  'Notas finales Primer periodo': 'PRIMER PERÍODO',
+  'Notas finales Segundo periodo': 'SEGUNDO PERÍODO',
+  'Notas finales Tercer periodo': 'TERCER PERÍODO',
+  'Notas finales Cuarto periodo': 'CUARTO PERÍODO',
+  Final: 'FINALES',
+}
+
 // const getSubjects = () => {
 //     const subjects = Object.keys(fullData)
 //     console.log('todas las subjects', subjects)

@@ -1,14 +1,13 @@
 import { useState } from 'react'
 import { firstLetterToUpperCase, toComparisonKey } from 'utils/Text'
-import { Select } from 'components/select'
 import { Paginator } from 'components/paginator'
-import { COURSES, SUBJECTS, PERIODS, TABLE_TITLE } from '../..'
-import { TableHeader } from '.'
+import { TableHeader } from './TableHeader'
+import { COURSES, SUBJECTS } from '../..'
 
-export const FailureTable = ({ data = {}, period = '', setPeriod = () => {} }) => {
+export const PercentageFailureTable = ({ data = {}, period = '' }) => {
   const [table, setTable] = useState(SUBJECTS)
 
-  const getFailedStudents = (course, subject) => {
+  const getFailRate = (course, subject) => {
     const notes = data[`${subject.split(' ').join('_')}_${course}`] || []
 
     const result = notes?.filter(item =>
@@ -17,18 +16,12 @@ export const FailureTable = ({ data = {}, period = '', setPeriod = () => {} }) =
       )
     )
 
-    return result?.length || '-'
+    return notes.length ? ((result?.length * 100) / notes.length).toFixed(1) : '-'
   }
-
-  const sortByPeriod = ({ target }) => setPeriod(target.value)
 
   return (
     <div>
-      <h2 className="text-blue text-center font-black text-xl mb-2">ESTADISTICAS {TABLE_TITLE[period]}</h2>
-      <h2 className="text-blue text-center font-black text-xl mb-2">REPROBACIÓN POR ÁREAS</h2>
-      <div className="flex justify-end mb-2">
-        <Select options={PERIODS} value={period} handleChange={sortByPeriod} />
-      </div>
+      <h2 className="text-blue text-center font-black text-xl mb-2">PORCENTAJE DE REPROBACIÓN POR ÁREAS</h2>
       <div className="table-container overflow-y-auto bg-transparent">
         <table className="table m-auto lock-column">
           <TableHeader />
@@ -38,7 +31,7 @@ export const FailureTable = ({ data = {}, period = '', setPeriod = () => {} }) =
                 <td className="text-center">{firstLetterToUpperCase(subject)}</td>
                 {COURSES.map((course, index) => (
                   <td className="text-center" key={`${course}${index}`}>
-                    {getFailedStudents(course, subject)}
+                    {getFailRate(course, subject)}
                   </td>
                 ))}
               </tr>

@@ -47,7 +47,7 @@
     }
 
     tbody tr {
-        border-bottom: 0.0625rem solid #dddddd;
+        border-bottom: 0.0625rem solid #dddddd !important;
     }
 
     tbody tr:nth-of-type(even) {
@@ -55,8 +55,12 @@
    
     }
 
+    // tbody tr {
+    //     border-bottom: 2px solid #354052 !important;
+    // }
+
     tbody tr:last-of-type {
-        border-bottom: 2px solid #354052;
+        border: none !important;
     }
 }
 
