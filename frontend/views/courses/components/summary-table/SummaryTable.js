@@ -116,8 +116,10 @@ export const SummaryTable = ({ subjects: allSubjects = [], data = [], setData = 
                 {data.map(({ student, position, average, lostAverages, isRetired = false, ...item }, index) => {
                   return (
                     <tr key={`item${index}`}>
-                      <td className={`text-center ${isRetired ? 'retired-field' : ''}`}>{student}</td>
-                      <td className={`text-center ${isRetired ? 'retired-field' : ''}`}>{isRetired ? 'Si' : 'No'}</td>
+                      <td className={`text-center ${isRetired ? 'retired-field' : ''}`}>
+                        {student}
+                        {isRetired && <span className="text-tiny font-bold">&nbsp;(Retirado)</span>}
+                      </td>
                       <td className="text-center">{position}</td>
                       <td className="text-center">{average}</td>
                       <td className="text-center">

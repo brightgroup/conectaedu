@@ -8,11 +8,8 @@ export const TableHeader = ({ subjects = [], periods = [], indicators = [], isAd
   return (
     <thead>
       <tr className="bg-blue">
-        <th className="cohorts__course-field text-center student-title border border-b-0" rowSpan={3}>
+        <th className="cohorts__course-field text-center student-title" rowSpan={3}>
           Estudiante
-        </th>
-        <th className="text-center" rowSpan={3}>
-          Retirado
         </th>
         <th className="cohorts__ranking-field text-center border border-r-0 border-b-0 border-t-0" rowSpan={3}>
           Puesto
