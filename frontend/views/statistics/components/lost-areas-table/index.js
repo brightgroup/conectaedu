@@ -1,4 +1,5 @@
 export * from './LostAreasTable'
+export * from './PercentageLostAreaTable'
 
 export const TABLE_ROWS = [
   {

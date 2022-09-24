@@ -9,10 +9,10 @@ const getStudentNotes = (data = {}) => {
 
   for (const key in data) {
     const items = data[key]
-    items?.forEach(({ student, Notas: notes, lastname }) => {
+    items?.forEach(({ student, Notas: notes, lastname, Status }) => {
       const average = notes?.find(({ Itemname: average }) => average)?.Nota
       const isLostSubject = average < 3
-      const [newItem, currentItem] = [{ notes, average, isLostSubject, lastname }, students[student]]
+      const [newItem, currentItem] = [{ notes, average, isLostSubject, lastname, Status }, students[student]]
       students[student] = { ...(currentItem && { ...currentItem }), [key]: newItem }
     })
   }
@@ -22,6 +22,7 @@ const getStudentNotes = (data = {}) => {
 
 const createStudentArray = (students = {}) => {
   const result = []
+
   for (const key in students) {
     let average = 0
     const lostAverages = []
@@ -32,12 +33,14 @@ const createStudentArray = (students = {}) => {
       average += Number(subjects[subject]?.average) || 0
       if (subjects[subject]?.isLostSubject) lostAverages.push(subject)
     }
+
     result.push({
       ...subjects,
       student: key,
       average: (average / Object.keys(subjects).length).toFixed(1),
       lostAverages,
       lastname,
+      isRetired: Object.values(students[key])?.length ? !!Object.values(students[key])[0]?.Status || false : false,
     })
   }
   return result

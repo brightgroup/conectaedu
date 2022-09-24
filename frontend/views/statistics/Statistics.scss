@@ -15,9 +15,6 @@
     .note-title {
         &:first-child {
             @apply sticky left-0 z-10 bg-blue;
-
-            // border-bottom: 0.0625rem solid #dddddd !important;
-       
         }
     }
 }
