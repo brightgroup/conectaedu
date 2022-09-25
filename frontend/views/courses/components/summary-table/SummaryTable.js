@@ -76,12 +76,10 @@ export const SummaryTable = ({ subjects: allSubjects = [], data = [], setData = 
 
   const getBehaviour = notes => {
     const Note = notes?.find(
-      ({ Description = '' }) => toComparisonKey(Description) === 'calificacion comportamental tercer periodo'|| toComparisonKey(Description) === 'calificacion comportamental 3 periodo'
+      ({ Itemname = '' }) => toComparisonKey(Itemname) === 'calificacion comportamental tercer periodo'|| toComparisonKey(Itemname) === 'calificacion comportamental 3 periodo'
     )?.Nota
     return !isNaN(Note) ? (Number(Note) ? Number(Note).toFixed(1) : '-' || '-') : '-'
   }
-
-  console.log('la data', data)
 
   return (
     <div>
@@ -212,6 +210,7 @@ export const SummaryTable = ({ subjects: allSubjects = [], data = [], setData = 
                               )
                             })}
                             <td className="text-center">{getBehaviour(notes)}</td>
+                            {console.log('aca',getBehaviour(notes))}
                           </Fragment>
                         )
                       })}
