@@ -76,7 +76,7 @@ export const SummaryTable = ({ subjects: allSubjects = [], data = [], setData = 
 
   const getBehaviour = notes => {
     const Note = notes?.find(
-      ({ Description = '' }) => toComparisonKey(Description) === 'calificacion comportamental tercer periodo'
+      ({ Description = '' }) => toComparisonKey(Description) === 'calificacion comportamental tercer periodo'|| toComparisonKey(Description) === 'calificacion comportamental 3 periodo'
     )?.Nota
     return !isNaN(Note) ? (Number(Note) ? Number(Note).toFixed(1) : '-' || '-') : '-'
   }
