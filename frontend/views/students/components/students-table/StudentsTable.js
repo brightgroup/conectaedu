@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 import { getCohorts } from 'redux/grade/actions'
-import { getStudentData, getStudentObservation, getStudentsCohort } from 'redux/students/actions'
+import { getCompleteStudents, getStudentData, getStudentObservation, getStudentsCohort } from 'redux/students/actions'
 import { Paginator } from 'components/paginator'
 import { StudentContext } from 'views/students/context/Provider'
 import { TableHeader } from './TableHeader'
@@ -24,6 +24,7 @@ export const StudentsTable = () => {
   useEffect(() => {
     dispatch(getCohorts())
     dispatch(getStudentObservation())
+    dispatch(getCompleteStudents())
   }, [])
 
   const getStudentInformation = async (student, id) => {
@@ -45,6 +46,8 @@ export const StudentsTable = () => {
     setNewCohort(true)
     dispatch(getStudentsCohort(value))
   }
+
+  console.log(studentsTable, 'desde la tabla')
 
   return (
     <div className="table-container overflow-y-auto">

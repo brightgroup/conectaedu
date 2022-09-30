@@ -21,19 +21,19 @@ const StudentProvider = ({ children }) => {
 
   const setFullStudents = () => {
     const fullStudents = []
-    completeStudents.map(cohort => fullStudents.push(cohort))
+    completeStudents?.map(cohort => fullStudents.push(cohort))
     return fullStudents
   }
 
   const setListStudents = () => {
     const fullStudents = []
-    studentsTable.map(cohort => fullStudents.push(cohort))
+    studentsTable?.map(cohort => fullStudents.push(cohort))
     return fullStudents
   }
 
   useEffect(() => setStudentsTable(cohortStudent), [cohortStudent])
 
-  useEffect(() => setStudentsTable(setFullStudents()), [])
+  useEffect(() => setStudentsTable(completeStudents), [completeStudents])
 
   useEffect(() => setStudentTable(notes), [notes])
 

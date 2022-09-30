@@ -1,4 +1,5 @@
 import { URLS } from 'api/Urls'
+import { setLoaderStatus } from 'redux/loader/actions'
 import { Axios } from 'utils/Axios'
 import { getAveragesAndFaults, getStudentNotes, getSubjects } from 'views/courses'
 import { getInitials } from 'views/students'
@@ -66,12 +67,14 @@ export const getStudents = () => {
 
 export const getCompleteStudents = () => {
   return async dispatch => {
+    dispatch(setLoaderStatus(true))
     try {
       const { data } = await Axios(URLS.getCompleteStudents)
       dispatch(setCompleteStudents(data || []))
     } catch (error) {
       dispatch(setError(error))
     }
+    dispatch(setLoaderStatus(false))
   }
 }
 
