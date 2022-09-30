@@ -1,28 +1,49 @@
 import React, { useState, useEffect, createContext } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getStudents } from 'redux/students/actions'
+import { getCompleteStudents, getStudents } from 'redux/students/actions'
 import { sortArray } from 'utils/Array'
 
 export const StudentContext = createContext()
 
 const StudentProvider = ({ children }) => {
   const dispatch = useDispatch()
-  const { students: studentList, student: notes } = useSelector(state => state.students)
+  const {
+    students: studentList,
+    student: notes,
+    completeStudents,
+    cohortStudent,
+  } = useSelector(state => state.students)
 
   const [students, setStudents] = useState([])
   const [student, setStudent] = useState([])
   const [studentTable, setStudentTable] = useState([])
   const [studentsTable, setStudentsTable] = useState([])
 
-  useEffect(() => setStudentsTable(studentList), [studentList])
+  const setFullStudents = () => {
+    const fullStudents = []
+    completeStudents.map(cohort => fullStudents.push(cohort))
+    return fullStudents
+  }
+
+  const setListStudents = () => {
+    const fullStudents = []
+    studentsTable.map(cohort => fullStudents.push(cohort))
+    return fullStudents
+  }
+
+  useEffect(() => setStudentsTable(cohortStudent), [cohortStudent])
+
+  useEffect(() => setStudentsTable(setFullStudents()), [])
 
   useEffect(() => setStudentTable(notes), [notes])
 
   useEffect(() => {
     dispatch(getStudents())
+    dispatch(getCompleteStudents())
+    setFullStudents()
   }, [])
 
-  const toggleSortStudents = (key, isAscending) => setStudentsTable(sortArray([...studentList], { key, isAscending }))
+  const toggleSortStudents = (key, isAscending) => setStudentsTable(sortArray(setListStudents(), { key, isAscending }))
 
   const toggleSortStudent = (key, isAscending = false) => setStudentTable(sortArray([...notes], { key, isAscending }))
 

@@ -6,7 +6,7 @@ export const TableHeader = () => {
 
   const [showFilter, setShowFilter] = useState(false)
   const [isAscendingSort, setIsAscendingSort] = useState(true)
-  const [sortKey, setSortKey] = useState('lastName')
+  const [sortKey, setSortKey] = useState('DisplayName')
 
   const changeSortKey = key => {
     setShowFilter(!showFilter)
@@ -28,31 +28,6 @@ export const TableHeader = () => {
           <button className="button-icon ml-1 mr-2" onClick={sortData}>
             <i className={`text-xs fa-solid mx-2 fa-arrow-${isAscendingSort ? 'up' : 'down'}`} />
           </button>
-          <div className="inline-block relative">
-            <button className="button-icon" onClick={() => setShowFilter(!showFilter)}>
-              <i className="fa-solid fa-ellipsis-vertical text-xs" />
-            </button>
-            {showFilter && (
-              <div className="students__filter-modal">
-                <small
-                  className={`students__filter-item ${
-                    sortKey === 'name' ? 'bg-white text-blue' : 'bg-blue text-white'
-                  }`}
-                  onClick={() => changeSortKey('name')}
-                >
-                  Ordenar por nombre
-                </small>
-                <small
-                  className={`students__filter-item ${
-                    sortKey === 'lastName' ? 'bg-white text-blue' : 'bg-blue text-white'
-                  }`}
-                  onClick={() => changeSortKey('lastName')}
-                >
-                  Ordenar por apellido
-                </small>
-              </div>
-            )}
-          </div>
         </th>
         <th className="text-center">Estudiante</th>
       </tr>

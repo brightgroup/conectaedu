@@ -1,16 +1,16 @@
-import { SET_ERROR, SET_LOADER_STATUS } from './types'
+import { SET_COHORT, SET_ERROR } from './types'
 
 const initialState = {
-  showLoader: false,
+  cohorts: [],
   error: '',
 }
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_LOADER_STATUS:
+    case SET_COHORT:
       return {
         ...state,
-        showLoader: action.payload,
+        cohorts: action.payload,
       }
     case SET_ERROR:
       return {

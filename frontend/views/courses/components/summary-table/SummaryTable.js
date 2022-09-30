@@ -210,7 +210,6 @@ export const SummaryTable = ({ subjects: allSubjects = [], data = [], setData = 
                               )
                             })}
                             <td className="text-center">{getBehaviour(notes)}</td>
-                            {console.log('aca',getBehaviour(notes))}
                           </Fragment>
                         )
                       })}

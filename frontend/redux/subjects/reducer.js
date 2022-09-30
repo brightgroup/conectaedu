@@ -1,4 +1,4 @@
-import { SET_SUBJECTS } from './types'
+import { SET_ERROR, SET_SUBJECTS } from './types'
 
 const initialState = {
   subjects: [],
@@ -11,6 +11,11 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         subjects: action.payload,
+      }
+      case SET_ERROR:
+      return {
+        ...state,
+        error: action.payload,
       }
     default:
       return state

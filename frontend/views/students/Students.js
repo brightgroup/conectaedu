@@ -6,7 +6,7 @@ import { StudentsTable, StudentTable } from '.'
 
 const Component = () => {
   const {
-    query: { nombre: student },
+    query: { nombre: student, id },
   } = useRouter()
 
   return (

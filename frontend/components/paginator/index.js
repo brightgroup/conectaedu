@@ -4,7 +4,6 @@ export * from './Paginator'
 
 export const getPaginatorGroup = pageList => {
   const [groupsNumber, paginatorGroup] = [Math.ceil(pageList.length / PAGES_LIMIT), {}]
-
   for (let i = 0; i < groupsNumber; i++) {
     const [start, lastPage] = [i * PAGES_LIMIT + 1, pageList.at(-1)]
     const finish = start + PAGES_LIMIT - 1
