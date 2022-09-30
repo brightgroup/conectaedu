@@ -1,22 +1,26 @@
 .students {
-    &__filter-modal {
-        @apply absolute top-9 right-0 bg-blue w-40 rounded-md  flex flex-col transition-all overflow-hidden;
+  &__filter-modal {
+    @apply absolute top-9 right-0 bg-blue w-40 rounded-md  flex flex-col transition-all overflow-hidden;
 
-        box-shadow: 0 0 1.25rem rgba(0, 0, 0, 0.15);
-        animation: .4s showModal;
-    }
+    box-shadow: 0 0 1.25rem rgba(0, 0, 0, 0.15);
+    animation: 0.4s showModal;
+  }
 
-    &__filter-item {
-        @apply p-2 hover:bg-white hover:text-blue transition-all cursor-pointer;
-    }
+  &__filter-item {
+    @apply p-2 hover:bg-white hover:text-blue transition-all cursor-pointer;
+  }
 }
 
 @keyframes showModal {
-    from {
-        opacity: 0;
-    }
+  from {
+    opacity: 0;
+  }
 
-    to {
-        opacity: 1;
-    }
+  to {
+    opacity: 1;
+  }
+}
+
+.observation__list:last-child {
+  border: none;
 }

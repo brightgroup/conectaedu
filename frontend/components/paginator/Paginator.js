@@ -3,9 +3,13 @@ import { createArray } from 'utils/Array'
 import { ITEMS_PER_PAGE } from 'constants/Paginator'
 import { getPaginatorGroup, getGroupLimits } from '.'
 
-export const Paginator = ({ data = [], setData = () => {} }) => {
+export const Paginator = ({ data = [], setData = () => {}, newCohort = false, setNewCohort = () => {} }) => {
   const [pages, setPages] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
+
+  useEffect(() => {
+    newCohort ? setCurrentPage(1) : ''
+  }, [newCohort])
 
   useEffect(() => {
     if (data?.length <= ITEMS_PER_PAGE) return setData(data)
@@ -34,6 +38,7 @@ export const Paginator = ({ data = [], setData = () => {} }) => {
 
   const increasePage = () => {
     if (enabledRightArrow) setCurrentPage(currentPage + 1)
+    setNewCohort(false)
   }
 
   const decreasePage = () => {

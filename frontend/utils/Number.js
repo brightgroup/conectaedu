@@ -40,6 +40,4 @@ const getFailedStatistics = () => {
       }
     })
   )
-  console.log('el item', disapprovalByAreas)
-  console.log('el item2', item2)
 }

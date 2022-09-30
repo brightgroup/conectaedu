@@ -5,6 +5,7 @@ import { reducer as loaderReducer } from './loader/reducer'
 import { reducer as subjectsReducer } from './subjects/reducer'
 import { reducer as studentsReducer } from './students/reducer'
 import { reducer as coursesReducer } from './courses/reducer'
+import { reducer as cohortsReducer } from './grade/reducer'
 
 export const rootReducer = combineReducers({
   auth: authReducer,
@@ -12,4 +13,5 @@ export const rootReducer = combineReducers({
   subjects: subjectsReducer,
   students: studentsReducer,
   courses: coursesReducer,
+  grades: cohortsReducer,
 })

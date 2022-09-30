@@ -2,12 +2,17 @@ import axios from 'axios'
 import { toast } from 'react-toastify'
 import { TOKEN } from 'constants/Auth'
 import { setLoaderStatus } from 'redux/loader/actions'
-import { SET_SESSION, SET_ERROR } from './types'
+import { SET_SESSION, SET_ERROR, SET_USER } from './types'
 import { IS_ADMIN, USER } from 'constants/LocalStorage'
 
 export const setSession = status => ({
   type: SET_SESSION,
   payload: status,
+})
+
+export const setUser = user => ({
+  type: SET_USER,
+  payload: user,
 })
 
 export const setError = error => ({
@@ -26,6 +31,7 @@ export const login = ({ email: user, password }) => {
         localStorage.setItem(USER, user[0])
         localStorage.setItem(IS_ADMIN, JSON.stringify(data.user?.role === 'admin'))
         dispatch(setSession(true))
+        dispatch(setUser(data.user))
       }
       dispatch(setLoaderStatus(false))
     } catch (error) {

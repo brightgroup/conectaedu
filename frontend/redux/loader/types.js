@@ -1,1 +1,2 @@
 export const SET_LOADER_STATUS = 'SET_LOADER_STATUS'
+export const SET_ERROR = 'SET_ERROR'
