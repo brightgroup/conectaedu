@@ -12,4 +12,5 @@ export const URLS = {
   getCohort: 'get-cohorts',
   getObservations: 'observations',
   getStudentUser: 'student',
+  getReport: 'getreport',
 }

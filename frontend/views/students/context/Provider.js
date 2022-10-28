@@ -7,12 +7,7 @@ export const StudentContext = createContext()
 
 const StudentProvider = ({ children }) => {
   const dispatch = useDispatch()
-  const {
-    students: studentList,
-    student: notes,
-    completeStudents,
-    cohortStudent,
-  } = useSelector(state => state.students)
+  const { student: notes, completeStudents, cohortStudent } = useSelector(state => state.students)
 
   const [students, setStudents] = useState([])
   const [student, setStudent] = useState([])

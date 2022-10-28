@@ -26,14 +26,4 @@ export const NAV_ITEMS = [
     label: 'Estadísticas',
     icon: 'fa-chart-line',
   },
-  // {
-  //   route: '/notas',
-  //   label: 'Notas',
-  //   icon: 'fa-file-pen',
-  // },
-  // {
-  //   route: '/subir-notas',
-  //   label: 'Subir notas',
-  //   icon: 'fa-upload',
-  // },
 ]
