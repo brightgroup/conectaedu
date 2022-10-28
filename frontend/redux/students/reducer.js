@@ -5,6 +5,7 @@ import {
   SET_STUDENTS,
   SET_STUDENT_COHORT,
   SET_STUDENT_DATA,
+  SET_STUDENT_REPORT,
   SET_STUDENT_SCORES,
   SET_STUDENT_USER,
 } from './types'
@@ -17,6 +18,7 @@ const initialState = {
   cohortStudent: [],
   studentUser: {},
   studentObservations: [],
+  studentReport: {},
   error: '',
 }
 
@@ -56,6 +58,11 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         studentObservations: action.payload,
+      }
+    case SET_STUDENT_REPORT:
+      return {
+        ...state,
+        studentReport: action.payload,
       }
     case SET_ERROR:
       return {

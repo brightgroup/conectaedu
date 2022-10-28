@@ -10,7 +10,7 @@ const Component = () => {
   } = useRouter()
 
   return (
-    <div className="students m-auto w-max mt-12">
+    <div className="students m-auto w-max mt-12 h-auto">
       <TableTitle title={student || 'Estudiantes'} includesArrow={!!student} backRoute="/estudiantes" />
       {student ? <StudentTable /> : <StudentsTable />}
     </div>

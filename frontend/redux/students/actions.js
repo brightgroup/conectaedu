@@ -12,6 +12,7 @@ import {
   SET_STUDENT_COHORT,
   SET_STUDENT_USER,
   SET_OBSERVATIONS,
+  SET_STUDENT_REPORT,
 } from './types'
 
 export const setStudents = courses => ({
@@ -47,6 +48,11 @@ export const setStudentUser = student => ({
 export const setObservations = observations => ({
   type: SET_OBSERVATIONS,
   payload: observations,
+})
+
+export const setStudentReport = report => ({
+  type: SET_STUDENT_REPORT,
+  payload: report,
 })
 
 export const setError = error => ({
@@ -149,5 +155,18 @@ export const getStudentUser = id => {
     } catch (error) {
       dispatch(setError(error))
     }
+  }
+}
+
+export const getStudentReport = (id, cohort) => {
+  return async dispatch => {
+    dispatch(setLoaderStatus(true))
+    try {
+      const { data } = await Axios(URLS.getReport, { cohort, student: id })
+      dispatch(setStudentReport(data || {}))
+    } catch (error) {
+      dispatch(setError(error))
+    }
+    dispatch(setLoaderStatus(false))
   }
 }
