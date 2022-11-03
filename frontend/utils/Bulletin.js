@@ -8,7 +8,7 @@ export const getValue = (notes, { item, valueKey = 'Nota', decimals = 1 }) => {
 }
 
 export const getCourseDescription = (course, key) => {
-  return course[0][key]
+  if (course.length) return course[0]?.[key]
 }
 
 export const getInstitutionDescription = (institutions, key) => {
