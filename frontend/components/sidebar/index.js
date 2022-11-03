@@ -26,4 +26,9 @@ export const NAV_ITEMS = [
     label: 'Estadísticas',
     icon: 'fa-chart-line',
   },
+  {
+    route: '/institucion',
+    label: 'Perfil Institucion',
+    icon: 'fa-solid fa-school',
+  },
 ]

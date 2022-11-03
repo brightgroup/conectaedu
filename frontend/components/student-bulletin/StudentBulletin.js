@@ -1,15 +1,35 @@
-import React, { useMemo } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { Document, Image, Page, Text, View } from '@react-pdf/renderer'
 import { PerformanceTable } from './PerformanceTable'
 import { TableNotes } from './TableNotes'
-import { image, styles } from '.'
+import { getCourseDescription, getInstitutionDescription } from 'utils/Bulletin'
+import { SignaturesSection } from './components'
+import { styles } from '.'
 
-export const StudentBulletin = ({ studentReport, schoolData }) => {
+export const StudentBulletin = ({ studentReport, period, course, institutions }) => {
   const courses = useMemo(() => Object.keys(studentReport), [studentReport])
-  const coursesPageOne = courses.slice(0, 6)
-  const coursesPagetwo = courses.slice(6, -1)
+  const [{ coursesFirstPage, coursesSecondPage, coursesThirdPage }, setPages] = useState({
+    coursesFirstPage: [],
+    coursesSecondPage: [],
+    coursesThirdPage: [],
+  })
 
-  const getNameStudent = () => studentReport[courses.slice(0, 1)][0]?.student
+  useEffect(() => {
+    if (courses.length > 12) {
+      setPages({
+        coursesFirstPage: courses.slice(0, 5),
+        coursesSecondPage: courses.slice(5, 13),
+        coursesThirdPage: courses.slice(13, courses.length),
+      })
+    } else {
+      setPages({
+        coursesFirstPage: courses.slice(0, 5),
+        coursesSecondPage: courses.slice(5, courses.length),
+      })
+    }
+  }, [courses])
+
+  const getNameStudent = () => studentReport[courses.slice(0, 1)]?.[0]?.student
 
   return (
     <Document>
@@ -17,13 +37,13 @@ export const StudentBulletin = ({ studentReport, schoolData }) => {
         <View style={styles.container}>
           <View style={styles.container__header}>
             <View style={styles.container__header_image}>
-              <Image src={schoolData?.URLImage || image} style={{ width: 60, height: 60 }} />
+              {/* <Image src="https://api.conectaedu.co/1667330222.png" width={20} height={20} /> */}
             </View>
             <View style={styles.container__header_title}>
               <View style={styles.container__description}>
-                <Text style={styles.title}>{schoolData?.schoolName}</Text>
-                <Text style={styles.subtitle}>{schoolData?.addres}</Text>
-                <Text style={styles.subtitle}>{schoolData.municipality}</Text>
+                <Text style={styles.title}>{getInstitutionDescription(institutions, 'name')}</Text>
+                <Text style={styles.subtitle}>{getInstitutionDescription(institutions, 'address')}</Text>
+                <Text style={styles.subtitle}>{getInstitutionDescription(institutions, 'municipality')}</Text>
               </View>
               <View style={styles.container__subtitle}>
                 <View style={styles.container__subtitle_comulmn1}>
@@ -43,41 +63,40 @@ export const StudentBulletin = ({ studentReport, schoolData }) => {
                 </View>
                 <View style={styles.information__name}>
                   <Text style={styles.subtitle}>Director de Grupo:</Text>
-                  <Text style={styles.text__student}>MARIA AMPARO ROA CASTRO</Text>
+                  <Text style={styles.text__student}>{getCourseDescription(course, 'director')}</Text>
                 </View>
                 <View style={{ width: '27.5%', fontSize: 10 }}>
                   <View style={{ paddingLeft: 6 }}>
-                    <Text style={styles.subtitle}>2022</Text>
+                    <Text style={styles.subtitle}>
+                      {getCourseDescription(course, 'year') || new Date().getFullYear()}
+                    </Text>
                   </View>
                   <View style={styles.box_background}>
                     <Text style={styles.title}>GRADO</Text>
                   </View>
                   <View style={{ paddingLeft: 6, paddingTop: 2 }}>
-                    <Text style={styles.subtitle}>QUINTO LIBERTADOR</Text>
+                    <Text style={styles.subtitle}>{getCourseDescription(course, 'name')}</Text>
                   </View>
                 </View>
                 <View style={{ width: '14%' }}>
                   <View style={{ paddingLeft: 6 }}>
-                    <Text style={styles.subtitle}>3</Text>
+                    <Text style={styles.subtitle}>{period}</Text>
                   </View>
                   <View style={styles.box_background}>
                     <Text style={styles.title}>JORNADA</Text>
                   </View>
                   <View style={{ paddingLeft: 6, paddingTop: 2 }}>
-                    <Text style={styles.subtitle}>MAÑANA</Text>
+                    <Text style={styles.subtitle}>{getCourseDescription(course, 'day_trip')}</Text>
                   </View>
                 </View>
               </View>
             </View>
           </View>
           <View style={{ height: 700, width: '100%', marginTop: 10 }}>
-            <Image
-              src={schoolData?.URLImage || image}
-              style={{ width: '100%', opacity: 0.2, marginTop: 100, zIndex: '10' }}
-            />
+            {/* <Image src={image} style={{ width: '100%', opacity: 0.2, marginTop: 100, zIndex: '10' }} /> */}
             <View style={{ width: '100%', position: 'absolute' }}>
               <View>
-                <TableNotes courses={courses} studentReport={studentReport} />
+                <TableNotes courses={courses} studentReport={studentReport} period={period} />
               </View>
               <View>
                 <Text style={styles.description}>
@@ -86,7 +105,7 @@ export const StudentBulletin = ({ studentReport, schoolData }) => {
                 </Text>
               </View>
               <View>
-                <PerformanceTable courses={coursesPageOne} studentReport={studentReport} />
+                <PerformanceTable courses={coursesFirstPage} studentReport={studentReport} period={period} />
               </View>
             </View>
           </View>
@@ -95,39 +114,31 @@ export const StudentBulletin = ({ studentReport, schoolData }) => {
       <Page>
         <View style={styles.container}>
           <View style={{ height: '100%', width: '100%' }}>
-            <Image
-              src={schoolData?.URLImage || image}
-              style={{ width: '100%', opacity: 0.2, marginTop: 100, zIndex: '10' }}
-            />
+            {/* <Image src={image} style={{ width: '100%', opacity: 0.2, marginTop: 100, zIndex: '10' }} /> */}
             <View style={{ width: '100%', position: 'absolute' }}>
               <View>
-                <PerformanceTable courses={coursesPagetwo} studentReport={studentReport} />
+                <PerformanceTable courses={coursesSecondPage} studentReport={studentReport} period={period} />
               </View>
             </View>
-            <View
-              style={{
-                width: '100%',
-                height: 100,
-                position: 'absolute',
-                flexDirection: 'row',
-                border: 1,
-                bottom: 20,
-                borderColor: '#AEAAAA',
-              }}
-            >
-              <View style={{ flex: 1, borderRight: 1, borderColor: '#AEAAAA', padding: 10 }}>
-                <Text style={styles.subtitle}>Observaciones:</Text>
-              </View>
-              <View style={{ flex: 1, borderRight: 1, borderColor: '#AEAAAA', padding: 10 }}>
-                <Text style={styles.subtitle}>Firma director de curso</Text>
-              </View>
-              <View style={{ flex: 1, padding: 10 }}>
-                <Text style={styles.subtitle}>Firma Rector</Text>
-              </View>
-            </View>
+            {coursesThirdPage ? null : <SignaturesSection />}
           </View>
         </View>
       </Page>
+      {coursesThirdPage ? (
+        <Page>
+          <View style={styles.container}>
+            <View style={{ height: '100%', width: '100%' }}>
+              {/* <Image src={image} style={{ width: '100%', opacity: 0.2, marginTop: 100, zIndex: '10' }} /> */}
+              <View style={{ width: '100%', position: 'absolute' }}>
+                <View>
+                  <PerformanceTable courses={coursesThirdPage} studentReport={studentReport} period={period} />
+                </View>
+              </View>
+              <SignaturesSection />
+            </View>
+          </View>
+        </Page>
+      ) : null}
     </Document>
   )
 }

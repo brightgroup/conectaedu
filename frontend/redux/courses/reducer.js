@@ -1,7 +1,8 @@
-import { SET_COURSES, SET_ERROR, SET_FULL_DATA, SET_SHEETS } from './types'
+import { GET_COURSE, SET_COURSES, SET_ERROR, SET_FULL_DATA, SET_SHEETS } from './types'
 
 const initialState = {
   courses: [],
+  course: [],
   sheet: {},
   fullData: {},
   error: '',
@@ -24,7 +25,12 @@ export const reducer = (state = initialState, action) => {
         ...state,
         sheet: action.payload,
       }
-      case SET_ERROR:
+    case GET_COURSE:
+      return {
+        ...state,
+        course: action.payload,
+      }
+    case SET_ERROR:
       return {
         ...state,
         error: action.payload,

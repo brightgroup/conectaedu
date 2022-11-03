@@ -1,17 +1,10 @@
 import React from 'react'
 import { Text, View } from '@react-pdf/renderer'
-import { NEWSLETTER_ITEMS } from 'constants/Bulletin'
-import { toComparisonKey } from 'utils/Text'
+import { COMPETENCES, FAULTS, NEWSLETTER_ITEMS, PERIOD } from 'constants/Bulletin'
 import { stylesPerformance } from '.'
+import { getValue } from 'utils/Bulletin'
 
-export const PerformanceTable = ({ courses, studentReport }) => {
-  const getValue = (notes, { item, valueKey = 'Nota' }) => {
-    if (Array.isArray(notes) && notes.length) {
-      const value = notes[0]?.Notas.find(note => toComparisonKey(note.Itemname) === toComparisonKey(item))?.[valueKey]
-      return isNaN(Number(value)) ? value : Number(value) || '-'
-    }
-  }
-
+export const PerformanceTable = ({ courses, studentReport, period }) => {
   const replacePerformance = text => text?.replace('Desempeño', '')
 
   return (
@@ -39,7 +32,7 @@ export const PerformanceTable = ({ courses, studentReport }) => {
           <Text style={stylesPerformance.subtitle}>4P</Text>
         </View>
       </View>
-      {courses.map((course, index) => (
+      {courses?.map((course, index) => (
         <View style={stylesPerformance.row} key={index}>
           <View style={stylesPerformance.areaDescription}>
             <Text style={stylesPerformance.subtitle}>{studentReport[course][0].Curso.replace(/[0-9]/g, '')}</Text>
@@ -49,7 +42,8 @@ export const PerformanceTable = ({ courses, studentReport }) => {
               <View style={stylesPerformance.fpDescription}>
                 <Text style={stylesPerformance.subtitle}>
                   {getValue(studentReport[course], {
-                    item: NEWSLETTER_ITEMS.faults,
+                    item: FAULTS[period],
+                    decimals: 0,
                   })}
                 </Text>
               </View>
@@ -57,7 +51,7 @@ export const PerformanceTable = ({ courses, studentReport }) => {
                 <Text style={stylesPerformance.subtitle}>
                   {`Desempeño del periodo: ${replacePerformance(
                     getValue(studentReport[course], {
-                      item: NEWSLETTER_ITEMS.thirdPeriod,
+                      item: PERIOD[period],
                       valueKey: 'Desempenio',
                     })
                   )}`}
@@ -96,7 +90,7 @@ export const PerformanceTable = ({ courses, studentReport }) => {
               <Text style={stylesPerformance.title_indicators}>INDICADORES DE DESEMPEÑO</Text>
               <Text style={stylesPerformance.subtitle}>
                 {getValue(studentReport[course], {
-                  item: NEWSLETTER_ITEMS.competencesFirstPeriod,
+                  item: COMPETENCES[period],
                   valueKey: 'Description',
                 })?.toLowerCase()}
               </Text>

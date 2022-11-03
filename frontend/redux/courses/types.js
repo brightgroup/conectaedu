@@ -1,4 +1,5 @@
 export const SET_COURSES = 'SET_COURSES'
 export const SET_SHEETS = 'SET_SHEETS'
 export const SET_FULL_DATA = 'SET_FULL_DATA'
+export const GET_COURSE = 'GET_COURSE'
 export const SET_ERROR = 'SET_ERROR'

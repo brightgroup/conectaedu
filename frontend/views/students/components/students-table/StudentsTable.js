@@ -13,6 +13,8 @@ import { Paginator } from 'components/paginator'
 import { StudentContext } from 'views/students/context/Provider'
 import { TableHeader } from './TableHeader'
 import { Select } from 'components/select'
+import { suppliers } from '.'
+import { getCourse } from 'redux/courses/actions'
 
 export const StudentsTable = () => {
   const dispatch = useDispatch()
@@ -28,6 +30,7 @@ export const StudentsTable = () => {
   const [subject, setSubject] = useState('')
   const [newCohort, setNewCohort] = useState(false)
   const [cohotStudent, setCohotStudent] = useState('')
+  const [bulletinPeriod, setBulletinPeriod] = useState({})
 
   useEffect(() => {
     dispatch(getCompleteStudents())
@@ -44,7 +47,8 @@ export const StudentsTable = () => {
 
   const getstudenrbulletin = async (id, cohort) => {
     await dispatch(getStudentReport(id, cohort || cohotStudent))
-    router.push('/boletin')
+    dispatch(getCourse(cohort || cohotStudent))
+    router.push({ pathname: '/boletin', query: { period: bulletinPeriod[id] || '1' } })
   }
 
   const getCourses = () => {
@@ -59,6 +63,11 @@ export const StudentsTable = () => {
     setSubject(value)
     setNewCohort(true)
     dispatch(getStudentsCohort(value))
+  }
+
+  const handleChangeSelect = ({ target }, idStedent) => {
+    const { value } = target
+    setBulletinPeriod({ ...bulletinPeriod, [idStedent]: value })
   }
 
   return (
@@ -92,6 +101,13 @@ export const StudentsTable = () => {
                         className="fa-regular fa-address-book pointer"
                         onClick={() => getstudenrbulletin(item['id'], item['cohort'])}
                       />
+                      <select className="border rounded ml-2" onChange={e => handleChangeSelect(e, item['id'])}>
+                        {suppliers.map(option => (
+                          <option key={option.value} value={option.value} name={323}>
+                            {option.label}
+                          </option>
+                        ))}
+                      </select>
                     </td>
                   ) : null}
                 </tr>

@@ -1,7 +1,7 @@
 import { URLS } from 'api/Urls'
 import { Axios } from 'utils/Axios'
 import { removeAccents } from 'utils/Text'
-import { SET_COURSES, SET_ERROR, SET_FULL_DATA, SET_SHEETS } from './types'
+import { GET_COURSE, SET_COURSES, SET_ERROR, SET_FULL_DATA, SET_SHEETS } from './types'
 
 export const setCourses = cohorts => ({
   type: SET_COURSES,
@@ -16,6 +16,11 @@ export const setSheets = sheets => ({
 export const setFullData = data => ({
   type: SET_FULL_DATA,
   payload: data,
+})
+
+export const setcourse = course => ({
+  type: GET_COURSE,
+  payload: course,
 })
 
 export const setError = error => ({
@@ -50,6 +55,17 @@ export const getFullData = () => {
     try {
       const { data } = await Axios(URLS.getFullData)
       if (data) dispatch(setFullData(formatData(data)))
+    } catch (error) {
+      dispatch(setError(error))
+    }
+  }
+}
+
+export const getCourse = cohort => {
+  return async dispatch => {
+    try {
+      const { data } = await Axios(URLS.getCourse(cohort))
+      if (data) dispatch(setcourse(data))
     } catch (error) {
       dispatch(setError(error))
     }
