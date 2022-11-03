@@ -6,6 +6,7 @@ import { reducer as subjectsReducer } from './subjects/reducer'
 import { reducer as studentsReducer } from './students/reducer'
 import { reducer as coursesReducer } from './courses/reducer'
 import { reducer as cohortsReducer } from './grade/reducer'
+import { reducer as institutionReducer } from './institutions/reducer'
 
 export const rootReducer = combineReducers({
   auth: authReducer,
@@ -14,4 +15,5 @@ export const rootReducer = combineReducers({
   students: studentsReducer,
   courses: coursesReducer,
   grades: cohortsReducer,
+  institutions: institutionReducer,
 })

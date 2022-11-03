@@ -1,20 +1,13 @@
 import { Text, View } from '@react-pdf/renderer'
-import { NEWSLETTER_ITEMS } from 'constants/Bulletin'
-import { toComparisonKey } from 'utils/Text'
+import { BEHAVIUR, FAULTS, NEWSLETTER_ITEMS, PERIOD } from 'constants/Bulletin'
+import { getValue } from 'utils/Bulletin'
 import { stylesNotes } from '.'
 
-export const TableNotes = ({ courses, studentReport }) => {
-  const getValue = (notes, { item, valueKey = 'Nota' }) => {
-    if (Array.isArray(notes) && notes.length) {
-      const value = notes[0]?.Notas.find(note => toComparisonKey(note.Itemname) === toComparisonKey(item))?.[valueKey]
-      return isNaN(Number(value)) ? value : Number(value) || '-'
-    }
-  }
-
+export const TableNotes = ({ courses, studentReport, period }) => {
   const replacePerformance = text => text?.replace('Desempeño', '')
 
   return (
-    <View>
+    <View style={stylesNotes.container}>
       <View style={stylesNotes.table__header}>
         <View style={stylesNotes.column_area}>
           <Text style={stylesNotes.subtitle}>AREA</Text>
@@ -51,7 +44,7 @@ export const TableNotes = ({ courses, studentReport }) => {
           <Text style={stylesNotes.subtitle}>DESEMPEÑO</Text>
         </View>
         <View style={stylesNotes.column_pt}>
-          <Text style={stylesNotes.subtitle}>PT 3P</Text>
+          <Text style={stylesNotes.subtitle}>{`PT ${period}P`}</Text>
         </View>
         <View style={stylesNotes.columl_average}>
           <Text style={stylesNotes.subtitle}>PROMEDIO GENERAL 3P</Text>
@@ -63,10 +56,10 @@ export const TableNotes = ({ courses, studentReport }) => {
       {courses?.map((course, index) => (
         <View style={stylesNotes.row} key={index}>
           <View style={stylesNotes.column_area}>
-            <Text style={stylesNotes.subtitle}>{studentReport[course][0].Curso.replace(/[0-9]/g, '')}</Text>
+            <Text style={stylesNotes.subtitle}>{studentReport[course][0].Curso?.replace(/[0-9]/g, '')}</Text>
           </View>
           <View style={stylesNotes.column_notes}>
-            <View style={{ flexDirection: 'row' }}>
+            <View style={{ flexDirection: 'row', margin:'auto 0' }}>
               <View style={stylesNotes.period_notes}>
                 <Text style={stylesNotes.subtitle}>
                   {getValue(studentReport[course], { item: NEWSLETTER_ITEMS.firstPeriod })}
@@ -91,7 +84,7 @@ export const TableNotes = ({ courses, studentReport }) => {
           </View>
           <View style={stylesNotes.column_faults}>
             <Text style={stylesNotes.subtitle}>
-              {getValue(studentReport[course], { item: NEWSLETTER_ITEMS.faults })}
+              {getValue(studentReport[course], { item: FAULTS[period], decimals: 0 })}
             </Text>
           </View>
           <View style={stylesNotes.column_faults}>
@@ -102,9 +95,7 @@ export const TableNotes = ({ courses, studentReport }) => {
           </View>
           <View style={stylesNotes.column_performance}>
             <Text style={stylesNotes.subtitle}>
-              {replacePerformance(
-                getValue(studentReport[course], { item: NEWSLETTER_ITEMS.thirdPeriod, valueKey: 'Desempenio' })
-              )}
+              {replacePerformance(getValue(studentReport[course], { item: PERIOD[period], valueKey: 'Desempenio' }))}
             </Text>
           </View>
           <View style={stylesNotes.column_pt}>
@@ -116,7 +107,7 @@ export const TableNotes = ({ courses, studentReport }) => {
             </Text>
           </View>
           <View style={stylesNotes.column_comport}>
-            <Text style={stylesNotes.subtitle}>-</Text>
+            <Text style={stylesNotes.subtitle}>{getValue(studentReport[course], { item: BEHAVIUR[period] })}</Text>
           </View>
         </View>
       ))}
