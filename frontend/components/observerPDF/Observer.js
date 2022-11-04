@@ -27,15 +27,15 @@ export const Observer = ({ studentUser, studentObservations }) => {
               <View style={styles.observation__container} key={index}>
                 <View style={styles.observation__subcontainer}>
                   <Text style={styles.observation__subtitle}>
-                    Docente: <Text style={styles.observation__subtitle}>{observation.Docente}</Text>
+                    Docente: <Text style={styles.observation__subtitle}>{observation?.Docente}</Text>
                   </Text>
-                  <Text style={styles.observation__subtitle}>{observation.date}</Text>
+                  <Text style={styles.observation__subtitle}>{observation?.date}</Text>
                 </View>
                 <Text style={styles.observation__subtitle}>
-                  Observacion: <Text style={styles.observation__description}>{observation.observation}</Text>
+                  Observacion: <Text style={styles.observation__description}>{observation?.observation}</Text>
                 </Text>
                 <Text style={styles.observation__subtitle}>
-                  Compromiso estudiante: <Text style={styles.observation__description}>{observation.goals}</Text>
+                  Compromiso estudiante: <Text style={styles.observation__description}>{observation?.goals}</Text>
                 </Text>
               </View>
             ))}

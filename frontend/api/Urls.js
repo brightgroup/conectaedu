@@ -2,7 +2,6 @@ export const URLS = {
   images: 'https://api.conectaedu.co/public/files/',
   getSubjects: 'get-courses',
   getStudents: 'get-achievements',
-  getStudentInformation: 'get-info-student',
   getCompleteStudents: 'getfullStudents',
   getCourses: 'get-cohorts',
   getCourse: cohort => `course-info?id=${cohort}`,
