@@ -23,11 +23,6 @@ export const studentInformation = [
     description: 'lastname',
   },
   {
-    name: 'Apellidos',
-    subtitle: 'Apellidos',
-    description: 'email',
-  },
-  {
     name: 'Telefono',
     subtitle: 'Telefono',
     description: 'phone',

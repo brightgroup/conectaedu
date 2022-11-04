@@ -71,19 +71,19 @@ export const StudentTable = () => {
           <div className="rounded-lg border border-2 border-gray-600 w-9/12 p-4 mt-4 mx-auto">
             <h4 className="font-bold text-xl mb-3 text-center">Estudiante</h4>
             <p className="font-bold">
-              ID:<span className="font-semibold ml-1 text-gray-600">{studentUser.id}</span>
+              ID:<span className="font-semibold ml-1 text-gray-600">{studentUser?.id}</span>
             </p>
             <p className="font-bold ">
-              Nombres:<span className="font-semibold ml-1 text-gray-600">{studentUser.firstname}</span>
+              Nombres:<span className="font-semibold ml-1 text-gray-600">{studentUser?.firstname}</span>
             </p>
             <p className="font-bold ">
-              Apellidos:<span className="font-semibold ml-1 text-gray-600">{studentUser.lastname}</span>
+              Apellidos:<span className="font-semibold ml-1 text-gray-600">{studentUser?.lastname}</span>
             </p>
             <p className="font-bold ">
-              Correo:<span className="font-semibold ml-1 text-gray-600">{studentUser.email}</span>
+              Correo:<span className="font-semibold ml-1 text-gray-600">{studentUser?.email}</span>
             </p>
             <p className="font-bold ">
-              Telefono:<span className="font-semibold ml-1 text-gray-600">{studentUser.phone || 'No disponible'}</span>
+              Telefono:<span className="font-semibold ml-1 text-gray-600">{studentUser?.phone || 'No disponible'}</span>
             </p>
           </div>
           <div className="rounded-lg border border-2 border-gray-600 w-9/12 p-4 mt-4 mx-auto">
