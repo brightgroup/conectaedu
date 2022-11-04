@@ -57,7 +57,7 @@ export const StudentTable = () => {
         </button>
         <PDFDownloadLink
           document={<Observer studentUser={studentUser} studentObservations={studentObservations} />}
-          fileName={`${studentUser.firstname} ${studentUser.lastname} - OBSERVADOR`}
+          fileName={`${studentUser?.firstname} ${studentUser?.lastname} - OBSERVADOR`}
         >
           <button className="px-3 py-1 text-white bg-gray-600 rounded pointer">Descargar PDF</button>
         </PDFDownloadLink>
