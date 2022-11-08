@@ -170,3 +170,27 @@ export const getStudentReport = (id, cohort) => {
     dispatch(setLoaderStatus(false))
   }
 }
+
+export const getcourseReport = (id, cohort) => {
+  return async dispatch => {
+    dispatch(setLoaderStatus(true))
+    try {
+      const { data } = await Axios(URLS.getReport, { cohort, student: id })
+    } catch (error) {
+      dispatch(setError(error))
+    }
+    dispatch(setLoaderStatus(false))
+  }
+}
+
+export const getCourseReport = (id, cohort) => {
+  return async dispatch => {
+    dispatch(setLoaderStatus(true))
+    try {
+      const { data } = await Axios(URLS.getReport, { cohort, student: id })
+    } catch (error) {
+      dispatch(setError(error))
+    }
+    dispatch(setLoaderStatus(false))
+  }
+}

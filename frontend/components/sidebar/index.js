@@ -31,4 +31,9 @@ export const NAV_ITEMS = [
     label: 'Perfil Institucion',
     icon: 'fa-solid fa-school',
   },
+  {
+    route: '/boletin-curso',
+    label: 'Boletin por curso',
+    icon: 'fa-solid fa-book',
+  },
 ]

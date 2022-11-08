@@ -1,7 +1,8 @@
 import { URLS } from 'api/Urls'
+import { setLoaderStatus } from 'redux/loader/actions'
 import { Axios } from 'utils/Axios'
 import { removeAccents } from 'utils/Text'
-import { GET_COURSE, SET_COURSES, SET_ERROR, SET_FULL_DATA, SET_SHEETS } from './types'
+import { GET_COURSE, GET_NOTES_COURSE, SET_COURSES, SET_ERROR, SET_FULL_DATA, SET_SHEETS } from './types'
 
 export const setCourses = cohorts => ({
   type: SET_COURSES,
@@ -21,6 +22,11 @@ export const setFullData = data => ({
 export const setcourse = course => ({
   type: GET_COURSE,
   payload: course,
+})
+
+export const setcourseNotes = notesCourse => ({
+  type: GET_NOTES_COURSE,
+  payload: notesCourse,
 })
 
 export const setError = error => ({
@@ -76,4 +82,21 @@ const formatData = data => {
   const newData = {}
   for (const key in data) newData[removeAccents(key)] = data[key]
   return newData
+}
+
+export const getNotesCourse = (student, cohort) => {
+  return async dispatch => {
+    dispatch(setLoaderStatus(true))
+    try {
+      await Promise.all(student.map(item => Axios(URLS.getReport, { cohort, student: item })))
+        .then(res => {
+          const data = res.map(item => item.data)
+          dispatch(setcourseNotes(data.some(item => item) ? data : []))
+        })
+        .catch(error => dispatch(setError(error)))
+    } catch (error) {
+      dispatch(setError())
+    }
+    dispatch(setLoaderStatus(false))
+  }
 }

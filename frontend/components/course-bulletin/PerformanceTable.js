@@ -35,7 +35,7 @@ export const PerformanceTable = ({ courses, studentReport, period }) => {
       {courses?.map((course, index) => (
         <View style={stylesPerformance.row} key={index}>
           <View style={stylesPerformance.areaDescription}>
-            <Text style={stylesPerformance.subtitle}>{studentReport[course][0].Curso.replace(/[0-9]/g, '')}</Text>
+            <Text style={stylesPerformance.subtitle}>{studentReport?.[course]?.[0]?.Curso.replace(/[0-9]/g, '')}</Text>
           </View>
           <View style={stylesPerformance.studentDescription}>
             <View style={{ flexDirection: 'row' }}>

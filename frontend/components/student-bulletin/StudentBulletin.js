@@ -6,7 +6,7 @@ import { getCourseDescription, getInstitutionDescription } from 'utils/Bulletin'
 import { SignaturesSection } from './components'
 import { styles } from '.'
 
-export const StudentBulletin = ({ studentReport, period, course, institutions }) => {
+export const StudentBulletin = ({ studentReport, period, course, institutions, courseReport }) => {
   const courses = useMemo(() => Object.keys(studentReport), [studentReport])
   const [{ coursesFirstPage, coursesSecondPage, coursesThirdPage }, setPages] = useState({
     coursesFirstPage: [],
