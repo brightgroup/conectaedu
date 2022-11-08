@@ -1,6 +1,6 @@
 import { StyleSheet } from '@react-pdf/renderer'
 
-export * from './StudentBulletin'
+export * from './CourseBulletin'
 
 export const styles = StyleSheet.create({
   container: {
@@ -314,6 +314,7 @@ export const stylesPerformance = StyleSheet.create({
     paddingTop: 2,
     borderTop: 1,
     borderColor: '#AEAAAA',
+    textAlign: 'left',
   },
 
   title_indicators: {
