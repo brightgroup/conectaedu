@@ -8,7 +8,7 @@ import { firstLetterToUpperCase, removeAccents, toComparisonKey } from 'utils/Te
 import { ALL, DEFAULT_VALUE } from 'constants/Select'
 import { IS_ADMIN } from 'constants/LocalStorage'
 import {
-  TableHeader,
+  HeaderSummaryTable,
   INDICATORS,
   PERIODS,
   SORTING_KEYS,
@@ -76,7 +76,9 @@ export const SummaryTable = ({ subjects: allSubjects = [], data = [], setData = 
 
   const getBehaviour = notes => {
     const Note = notes?.find(
-      ({ Itemname = '' }) => toComparisonKey(Itemname) === 'calificacion comportamental tercer periodo'|| toComparisonKey(Itemname) === 'calificacion comportamental 3 periodo'
+      ({ Itemname = '' }) =>
+        toComparisonKey(Itemname) === 'calificacion comportamental tercer periodo' ||
+        toComparisonKey(Itemname) === 'calificacion comportamental 3 periodo'
     )?.Nota
     return !isNaN(Note) ? (Number(Note) ? Number(Note).toFixed(1) : '-' || '-') : '-'
   }
@@ -111,7 +113,7 @@ export const SummaryTable = ({ subjects: allSubjects = [], data = [], setData = 
           </div>
           <div className="table-container summary-table">
             <table className="table" id="table">
-              <TableHeader subjects={subjects} periods={periods} indicators={indicators} isAdmin={isAdmin} />
+              <HeaderSummaryTable subjects={subjects} periods={periods} indicators={indicators} isAdmin={isAdmin} />
               <tbody>
                 {data.map(({ student, position, average, lostAverages, isRetired = false, ...item }, index) => {
                   return (
