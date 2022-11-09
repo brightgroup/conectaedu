@@ -4,7 +4,7 @@ import { firstLetterToUpperCase } from 'utils/Text'
 export * from './Courses'
 export * from './components'
 
-const getStudentNotes = (data = {}) => {
+export const getStudentNotes = (data = {}) => {
   const students = {}
 
   for (const key in data) {

@@ -98,7 +98,7 @@ export const BulletinCourse = () => {
               courseReport={courseNotes}
             />
           ) : course.course && course.period ? (
-            <label className="ml-6 font-bold text-[#354052]">Generando PDF...</label>
+            <label className="ml-6 font-bold text-[#354052]">Generando PDF, por favor espere...</label>
           ) : null}
         </div>
       </div>
@@ -109,23 +109,31 @@ export const BulletinCourse = () => {
 const PDFDownload = ({ courseReport, institutions, course, period }) => {
   const [viewComponet, setViewComponet] = useState(false)
 
-  setTimeout(() => {
-    setViewComponet(true)
-  }, 4000)
+  const toggleViwe = () => {
+    setTimeout(() => {
+      setViewComponet(true)
+    }, 1)
+  }
+
+  useEffect(() => {
+    toggleViwe()
+  }, [])
+
   return (
     <>
-      {viewComponet ? (
-        <PDFDownloadLink
-          document={
-            <CourseBulletin period={period} course={course} institutions={institutions} courseReport={courseReport} />
-          }
-          fileName={`${getCourseDescription(course, 'name')} - Boletines`}
-        >
-          <button className="px-3 py-1 text-white bg-gray-600 rounded pointer">Descargar PDF</button>
-        </PDFDownloadLink>
-      ) : (
-        <label className="ml-6 font-bold text-[#354052]">Generando PDF...</label>
-      )}
+      <PDFDownloadLink
+        document={
+          <CourseBulletin period={period} course={course} institutions={institutions} courseReport={courseReport} />
+        }
+        fileName={`${getCourseDescription(course, 'name')} - Boletines`}
+      >
+        <button className={`px-3 py-1 text-white bg-gray-600 rounded pointer ${!viewComponet ? 'hidden' : null}`}>
+          Descargar PDF
+        </button>
+      </PDFDownloadLink>
+      <label className={`ml-6 font-bold text-[#354052] ${viewComponet ? 'hidden' : null}`}>
+        Generando PDF, por favor espere...
+      </label>
     </>
   )
 }

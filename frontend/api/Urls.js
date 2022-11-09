@@ -7,7 +7,6 @@ export const URLS = {
   getCourse: cohort => `course-info?id=${cohort}`,
   getStudentsByCohort: cohort => `get-getstudentbycohorts?cohort=${cohort}`,
   getCoursesByCohort: 'get-getcoursesbycohorts',
-  getStudentScores: 'getfulldata',
   getSheets: 'getfulldata',
   getFullData: 'getfulldataByReport',
   getCohort: 'get-cohorts',

@@ -1,7 +1,6 @@
 import { URLS } from 'api/Urls'
 import { setLoaderStatus } from 'redux/loader/actions'
 import { Axios } from 'utils/Axios'
-import { getAveragesAndFaults, getStudentNotes, getSubjects } from 'views/courses'
 import { getInitials } from 'views/students'
 import {
   SET_STUDENTS,
@@ -91,20 +90,6 @@ export const getStudentData = () => {
       dispatch(setStudentData(data || []))
     } catch (error) {
       dispatch(setError(error))
-    }
-  }
-}
-
-export const getStudentScores = () => {
-  return async dispatch => {
-    try {
-      const { data } = await Axios(URLS.getStudentScores)
-      if (data) {
-        const scores = getStudentNotes(data)
-        dispatch(setStudentScores({ subjects: getSubjects(scores), data: getAveragesAndFaults(scores) }))
-      }
-    } catch (error) {
-      dispatch(setStudentScores([]))
     }
   }
 }

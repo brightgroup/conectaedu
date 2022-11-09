@@ -2,7 +2,7 @@ import { Fragment } from 'react'
 import { createArray } from 'utils/Array'
 import { SINGLE_SUBJECT_FIELDS } from '.'
 
-export const TableHeader = ({ subjects = [], periods = [], indicators = [], isAdmin = false }) => {
+export const HeaderSummaryTable = ({ subjects = [], periods = [], indicators = [], isAdmin = false }) => {
   const getCurrentPeriod = period => (periods.length === 1 ? periods[0]?.acronym : period)
 
   return (
@@ -27,7 +27,6 @@ export const TableHeader = ({ subjects = [], periods = [], indicators = [], isAd
           <th
             key={`subject${index}`}
             className="cohorts__subject-field text-center border"
-            // (notes + failures + performance) + indicators + single fields + behaviour field
             colSpan={periods.length * (isAdmin ? 3 : 2) + indicators.length + (isAdmin ? SINGLE_SUBJECT_FIELDS : 2) + 1}
           >
             {label}
@@ -84,7 +83,6 @@ export const TableHeader = ({ subjects = [], periods = [], indicators = [], isAd
                 {indicator}
               </th>
             ))}
-            {/* <th className="text-center border ">Comportamiento</th> */}
           </Fragment>
         ))}
       </tr>
