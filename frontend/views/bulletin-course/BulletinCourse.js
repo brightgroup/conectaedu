@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Select } from 'components/select'
 import { getCohorts } from 'redux/grade/actions'
-import { PERIODS } from '.'
 import { PDFDownloadLink } from '@react-pdf/renderer'
 import { getInstitutions } from 'redux/institutions/actions'
 import { getCourse, getNotesCourse } from 'redux/courses/actions'
 import { getStudentsCohort } from 'redux/students/actions'
 import { CourseBulletin } from 'components/course-bulletin'
 import { getCourseDescription } from 'utils/Bulletin'
+import { PERIODS } from '.'
 
 export const BulletinCourse = () => {
   const dispatch = useDispatch()
@@ -37,12 +37,12 @@ export const BulletinCourse = () => {
   }, [course.course])
 
   useEffect(() => {
-    if (cohortStudent.length && course.course)
+    if (cohortStudent?.length && course.course)
       dispatch(getNotesCourse(getvalueObject(cohortStudent, 'id'), course.course))
   }, [cohortStudent])
 
   useEffect(() => {
-    if (courseNotes.length) setToggleDownload(true)
+    if (courseNotes?.length) setToggleDownload(true)
   }, [courseNotes])
 
   const getCourses = () => {

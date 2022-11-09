@@ -16,16 +16,16 @@ export const CourseBulletin = ({ studentReport, period, course, institutions, co
   })
 
   useEffect(() => {
-    if (courses.length > 12) {
+    if (courses?.length > 12) {
       setPages({
         coursesFirstPage: courses.slice(0, 5),
         coursesSecondPage: courses.slice(5, 13),
-        coursesThirdPage: courses.slice(13, courses.length),
+        coursesThirdPage: courses.slice(13, courses?.length),
       })
     } else {
       setPages({
         coursesFirstPage: courses.slice(0, 5),
-        coursesSecondPage: courses.slice(5, courses.length),
+        coursesSecondPage: courses.slice(5, courses?.length),
       })
     }
   }, [courses])
