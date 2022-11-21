@@ -1,5 +1,5 @@
 import { PDFViewer } from '@react-pdf/renderer'
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
 import { StudentBulletin } from 'components/student-bulletin'
@@ -13,7 +13,7 @@ export const Bulletin = () => {
 
   const {
     students: { studentReport },
-    courses: { course },
+    courses: { course, courseAverage },
     institutions: { institutions },
   } = useSelector(state => state)
 
@@ -30,7 +30,13 @@ export const Bulletin = () => {
       </button>
 
       <PDFViewer style={styles.page}>
-        <StudentBulletin studentReport={studentReport} period={period} course={course} institutions={institutions} />
+        <StudentBulletin
+          studentReport={studentReport}
+          period={period}
+          course={course}
+          institutions={institutions}
+          courseAverage={courseAverage}
+        />
       </PDFViewer>
     </div>
   )

@@ -2,7 +2,15 @@ import { URLS } from 'api/Urls'
 import { setLoaderStatus } from 'redux/loader/actions'
 import { Axios } from 'utils/Axios'
 import { removeAccents } from 'utils/Text'
-import { GET_COURSE, GET_NOTES_COURSE, SET_COURSES, SET_ERROR, SET_FULL_DATA, SET_SHEETS } from './types'
+import {
+  GET_AVERAGE_COURSE,
+  GET_COURSE,
+  GET_NOTES_COURSE,
+  SET_COURSES,
+  SET_ERROR,
+  SET_FULL_DATA,
+  SET_SHEETS,
+} from './types'
 
 export const setCourses = cohorts => ({
   type: SET_COURSES,
@@ -27,6 +35,11 @@ export const setcourse = course => ({
 export const setcourseNotes = notesCourse => ({
   type: GET_NOTES_COURSE,
   payload: notesCourse,
+})
+
+export const getCouseAverage = courseAverage => ({
+  type: GET_AVERAGE_COURSE,
+  payload: courseAverage,
 })
 
 export const setError = error => ({

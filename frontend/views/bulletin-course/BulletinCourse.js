@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Select } from 'components/select'
 import { getCohorts } from 'redux/grade/actions'
 import { PDFDownloadLink } from '@react-pdf/renderer'
+import { getCourse, getCouseAverage, getNotesCourse, getSheets } from 'redux/courses/actions'
 import { getInstitutions } from 'redux/institutions/actions'
-import { getCourse, getNotesCourse } from 'redux/courses/actions'
 import { getStudentsCohort } from 'redux/students/actions'
 import { CourseBulletin } from 'components/course-bulletin'
-import { getCourseDescription } from 'utils/Bulletin'
+import { getCourseDescription, getStudents } from 'utils/Bulletin'
 import { PERIODS } from '.'
 
 export const BulletinCourse = () => {
@@ -15,7 +15,7 @@ export const BulletinCourse = () => {
 
   const {
     grades: { cohorts },
-    courses: { course: infocourse, courseNotes },
+    courses: { course: infocourse, courseNotes, sheet, courseAverage },
     institutions: { institutions },
     students: { cohortStudent },
   } = useSelector(state => state)
@@ -59,10 +59,14 @@ export const BulletinCourse = () => {
 
   const selectCohort = ({ target }, name) => {
     const { value } = target
+    dispatch(getSheets(value))
     setCourse({
       ...course,
       [name]: value,
     })
+    if (sheet) {
+      dispatch(getCouseAverage(getStudents(sheet, value)))
+    }
   }
 
   return (
@@ -96,6 +100,7 @@ export const BulletinCourse = () => {
               course={infocourse}
               institutions={institutions}
               courseReport={courseNotes}
+              courseAverage={courseAverage}
             />
           ) : course.course && course.period ? (
             <label className="ml-6 font-bold text-[#354052]">Generando PDF, por favor espere...</label>
@@ -106,7 +111,7 @@ export const BulletinCourse = () => {
   )
 }
 
-const PDFDownload = ({ courseReport, institutions, course, period }) => {
+const PDFDownload = ({ courseReport, institutions, course, period, courseAverage }) => {
   const [viewComponet, setViewComponet] = useState(false)
 
   const toggleViwe = () => {
@@ -123,7 +128,13 @@ const PDFDownload = ({ courseReport, institutions, course, period }) => {
     <>
       <PDFDownloadLink
         document={
-          <CourseBulletin period={period} course={course} institutions={institutions} courseReport={courseReport} />
+          <CourseBulletin
+            period={period}
+            course={course}
+            institutions={institutions}
+            courseReport={courseReport}
+            courseAverage={courseAverage}
+          />
         }
         fileName={`${getCourseDescription(course, 'name')} - Boletines`}
       >

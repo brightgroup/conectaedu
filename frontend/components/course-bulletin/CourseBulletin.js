@@ -2,12 +2,14 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { Document, Image, Page, Text, View } from '@react-pdf/renderer'
 import { PerformanceTable } from './PerformanceTable'
 import { TableNotes } from './TableNotes'
-import { getCourseDescription, getInstitutionDescription } from 'utils/Bulletin'
+import { coursesList, getCourseDescription, getInstitutionDescription } from 'utils/Bulletin'
 import { SignaturesSection } from './components'
 import { styles } from '.'
 
-export const CourseBulletin = ({ studentReport, period, course, institutions, courseReport }) => {
+export const CourseBulletin = ({ period, course, institutions, courseReport, courseAverage }) => {
   const courses = useMemo(() => Object.keys(courseReport?.[0]), [courseReport])
+
+  const orderedCourses = useMemo(() => coursesList(courses), [courses])
 
   const [{ coursesFirstPage, coursesSecondPage, coursesThirdPage }, setPages] = useState({
     coursesFirstPage: [],
@@ -16,19 +18,19 @@ export const CourseBulletin = ({ studentReport, period, course, institutions, co
   })
 
   useEffect(() => {
-    if (courses?.length > 12) {
+    if (orderedCourses.length > 12) {
       setPages({
-        coursesFirstPage: courses.slice(0, 5),
-        coursesSecondPage: courses.slice(5, 13),
-        coursesThirdPage: courses.slice(13, courses?.length),
+        coursesFirstPage: orderedCourses.slice(0, 5),
+        coursesSecondPage: orderedCourses.slice(5, 13),
+        coursesThirdPage: orderedCourses.slice(13, courses.length),
       })
     } else {
       setPages({
-        coursesFirstPage: courses.slice(0, 5),
-        coursesSecondPage: courses.slice(5, courses?.length),
+        coursesFirstPage: orderedCourses.slice(0, 5),
+        coursesSecondPage: orderedCourses.slice(5, courses.length),
       })
     }
-  }, [courses])
+  }, [orderedCourses])
 
   return (
     <Document>
@@ -97,7 +99,12 @@ export const CourseBulletin = ({ studentReport, period, course, institutions, co
                 {/* <Image src={image} style={{ width: '100%', opacity: 0.2, marginTop: 100, zIndex: '10' }} /> */}
                 <View style={{ width: '100%', position: 'absolute' }}>
                   <View>
-                    <TableNotes courses={courses} studentReport={student} period={period} />
+                    <TableNotes
+                      courses={orderedCourses}
+                      studentReport={student}
+                      period={period}
+                      courseAverage={courseAverage}
+                    />
                   </View>
                   <View>
                     <Text style={styles.description}>

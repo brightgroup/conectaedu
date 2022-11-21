@@ -12,7 +12,6 @@ export const getPaginatorGroup = pageList => {
       finish: finish > lastPage ? lastPage : finish,
     }
   }
-
   return paginatorGroup
 }
 

@@ -2,12 +2,15 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { Document, Image, Page, Text, View } from '@react-pdf/renderer'
 import { PerformanceTable } from './PerformanceTable'
 import { TableNotes } from './TableNotes'
-import { getCourseDescription, getInstitutionDescription } from 'utils/Bulletin'
+import { coursesList, getCourseDescription, getInstitutionDescription, getValue } from 'utils/Bulletin'
 import { SignaturesSection } from './components'
 import { styles } from '.'
 
-export const StudentBulletin = ({ studentReport, period, course, institutions, courseReport }) => {
+export const StudentBulletin = ({ studentReport, period = 1, course, institutions, courseReport, courseAverage }) => {
   const courses = useMemo(() => Object.keys(studentReport), [studentReport])
+
+  const orderedCourses = useMemo(() => coursesList(courses), [courses])
+
   const [{ coursesFirstPage, coursesSecondPage, coursesThirdPage }, setPages] = useState({
     coursesFirstPage: [],
     coursesSecondPage: [],
@@ -15,21 +18,26 @@ export const StudentBulletin = ({ studentReport, period, course, institutions, c
   })
 
   useEffect(() => {
-    if (courses.length > 12) {
+    if (orderedCourses.length > 12) {
       setPages({
-        coursesFirstPage: courses.slice(0, 5),
-        coursesSecondPage: courses.slice(5, 13),
-        coursesThirdPage: courses.slice(13, courses.length),
+        coursesFirstPage: orderedCourses.slice(0, 5),
+        coursesSecondPage: orderedCourses.slice(5, 13),
+        coursesThirdPage: orderedCourses.slice(13, courses.length),
       })
     } else {
       setPages({
-        coursesFirstPage: courses.slice(0, 5),
-        coursesSecondPage: courses.slice(5, courses.length),
+        coursesFirstPage: orderedCourses.slice(0, 5),
+        coursesSecondPage: orderedCourses.slice(5, courses.length),
       })
     }
-  }, [courses])
+  }, [orderedCourses])
 
   const getNameStudent = () => studentReport[courses.slice(0, 1)]?.[0]?.student
+
+  const getPosition = useMemo(
+    () => courseAverage.find(average => average.student === getNameStudent())?.position,
+    [courseAverage]
+  )
 
   return (
     <Document>
@@ -47,7 +55,7 @@ export const StudentBulletin = ({ studentReport, period, course, institutions, c
               </View>
               <View style={styles.container__subtitle}>
                 <View style={styles.container__subtitle_comulmn1}>
-                  <Text style={{ fontSize: 10 }}>BOLETIN DE EVALUACION</Text>
+                  <Text style={styles.title_bold}>BOLETIN DE EVALUACION</Text>
                 </View>
                 <View style={styles.container__subtitle_comulmn2}>
                   <Text style={styles.title}>AÑO</Text>
@@ -96,7 +104,12 @@ export const StudentBulletin = ({ studentReport, period, course, institutions, c
             {/* <Image src={image} style={{ width: '100%', opacity: 0.2, marginTop: 100, zIndex: '10' }} /> */}
             <View style={{ width: '100%', position: 'absolute' }}>
               <View>
-                <TableNotes courses={courses} studentReport={studentReport} period={period} />
+                <TableNotes
+                  courses={orderedCourses}
+                  studentReport={studentReport}
+                  period={period}
+                  getPosition={getPosition}
+                />
               </View>
               <View>
                 <Text style={styles.description}>

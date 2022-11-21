@@ -13,8 +13,9 @@ import { Paginator } from 'components/paginator'
 import { StudentContext } from 'views/students/context/Provider'
 import { TableHeader } from './TableHeader'
 import { Select } from 'components/select'
-import { suppliers } from '.'
-import { getCourse } from 'redux/courses/actions'
+import {  suppliers } from '.'
+import { getCourse, getCouseAverage, getSheets } from 'redux/courses/actions'
+import { getStudents } from 'utils/Bulletin'
 
 export const StudentsTable = () => {
   const dispatch = useDispatch()
@@ -23,6 +24,7 @@ export const StudentsTable = () => {
   const {
     grades: { cohorts },
     auth: { user },
+    courses: { sheet },
   } = useSelector(state => state)
 
   const { students, setStudents, studentsTable } = useContext(StudentContext)
@@ -31,6 +33,7 @@ export const StudentsTable = () => {
   const [newCohort, setNewCohort] = useState(false)
   const [cohotStudent, setCohotStudent] = useState('')
   const [bulletinPeriod, setBulletinPeriod] = useState({})
+  const [averagesTable, setAveragesTable] = useState([])
 
   useEffect(() => {
     dispatch(getCompleteStudents())
@@ -45,10 +48,14 @@ export const StudentsTable = () => {
     })
   }
 
-  const getstudenrbulletin = async (id, cohort) => {
+  const getstudenrbulletin = async (id, { cohort, student = '' }) => {
     await dispatch(getStudentReport(id, cohort || cohotStudent))
     dispatch(getCourse(cohort || cohotStudent))
-    router.push({ pathname: '/boletin', query: { period: bulletinPeriod[id] || '1' } })
+    dispatch(getCouseAverage(getStudents(sheet, bulletinPeriod?.[id])))
+    router.push({
+      pathname: '/boletin',
+      query: { period: bulletinPeriod[id] || '1' },
+    })
   }
 
   const getCourses = () => {
@@ -63,6 +70,7 @@ export const StudentsTable = () => {
     setSubject(value)
     setNewCohort(true)
     dispatch(getStudentsCohort(value))
+    dispatch(getSheets(value))
   }
 
   const handleChangeSelect = ({ target }, idStedent) => {
@@ -99,7 +107,9 @@ export const StudentsTable = () => {
                     <td className="subjects__view-field text-center">
                       <i
                         className="fa-regular fa-address-book pointer"
-                        onClick={() => getstudenrbulletin(item['id'], item['cohort'])}
+                        onClick={() =>
+                          getstudenrbulletin(item['id'], { cohort: item['cohort'], student: item['DisplayName'] })
+                        }
                       />
                       <select className="border rounded ml-2" onChange={e => handleChangeSelect(e, item['id'])}>
                         {suppliers.map(option => (

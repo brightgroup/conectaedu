@@ -71,21 +71,25 @@ export const indicatorsByPeriod = {
   'notas finales cuarto periodo': ['JD14P', 'JD24P', 'JD34P'],
 }
 
+const invalidSubjects = ['string', 'boolean', 'number']
+
 export const getAverageByPeriod = (data, period) => {
   const newData = data.map(({ average, lostAverages, position, student, ...item }) => {
     let total = 0
+    let subjects = 0
     const lostItems = []
     for (const key in item) {
       const { notes } = item[key]
       const periodNote =
         notes?.find(({ Itemname: name }) => toComparisonKey(name) === toComparisonKey(period))?.Nota || 0
       total += Number(periodNote)
+      if (Number(periodNote) !== 0) subjects += 1
       if (Number(periodNote) && Number(periodNote) < 3) lostItems.push(key)
     }
 
     return {
       ...item,
-      average: (total / Object.keys(item).length).toFixed(1),
+      average: (total / subjects).toFixed(1),
       lostAverages: lostItems,
       student,
     }

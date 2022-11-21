@@ -1,3 +1,7 @@
+import { AVERAGES } from 'constants/Bulletin'
+import { sortArray } from 'utils/Array'
+import { toComparisonKey } from 'utils/Text'
+
 export * from './StudentsTable'
 
 export const suppliers = [
