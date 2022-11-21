@@ -36,3 +36,96 @@ export const BEHAVIUR = {
   3: 'Calificación comportamental 3 periodo',
   4: 'Calificación comportamental 4 periodo',
 }
+
+export const AVERAGES = {
+  1: 'firstPeriodAverage',
+  2: 'secondPeriodAverage',
+  3: 'thirdPeriodAverage',
+  4: 'fourthPeriodAverage',
+}
+
+export const ORDER_SUBJECTS10 = [
+  'FÍSICA_1001',
+  'QUIMICA_1001',
+  'CIENCIAS_SOCIALES_1001',
+  'EDUCACIÓN_ARTÍSTICA_1001',
+  'EDUCACION_ETICA_Y_VALORES_HUMANOS_1001',
+  'EDUCACIÓN_FÍSICA_1001',
+  'EDUCACIÓN_RELIGIOSA_Y_MORAL_1001',
+  'ESPAÑOL_1001',
+  'INGLÉS_1001',
+  'MATEMÁTICAS_1001',
+  'TECNOLOGÍA_E_INFORMÁTICA_1001',
+  'FUNDAMENTOS_DE_ADMINISTRACIÓN_1001',
+  'FILOSOFÍA_1001',
+  'FENOMENOLOGÍA_DE_LA_EMPRESA_1001',
+  'CONTABILIDAD_1001',
+]
+
+export const SUBJECTS10 = [
+  {
+    place: 1,
+    name: 'FISICA',
+    key: 'FÍSICA_',
+  },
+  {
+    place: 2,
+    name: 'QUIMICA',
+    key: 'QUIMICA_',
+  },
+  {
+    place: 3,
+    name: 'CIENCIAS SOCIALES',
+    key: 'CIENCIAS_SOCIALES_',
+  },
+  {
+    place: 4,
+    name: 'EDUCACIÓN ARTÍSTICA',
+    key: 'EDUCACIÓN_ARTÍSTICA_',
+  },
+  {
+    place: 5,
+    name: 'EDUCACION ETICA Y VALORES HUMANOS',
+    key: 'EDUCACION_ETICA_Y_VALORES_HUMANOS_',
+  },
+  {
+    place: 6,
+    name: 'EDUCACIÓN FÍSICA',
+    key: 'EDUCACIÓN_FÍSICA_',
+  },
+  {
+    place: 7,
+    name: 'EDUCACIÓN RELIGIOSA Y MORAL',
+    key: 'EDUCACIÓN_RELIGIOSA_Y_MORAL_',
+  },
+  {
+    place: 8,
+    name: 'ESPAÑOL',
+    key: 'ESPAÑOL_',
+  },
+  {
+    place: 9,
+    name: 'INGLÉS',
+    key: 'INGLÉS_',
+  },
+  {
+    place: 10,
+    name: 'MATEMÁTICAS',
+    key: 'MATEMÁTICAS_',
+  },
+  {
+    place: 11,
+    name: 'TECNOLOGÍA E INFORMÁTICA',
+    key: 'TECNOLOGÍA_E_INFORMÁTICA_',
+  },
+  {
+    place: 12,
+    name: 'FUNDAMENTOS DE ADMINISTRACIÓN',
+    key: 'FUNDAMENTOS_DE_ADMINISTRACIÓN_',
+  },
+  {
+    place: 13,
+    name: 'FILOSOFÍA',
+    key: 'FILOSOFÍA_',
+  },
+]

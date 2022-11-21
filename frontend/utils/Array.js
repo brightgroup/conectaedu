@@ -4,7 +4,7 @@ export const createArray = items => {
   return array
 }
 
-const getValue = value => (isNaN(value) ? value.toLowerCase() : value)
+const getValue = value => (isNaN(value) ? value?.toLowerCase() : value)
 
 export const sortArray = (array, { key, isAscending = true }) => {
   return [...array].sort((a, b) => {

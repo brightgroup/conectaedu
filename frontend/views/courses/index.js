@@ -6,7 +6,6 @@ export * from './components'
 
 export const getStudentNotes = (data = {}) => {
   const students = {}
-
   for (const key in data) {
     const items = data[key]
     items?.forEach(({ student, Notas: notes, lastname, Status }) => {
@@ -16,7 +15,6 @@ export const getStudentNotes = (data = {}) => {
       students[student] = { ...(currentItem && { ...currentItem }), [key]: newItem }
     })
   }
-
   return students
 }
 

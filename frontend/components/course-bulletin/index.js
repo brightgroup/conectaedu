@@ -1,6 +1,15 @@
-import { StyleSheet } from '@react-pdf/renderer'
+import { Font, StyleSheet } from '@react-pdf/renderer'
 
 export * from './CourseBulletin'
+Font.register({
+  family: 'Open Sans',
+  fonts: [
+    { src: 'https://cdn.jsdelivr.net/npm/open-sans-all@0.1.3/fonts/open-sans-regular.ttf' },
+    { src: 'https://cdn.jsdelivr.net/npm/open-sans-all@0.1.3/fonts/open-sans-600.ttf', fontWeight: 600 },
+    { src: 'https://cdn.jsdelivr.net/npm/open-sans-all@0.1.3/fonts/open-sans-700.ttf', fontWeight: 700 },
+    { src: 'https://cdn.jsdelivr.net/npm/open-sans-all@0.1.3/fonts/open-sans-800.ttf', fontWeight: 800 },
+  ],
+})
 
 export const styles = StyleSheet.create({
   container: {
@@ -109,12 +118,21 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 10,
   },
+  title_bold: {
+    fontSize: 10,
+    fontWeight: '700',
+    fontFamily: 'Open Sans',
+  },
 })
 
 export const stylesNotes = StyleSheet.create({
   container: {
     overflow: 'hidden',
+    border: 1,
+    borderColor: '#D0CECE',
+    position: 'relative',
   },
+
   title_bold: {
     fontSize: 10,
     fontWeight: 'bold',
@@ -122,6 +140,24 @@ export const stylesNotes = StyleSheet.create({
 
   subtitle: {
     fontSize: 8,
+  },
+
+  subtitle_comport: {
+    fontSize: 8,
+    positiono: 'absolute',
+    top: 10,
+  },
+
+  subtitle_average: {
+    position: 'absolute',
+    fontSize: 8,
+    top: 30,
+  },
+
+  subtitle_bold: {
+    fontSize: 8,
+    fontWeight: '700',
+    fontFamily: 'Open Sans',
   },
 
   table__header: {
@@ -137,12 +173,14 @@ export const stylesNotes = StyleSheet.create({
     justifyContent: 'center',
     paddingLeft: 6,
     borderRight: 1,
+    borderBottom: 1,
     borderColor: '#D0CECE',
   },
 
   column_notes: {
     width: '18%',
     borderRight: 1,
+    borderBottom: 1,
     borderColor: '#D0CECE',
     height: 'auto',
   },
@@ -150,6 +188,7 @@ export const stylesNotes = StyleSheet.create({
   column_faults: {
     width: '4%',
     borderRight: 1,
+    borderBottom: 1,
     alignItems: 'center',
     justifyContent: 'center',
     borderColor: '#D0CECE',
@@ -158,6 +197,7 @@ export const stylesNotes = StyleSheet.create({
   column_performance: {
     width: '10.5%',
     borderRight: 1,
+    borderBottom: 1,
     alignItems: 'center',
     justifyContent: 'center',
     borderColor: '#D0CECE',
@@ -171,6 +211,15 @@ export const stylesNotes = StyleSheet.create({
     borderColor: '#D0CECE',
   },
 
+  prueba: {
+    width: '10.5%',
+    borderRight: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: 'transparent',
+    borderColor: '#D0CECE',
+  },
+
   column_pt: {
     width: '7.5%',
     borderRight: 1,
@@ -179,10 +228,34 @@ export const stylesNotes = StyleSheet.create({
     borderColor: '#D0CECE',
   },
 
+  column_pt_hidden: {
+    width: '7.5%',
+    borderRight: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderColor: '#D0CECE',
+    color: 'transparent',
+  },
+
+  text_pt: {
+    top: 30,
+    fontSize: 8,
+  },
+
   column_comport: {
     width: '12.5%',
     alignItems: 'center',
     justifyContent: 'center',
+    position: 'relative',
+  },
+
+  item_comport: {
+    width: '12.5%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'absolute',
+    top: 0,
+    right: 0,
   },
 
   period_notes: {
@@ -207,8 +280,6 @@ export const stylesNotes = StyleSheet.create({
   },
 
   row: {
-    border: 1,
-    borderColor: '#D0CECE',
     borderTop: 'none',
     flexDirection: 'row',
   },
@@ -293,6 +364,8 @@ export const stylesPerformance = StyleSheet.create({
     borderColor: '#AEAAAA',
     justifyContent: 'center',
     alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'row',
   },
 
   note_description: {
@@ -314,19 +387,29 @@ export const stylesPerformance = StyleSheet.create({
     paddingTop: 2,
     borderTop: 1,
     borderColor: '#AEAAAA',
-    textAlign: 'left',
   },
 
   title_indicators: {
-    fontSize: 9,
+    fontSize: 8,
     marginBottom: 6,
-    fontWeight: 'extrabold',
+    fontWeight: '700',
+    fontFamily: 'Open Sans',
   },
-
   subtitle: {
     fontSize: 10,
     whiteSpace: 'normal',
     textAlign: 'center',
+  },
+  subtitle_matter: {
+    fontSize: 7,
+    whiteSpace: 'normal',
+    textAlign: 'center',
+  },
+  subtitle_bold: {
+    fontSize: 10,
+    fontWeight: '700',
+    fontFamily: 'Open Sans',
+    display: 'inline',
   },
   text_competences: {
     fontSize: 10,

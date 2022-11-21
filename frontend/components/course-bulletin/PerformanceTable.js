@@ -11,13 +11,13 @@ export const PerformanceTable = ({ courses, studentReport, period }) => {
     <View style={{ marginTop: 40 }}>
       <View style={stylesPerformance.headerTable}>
         <View style={stylesPerformance.area}>
-          <Text style={stylesPerformance.subtitle}>AREA</Text>
+          <Text style={stylesPerformance.subtitle_bold}>AREA</Text>
         </View>
         <View style={stylesPerformance.fp}>
           <Text style={stylesPerformance.subtitle}>FP</Text>
         </View>
         <View style={stylesPerformance.performance}>
-          <Text style={stylesPerformance.subtitle}>DESEMPEÑO Y CALIFICACIONES</Text>
+          <Text style={stylesPerformance.subtitle_bold}>DESEMPEÑO Y CALIFICACIONES</Text>
         </View>
         <View style={stylesPerformance.note}>
           <Text style={stylesPerformance.subtitle}>1P</Text>
@@ -35,7 +35,9 @@ export const PerformanceTable = ({ courses, studentReport, period }) => {
       {courses?.map((course, index) => (
         <View style={stylesPerformance.row} key={index}>
           <View style={stylesPerformance.areaDescription}>
-            <Text style={stylesPerformance.subtitle}>{studentReport?.[course]?.[0]?.Curso.replace(/[0-9]/g, '')}</Text>
+            <Text style={stylesPerformance.subtitle_matter}>
+              {studentReport[course]?.[0]?.Curso.replace(/[0-9]/g, '')}
+            </Text>
           </View>
           <View style={stylesPerformance.studentDescription}>
             <View style={{ flexDirection: 'row' }}>
@@ -48,13 +50,14 @@ export const PerformanceTable = ({ courses, studentReport, period }) => {
                 </Text>
               </View>
               <View style={stylesPerformance.performance_description}>
-                <Text style={stylesPerformance.subtitle}>
-                  {`Desempeño del periodo: ${replacePerformance(
+                <Text style={stylesPerformance.subtitle}>Desempeño del periodo:</Text>
+                <Text style={stylesPerformance.subtitle_bold}>
+                  {replacePerformance(
                     getValue(studentReport[course], {
                       item: PERIOD[period],
                       valueKey: 'Desempenio',
                     })
-                  )}`}
+                  )}
                 </Text>
               </View>
               <View style={stylesPerformance.note_description}>
@@ -87,12 +90,12 @@ export const PerformanceTable = ({ courses, studentReport, period }) => {
               </View>
             </View>
             <View style={stylesPerformance.container_indicators}>
-              <Text style={stylesPerformance.title_indicators}>INDICADORES DE DESEMPEÑO</Text>
+              <Text style={stylesPerformance.title_indicators}>INDICADOR DE DESEMPEÑO:</Text>
               <Text style={stylesPerformance.text_competences}>
                 {getValue(studentReport[course], {
                   item: COMPETENCES[period],
                   valueKey: 'Description',
-                })?.toLowerCase()}
+                })}
               </Text>
               <Text style={stylesPerformance.text_competences}>-</Text>
             </View>

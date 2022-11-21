@@ -6,7 +6,7 @@ export const TableHeader = ({ admin }) => {
 
   const [showFilter, setShowFilter] = useState(false)
   const [isAscendingSort, setIsAscendingSort] = useState(true)
-  const [sortKey, setSortKey] = useState('DisplayName')
+  const [sortKey, setSortKey] = useState('lastname')
 
   const changeSortKey = key => {
     setShowFilter(!showFilter)

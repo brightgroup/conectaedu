@@ -1,10 +1,11 @@
+import { useMemo } from 'react'
 import { Text, View } from '@react-pdf/renderer'
 import { BEHAVIUR, FAULTS, NEWSLETTER_ITEMS, PERIOD } from 'constants/Bulletin'
-import { getValue } from 'utils/Bulletin'
+import { generalAverageperiod, getValue, replacePerformance } from 'utils/Bulletin'
 import { stylesNotes } from '.'
 
-export const TableNotes = ({ courses, studentReport, period }) => {
-  const replacePerformance = text => text?.replace('Desempeño', '')
+export const TableNotes = ({ courses, studentReport, period, getPosition }) => {
+  const average = useMemo(() => generalAverageperiod(courses, studentReport, period), [])
 
   return (
     <View style={stylesNotes.container}>
@@ -18,16 +19,16 @@ export const TableNotes = ({ courses, studentReport, period }) => {
           </View>
           <View style={{ flexDirection: 'row' }}>
             <View style={stylesNotes.period_notes}>
-              <Text style={stylesNotes.subtitle}>1P</Text>
+              <Text style={stylesNotes.subtitle_bold}>1P</Text>
             </View>
             <View style={stylesNotes.period_notes}>
-              <Text style={stylesNotes.subtitle}>2P</Text>
+              <Text style={stylesNotes.subtitle_bold}>2P</Text>
             </View>
             <View style={stylesNotes.period_notes}>
-              <Text style={stylesNotes.subtitle}>3P</Text>
+              <Text style={stylesNotes.subtitle_bold}>3P</Text>
             </View>
             <View style={stylesNotes.period_last_note}>
-              <Text style={stylesNotes.subtitle}>4P</Text>
+              <Text style={stylesNotes.subtitle_bold}>4P</Text>
             </View>
           </View>
         </View>
@@ -47,7 +48,7 @@ export const TableNotes = ({ courses, studentReport, period }) => {
           <Text style={stylesNotes.subtitle}>{`PT ${period}P`}</Text>
         </View>
         <View style={stylesNotes.columl_average}>
-          <Text style={stylesNotes.subtitle}>PROMEDIO GENERAL 3P</Text>
+          <Text style={stylesNotes.subtitle}>{`PROMEDIO GENERAL ${period}P`}</Text>
         </View>
         <View style={stylesNotes.column_comport}>
           <Text style={stylesNotes.subtitle}>NOTA COMPORT</Text>
@@ -59,7 +60,7 @@ export const TableNotes = ({ courses, studentReport, period }) => {
             <Text style={stylesNotes.subtitle}>{studentReport[course][0].Curso?.replace(/[0-9]/g, '')}</Text>
           </View>
           <View style={stylesNotes.column_notes}>
-            <View style={{ flexDirection: 'row', margin:'auto 0' }}>
+            <View style={{ flexDirection: 'row', margin: 'auto 0' }}>
               <View style={stylesNotes.period_notes}>
                 <Text style={stylesNotes.subtitle}>
                   {getValue(studentReport[course], { item: NEWSLETTER_ITEMS.firstPeriod })}
@@ -98,16 +99,16 @@ export const TableNotes = ({ courses, studentReport, period }) => {
               {replacePerformance(getValue(studentReport[course], { item: PERIOD[period], valueKey: 'Desempenio' }))}
             </Text>
           </View>
-          <View style={stylesNotes.column_pt}>
-            <Text style={stylesNotes.subtitle}></Text>
+          <View style={index === 0 ? stylesNotes.column_pt : stylesNotes.column_pt_hidden}>
+            <Text style={index === 0 ? stylesNotes.text_pt : stylesNotes.subtitle}>{getPosition}</Text>
           </View>
-          <View style={stylesNotes.columl_average}>
-            <Text style={stylesNotes.subtitle}>
-              {getValue(studentReport[course], { item: NEWSLETTER_ITEMS.averagePeriod })}
+          <View style={index === 0 ? stylesNotes.columl_average : stylesNotes.prueba}>
+            <Text style={stylesNotes.subtitle_average}>{average}</Text>
+          </View>
+          <View style={stylesNotes.item_comport}>
+            <Text style={stylesNotes.subtitle_comport}>
+              {getValue(studentReport[course], { item: BEHAVIUR[period] })}
             </Text>
-          </View>
-          <View style={stylesNotes.column_comport}>
-            <Text style={stylesNotes.subtitle}>{getValue(studentReport[course], { item: BEHAVIUR[period] })}</Text>
           </View>
         </View>
       ))}
