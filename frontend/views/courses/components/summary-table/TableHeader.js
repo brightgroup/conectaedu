@@ -27,7 +27,9 @@ export const HeaderSummaryTable = ({ subjects = [], periods = [], indicators = [
           <th
             key={`subject${index}`}
             className="cohorts__subject-field text-center border"
-            colSpan={periods.length * (isAdmin ? 3 : 2) + indicators.length + (isAdmin ? SINGLE_SUBJECT_FIELDS : 2) + 1}
+            colSpan={
+              periods.length * (isAdmin ? 4 : 3) + indicators.length + (isAdmin ? SINGLE_SUBJECT_FIELDS : 1) + 1 + 1
+            }
           >
             {label}
           </th>
@@ -47,7 +49,7 @@ export const HeaderSummaryTable = ({ subjects = [], periods = [], indicators = [
                 Indicadores
               </th>
             )}
-            <th className="text-center border border-b-0" rowSpan={2}>
+            <th className="text-center border" colSpan={periods.length + 1}>
               Comportamiento
             </th>
           </Fragment>
@@ -72,17 +74,24 @@ export const HeaderSummaryTable = ({ subjects = [], periods = [], indicators = [
                 {getCurrentPeriod(`P${item}`)}
               </th>
             ))}
+
             <th className="text-center border border-r border-b-0 border-l-0">Total</th>
             {indicators.map((indicator, index) => (
               <th
                 key={indicator}
                 className={`text-center ${
-                  index + 1 === indicators.length ? ' border-l-0 border border-b-0 border-t-0' : ''
+                  index + 1 === indicators.length ? 'border-l-0 border border-b-0 border-t-0' : ''
                 }`}
               >
                 {indicator}
               </th>
             ))}
+            {createArray(periods.length).map(item => (
+              <th key={`failure${item}`} className="text-center">
+                P{item}
+              </th>
+            ))}
+            <th>total</th>
           </Fragment>
         ))}
       </tr>

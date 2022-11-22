@@ -110,6 +110,11 @@ export const performanceColors = {
   superior: 'bg-green-500',
 }
 
+export const behaviorColors = note => {
+  if (isNaN(note)) return 'white'
+  return note <= 2.9 ? 'bg-red-300 text-white' : note <= 4.5 ? 'bg-orange-300 text-white' : 'bg-green-500 text-white'
+}
+
 export const SINGLE_SUBJECT_FIELDS = 3
 
 export const subjectAcronyms = {
@@ -124,3 +129,10 @@ export const subjectAcronyms = {
   matematicas: 'MAT',
   'tecnologia e informatica': 'TEC',
 }
+
+export const BEHAVIOUR_KEYS = [
+  'calificacion comportamental 1 periodo',
+  'calificacion comportamental 2 periodo',
+  'calificacion comportamental 3 periodo',
+  'calificacion comportamental 4 periodo',
+]

@@ -2,7 +2,7 @@ import { Fragment, useEffect, useState } from 'react'
 import ReactHtmlParser from 'react-html-parser'
 import ReactHtmlTableToExcel from 'react-html-table-to-excel'
 import { Select } from 'components/select'
-import { sortArray } from 'utils/Array'
+import { getAverage, sortArray } from 'utils/Array'
 import { toInteger } from 'utils/Number'
 import { firstLetterToUpperCase, removeAccents, toComparisonKey } from 'utils/Text'
 import { ALL, DEFAULT_VALUE } from 'constants/Select'
@@ -12,10 +12,12 @@ import {
   INDICATORS,
   PERIODS,
   SORTING_KEYS,
+  BEHAVIOUR_KEYS,
   indicatorsByPeriod,
   getAverageByPeriod,
   performanceColors,
   subjectAcronyms,
+  behaviorColors,
 } from '.'
 
 export const SummaryTable = ({ subjects: allSubjects = [], data = [], setData = [], initialData = [] }) => {
@@ -50,9 +52,9 @@ export const SummaryTable = ({ subjects: allSubjects = [], data = [], setData = 
   }
 
   const sortBySubject = ({ target }) => {
-    const { value } = target
-    setSubjects(value === ALL ? allSubjects : allSubjects.filter(({ value: subject }) => subject === value))
-    setSubject(value === ALL ? 'all' : target.value)
+    const isDefaultValue = [DEFAULT_VALUE, ALL].includes(target.value)
+    setSubjects(isDefaultValue ? allSubjects : allSubjects.filter(({ value: subject }) => subject === target.value))
+    setSubject(isDefaultValue ? 'all' : target.value)
   }
 
   const getFailures = array => {
@@ -75,12 +77,9 @@ export const SummaryTable = ({ subjects: allSubjects = [], data = [], setData = 
   const getSubjectName = subject => toComparisonKey(allSubjects?.find(({ name }) => name === subject)?.label || '')
 
   const getBehaviour = notes => {
-    const Note = notes?.find(
-      ({ Itemname = '' }) =>
-        toComparisonKey(Itemname) === 'calificacion comportamental tercer periodo' ||
-        toComparisonKey(Itemname) === 'calificacion comportamental 3 periodo'
-    )?.Nota
-    return !isNaN(Note) ? (Number(Note) ? Number(Note).toFixed(1) : '-' || '-') : '-'
+    const values = notes.filter(({ Itemname }) => BEHAVIOUR_KEYS.includes(toComparisonKey(Itemname)))
+
+    return values.length ? getAverage(values.map(item => item.Nota)).toFixed(1) : '-'
   }
 
   return (
@@ -142,6 +141,7 @@ export const SummaryTable = ({ subjects: allSubjects = [], data = [], setData = 
                         const { notes, average } = item[name] || { notes: [], average: 0 }
                         const failures = getFailures(notes)
                         const finalPerformance = getPerformance(notes, 'final')
+                        const behaviourNote = getBehaviour(notes)
                         return (
                           <Fragment key={`subject${label}`}>
                             {/* These are the notes */}
@@ -211,7 +211,14 @@ export const SummaryTable = ({ subjects: allSubjects = [], data = [], setData = 
                                 </Fragment>
                               )
                             })}
-                            <td className="text-center">{getBehaviour(notes)}</td>
+
+                            {/* These are the behavior notes */}
+                            {BEHAVIOUR_KEYS.map(key => (
+                              <Fragment key={key}>
+                                <td className="text-center">{getValue(notes, key)}</td>
+                              </Fragment>
+                            ))}
+                            <td className={`text-center ${behaviorColors(behaviourNote)}`}>{behaviourNote}</td>
                           </Fragment>
                         )
                       })}
