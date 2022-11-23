@@ -27,9 +27,7 @@ export const HeaderSummaryTable = ({ subjects = [], periods = [], indicators = [
           <th
             key={`subject${index}`}
             className="cohorts__subject-field text-center border"
-            colSpan={
-              periods.length * (isAdmin ? 4 : 3) + indicators.length + (isAdmin ? SINGLE_SUBJECT_FIELDS : 1) + 1 + 1
-            }
+            colSpan={periods.length * (isAdmin ? 4 : 3) + indicators.length + (isAdmin ? SINGLE_SUBJECT_FIELDS : 2) + 1}
           >
             {label}
           </th>
