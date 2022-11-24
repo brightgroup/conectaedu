@@ -30,6 +30,19 @@ export const styles = StyleSheet.create({
     width: 70,
   },
 
+  backgroundImage: {
+    objectFit: 'cover',
+    width: '100%',
+    opacity: 0.2,
+    marginTop: 100,
+    zIndex: '10',
+  },
+
+  image: {
+    width: '100%',
+    heigth: '100%',
+  },
+
   container__description: {
     textAlign: 'center',
   },

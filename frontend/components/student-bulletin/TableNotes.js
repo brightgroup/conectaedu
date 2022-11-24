@@ -6,7 +6,7 @@ import { stylesNotes } from '.'
 
 export const TableNotes = ({ courses, studentReport, period, getPosition }) => {
   const average = useMemo(() => generalAverageperiod(courses, studentReport, period), [])
-
+  
   return (
     <View style={stylesNotes.container}>
       <View style={stylesNotes.table__header}>
@@ -54,64 +54,66 @@ export const TableNotes = ({ courses, studentReport, period, getPosition }) => {
           <Text style={stylesNotes.subtitle}>NOTA COMPORT</Text>
         </View>
       </View>
-      {courses?.map((course, index) => (
-        <View style={stylesNotes.row} key={index}>
-          <View style={stylesNotes.column_area}>
-            <Text style={stylesNotes.subtitle}>{studentReport[course][0].Curso?.replace(/[0-9]/g, '')}</Text>
-          </View>
-          <View style={stylesNotes.column_notes}>
-            <View style={{ flexDirection: 'row', margin: 'auto 0' }}>
-              <View style={stylesNotes.period_notes}>
-                <Text style={stylesNotes.subtitle}>
-                  {getValue(studentReport[course], { item: NEWSLETTER_ITEMS.firstPeriod })}
-                </Text>
-              </View>
-              <View style={stylesNotes.period_notes}>
-                <Text style={stylesNotes.subtitle}>
-                  {getValue(studentReport[course], { item: NEWSLETTER_ITEMS.secondPeriod })}
-                </Text>
-              </View>
-              <View style={stylesNotes.period_notes}>
-                <Text style={stylesNotes.subtitle}>
-                  {getValue(studentReport[course], { item: NEWSLETTER_ITEMS.thirdPeriod })}
-                </Text>
-              </View>
-              <View style={stylesNotes.period_last_note}>
-                <Text style={stylesNotes.subtitle}>
-                  {getValue(studentReport[course], { item: NEWSLETTER_ITEMS.fourthPeriod })}
-                </Text>
+      {courses?.map((course, index) =>
+        Array.isArray(studentReport[course]) ? (
+          <View style={stylesNotes.row} key={index}>
+            <View style={stylesNotes.column_area}>
+              <Text style={stylesNotes.subtitle}>{studentReport[course][0].Curso?.replace(/[0-9]/g, '')}</Text>
+            </View>
+            <View style={stylesNotes.column_notes}>
+              <View style={{ flexDirection: 'row', margin: 'auto 0' }}>
+                <View style={stylesNotes.period_notes}>
+                  <Text style={stylesNotes.subtitle}>
+                    {getValue(studentReport[course], { item: NEWSLETTER_ITEMS.firstPeriod })}
+                  </Text>
+                </View>
+                <View style={stylesNotes.period_notes}>
+                  <Text style={stylesNotes.subtitle}>
+                    {getValue(studentReport[course], { item: NEWSLETTER_ITEMS.secondPeriod })}
+                  </Text>
+                </View>
+                <View style={stylesNotes.period_notes}>
+                  <Text style={stylesNotes.subtitle}>
+                    {getValue(studentReport[course], { item: NEWSLETTER_ITEMS.thirdPeriod })}
+                  </Text>
+                </View>
+                <View style={stylesNotes.period_last_note}>
+                  <Text style={stylesNotes.subtitle}>
+                    {getValue(studentReport[course], { item: NEWSLETTER_ITEMS.fourthPeriod })}
+                  </Text>
+                </View>
               </View>
             </View>
+            <View style={stylesNotes.column_faults}>
+              <Text style={stylesNotes.subtitle}>
+                {getValue(studentReport[course], { item: FAULTS[period], decimals: 0 })}
+              </Text>
+            </View>
+            <View style={stylesNotes.column_faults}>
+              <Text style={stylesNotes.subtitle}></Text>
+            </View>
+            <View style={stylesNotes.column_faults}>
+              <Text style={stylesNotes.subtitle}></Text>
+            </View>
+            <View style={stylesNotes.column_performance}>
+              <Text style={stylesNotes.subtitle}>
+                {replacePerformance(getValue(studentReport[course], { item: PERIOD[period], valueKey: 'Desempenio' }))}
+              </Text>
+            </View>
+            <View style={index === 0 ? stylesNotes.column_pt : stylesNotes.column_pt_hidden}>
+              <Text style={index === 0 ? stylesNotes.text_pt : stylesNotes.subtitle}>{getPosition}</Text>
+            </View>
+            <View style={index === 0 ? stylesNotes.columl_average : stylesNotes.prueba}>
+              <Text style={stylesNotes.subtitle_average}>{average}</Text>
+            </View>
+            <View style={stylesNotes.item_comport}>
+              <Text style={stylesNotes.subtitle_comport}>
+                {getValue(studentReport[course], { item: BEHAVIUR[period] })}
+              </Text>
+            </View>
           </View>
-          <View style={stylesNotes.column_faults}>
-            <Text style={stylesNotes.subtitle}>
-              {getValue(studentReport[course], { item: FAULTS[period], decimals: 0 })}
-            </Text>
-          </View>
-          <View style={stylesNotes.column_faults}>
-            <Text style={stylesNotes.subtitle}></Text>
-          </View>
-          <View style={stylesNotes.column_faults}>
-            <Text style={stylesNotes.subtitle}></Text>
-          </View>
-          <View style={stylesNotes.column_performance}>
-            <Text style={stylesNotes.subtitle}>
-              {replacePerformance(getValue(studentReport[course], { item: PERIOD[period], valueKey: 'Desempenio' }))}
-            </Text>
-          </View>
-          <View style={index === 0 ? stylesNotes.column_pt : stylesNotes.column_pt_hidden}>
-            <Text style={index === 0 ? stylesNotes.text_pt : stylesNotes.subtitle}>{getPosition}</Text>
-          </View>
-          <View style={index === 0 ? stylesNotes.columl_average : stylesNotes.prueba}>
-            <Text style={stylesNotes.subtitle_average}>{average}</Text>
-          </View>
-          <View style={stylesNotes.item_comport}>
-            <Text style={stylesNotes.subtitle_comport}>
-              {getValue(studentReport[course], { item: BEHAVIUR[period] })}
-            </Text>
-          </View>
-        </View>
-      ))}
+        ) : null
+      )}
     </View>
   )
 }
