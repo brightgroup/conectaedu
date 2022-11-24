@@ -16,4 +16,5 @@ export const URLS = {
   postInstitution: 'institution-info',
   updateInstitution: 'institution-info-update/1',
   getInstitutions: 'institution-info',
+  assets: institution => `/assets/${institution}`,
 }

@@ -4,6 +4,7 @@ import { PerformanceTable } from './PerformanceTable'
 import { TableNotes } from './TableNotes'
 import { coursesList, getCourseDescription, getInstitutionDescription } from 'utils/Bulletin'
 import { SignaturesSection } from './components'
+import { URLS } from 'api/Urls'
 import { styles } from '.'
 
 export const CourseBulletin = ({ period, course, institutions, courseReport, courseAverage }) => {
@@ -40,7 +41,7 @@ export const CourseBulletin = ({ period, course, institutions, courseReport, cou
             <View style={styles.container}>
               <View style={styles.container__header}>
                 <View style={styles.container__header_image}>
-                  {/* <Image src="https://api.conectaedu.co/1667330222.png" width={20} height={20} /> */}
+                  {WithDynamicImage(getInstitutionDescription(institutions, 'brand'), false)}
                 </View>
                 <View style={styles.container__header_title}>
                   <View style={styles.container__description}>
@@ -96,7 +97,7 @@ export const CourseBulletin = ({ period, course, institutions, courseReport, cou
                 </View>
               </View>
               <View style={{ height: 700, width: '100%', marginTop: 10 }}>
-                {/* <Image src={image} style={{ width: '100%', opacity: 0.2, marginTop: 100, zIndex: '10' }} /> */}
+                {WithDynamicImage(getInstitutionDescription(institutions, 'brand'))}
                 <View style={{ width: '100%', position: 'absolute' }}>
                   <View>
                     <TableNotes
@@ -122,7 +123,7 @@ export const CourseBulletin = ({ period, course, institutions, courseReport, cou
           <Page>
             <View style={styles.container}>
               <View style={{ height: '100%', width: '100%' }}>
-                {/* <Image src={image} style={{ width: '100%', opacity: 0.2, marginTop: 100, zIndex: '10' }} /> */}
+                {WithDynamicImage(getInstitutionDescription(institutions, 'brand'))}
                 <View style={{ width: '100%', position: 'absolute' }}>
                   <View>
                     <PerformanceTable courses={coursesSecondPage} studentReport={student} period={period} />
@@ -136,7 +137,7 @@ export const CourseBulletin = ({ period, course, institutions, courseReport, cou
             <Page>
               <View style={styles.container}>
                 <View style={{ height: '100%', width: '100%' }}>
-                  {/* <Image src={image} style={{ width: '100%', opacity: 0.2, marginTop: 100, zIndex: '10' }} /> */}
+                  {WithDynamicImage(getInstitutionDescription(institutions, 'brand'))}
                   <View style={{ width: '100%', position: 'absolute' }}>
                     <View>
                       <PerformanceTable courses={coursesThirdPage} studentReport={student} period={period} />
@@ -150,5 +151,12 @@ export const CourseBulletin = ({ period, course, institutions, courseReport, cou
         </React.Fragment>
       ))}
     </Document>
+  )
+}
+
+const WithDynamicImage = (image, background = true) => {
+  let imageDynamic = URLS.assets(image)
+  return (
+    <Image src={imageDynamic} alt="Picture of the author" style={background ? styles.backgroundImage : styles.image} />
   )
 }

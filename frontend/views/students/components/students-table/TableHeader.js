@@ -21,8 +21,8 @@ export const TableHeader = ({ admin }) => {
   }
 
   return (
-    <thead>
-      <tr className="bg-blue">
+    <thead className="px-2">
+      <tr className="bg-blue px-4">
         <th className="text-center relative">
           Nombre
           <button className="button-icon ml-1 mr-2" onClick={sortData}>
@@ -31,6 +31,7 @@ export const TableHeader = ({ admin }) => {
         </th>
         <th className="text-center">Estudiante</th>
         <th className="text-center">Boletin</th>
+        <th className="text-left px-7">Final</th>
       </tr>
     </thead>
   )
