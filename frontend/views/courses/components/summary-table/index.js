@@ -136,3 +136,10 @@ export const BEHAVIOUR_KEYS = [
   'calificacion comportamental 3 periodo',
   'calificacion comportamental 4 periodo',
 ]
+
+export const alternativebehaviourKeys = [
+  'calificacion comportamental primer periodo',
+  'calificacion comportamental segundo periodo',
+  'calificacion comportamental tercer periodo',
+  'calificacion comportamental cuarto periodo',
+]

@@ -18,6 +18,7 @@ import {
   performanceColors,
   subjectAcronyms,
   behaviorColors,
+  alternativebehaviourKeys,
 } from '.'
 
 export const SummaryTable = ({ subjects: allSubjects = [], data = [], setData = [], initialData = [] }) => {
@@ -213,12 +214,27 @@ export const SummaryTable = ({ subjects: allSubjects = [], data = [], setData = 
                             })}
 
                             {/* These are the behavior notes */}
-                            {BEHAVIOUR_KEYS.map(key => (
+                            {BEHAVIOUR_KEYS.map((key, index) => {
+                              const alternativeKey = alternativebehaviourKeys[index]
+                              const note1 = getValue(notes, key)
+                              const note2 = getValue(notes, alternativeKey)
+                              return (
+                                <Fragment key={key}>
+                                  <td className="text-center">
+                                    {!isNaN(note1) ? note1 : !isNaN(note2) ? note2 : note1}
+                                  </td>
+                                </Fragment>
+                              )
+                            })}
+                            <td className={`text-center ${behaviorColors(behaviourNote)}`}>{behaviourNote}</td>
+
+                            {/* These are the behavior notes */}
+                            {/* {BEHAVIOUR_KEYS.map(key => (
                               <Fragment key={key}>
                                 <td className="text-center">{getValue(notes, key)}</td>
                               </Fragment>
                             ))}
-                            <td className={`text-center ${behaviorColors(behaviourNote)}`}>{behaviourNote}</td>
+                            <td className={`text-center ${behaviorColors(behaviourNote)}`}>{behaviourNote}</td> */}
                           </Fragment>
                         )
                       })}
