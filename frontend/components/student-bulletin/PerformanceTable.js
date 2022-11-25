@@ -95,13 +95,14 @@ export const PerformanceTable = ({ courses, studentReport, period }) => {
               </View>
               <View style={stylesPerformance.container_indicators}>
                 <Text style={stylesPerformance.title_indicators}>INDICADOR DE DESEMPEÑO:</Text>
-                <Text style={stylesPerformance.text_competences}>
-                  {getValue(studentReport[course], {
-                    item: COMPETENCES[period],
-                    valueKey: 'Description',
-                  })}
-                </Text>
-                <Text style={stylesPerformance.text_competences}>-</Text>
+                {COMPETENCES[period]?.map(indicator => (
+                  <Text style={stylesPerformance.text_competences}>
+                    -{getValue(studentReport[course], {
+                      item: indicator,
+                      valueKey: 'Description',
+                    })}
+                  </Text>
+                ))}
               </View>
             </View>
           </View>
