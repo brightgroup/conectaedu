@@ -1,4 +1,4 @@
-import { AVERAGES, PERIOD, SUBJECTS10 } from 'constants/Bulletin'
+import { AVERAGES, BASIC_SUBJECTS, PERIOD, SUBJECTS10 } from 'constants/Bulletin'
 import { sortArray } from './Array'
 
 const { toComparisonKey } = require('./Text')
@@ -90,31 +90,34 @@ const averageByPeriod = (students = {}) => {
     let lastname = ''
 
     for (const subject in subjects) {
-      if (!lastname) lastname = subjects[subject]?.lastname
-      const { notes } = subjects[subject]
-      const firstPeriod =
-        notes?.find(({ Itemname: name }) => toComparisonKey(name) === toComparisonKey('Notas Finales Primer Periodo'))
-          ?.Nota || 0
-      averageFirstPeriod += Number(firstPeriod)
-      if (Number(firstPeriod) !== 0) itemsFirstPeriod += 1
+      if (BASIC_SUBJECTS.includes(subject.replace(/[0-9]/g, ''))) {
+        if (!lastname) lastname = subjects[subject]?.lastname
+        const { notes } = subjects[subject]
+        const firstPeriod =
+          notes?.find(({ Itemname: name }) => toComparisonKey(name) === toComparisonKey('Notas Finales Primer Periodo'))
+            ?.Nota || 0
+        averageFirstPeriod += Number(firstPeriod)
+        if (Number(firstPeriod) !== 0) itemsFirstPeriod += 1
 
-      const secondPeriod =
-        notes?.find(({ Itemname: name }) => toComparisonKey(name) === toComparisonKey('Notas Finales Segundo periodo'))
-          ?.Nota || 0
-      averageSecondPeriod += Number(secondPeriod)
-      if (Number(secondPeriod) !== 0) itemsSecondPeriod += 1
+        const secondPeriod =
+          notes?.find(
+            ({ Itemname: name }) => toComparisonKey(name) === toComparisonKey('Notas Finales Segundo periodo')
+          )?.Nota || 0
+        averageSecondPeriod += Number(secondPeriod)
+        if (Number(secondPeriod) !== 0) itemsSecondPeriod += 1
 
-      const thirdPeriod =
-        notes?.find(({ Itemname: name }) => toComparisonKey(name) === toComparisonKey('Notas Finales Tercer Periodo'))
-          ?.Nota || 0
-      averageThirdPeriod += Number(thirdPeriod)
-      if (Number(thirdPeriod) !== 0) itemsThirdPeriod += 1
+        const thirdPeriod =
+          notes?.find(({ Itemname: name }) => toComparisonKey(name) === toComparisonKey('Notas Finales Tercer Periodo'))
+            ?.Nota || 0
+        averageThirdPeriod += Number(thirdPeriod)
+        if (Number(thirdPeriod) !== 0) itemsThirdPeriod += 1
 
-      const fourthPeriod =
-        notes?.find(({ Itemname: name }) => toComparisonKey(name) === toComparisonKey('Notas Finales Cuarto Periodo'))
-          ?.Nota || 0
-      averageFourthPeriod += Number(fourthPeriod)
-      if (Number(fourthPeriod) !== 0) itemsFourthPeriod += 1
+        const fourthPeriod =
+          notes?.find(({ Itemname: name }) => toComparisonKey(name) === toComparisonKey('Notas Finales Cuarto Periodo'))
+            ?.Nota || 0
+        averageFourthPeriod += Number(fourthPeriod)
+        if (Number(fourthPeriod) !== 0) itemsFourthPeriod += 1
+      }
     }
     result.push({
       ...subjects,

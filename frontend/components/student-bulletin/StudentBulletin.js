@@ -21,14 +21,14 @@ export const StudentBulletin = ({ studentReport, period = 1, course, institution
   useEffect(() => {
     if (orderedCourses.length > 12) {
       setPages({
-        coursesFirstPage: orderedCourses.slice(0, 5),
-        coursesSecondPage: orderedCourses.slice(5, 13),
-        coursesThirdPage: orderedCourses.slice(13, courses.length),
+        coursesFirstPage: orderedCourses.slice(0, 4),
+        coursesSecondPage: orderedCourses.slice(4, 11),
+        coursesThirdPage: orderedCourses.slice(11, courses.length),
       })
     } else {
       setPages({
-        coursesFirstPage: orderedCourses.slice(0, 5),
-        coursesSecondPage: orderedCourses.slice(5, courses.length),
+        coursesFirstPage: orderedCourses.slice(0, 4),
+        coursesSecondPage: orderedCourses.slice(4, courses.length),
       })
     }
   }, [orderedCourses])

@@ -24,10 +24,10 @@ export const PERIOD = {
 }
 
 export const COMPETENCES = {
-  1: 'JD11P',
-  2: 'JD12P',
-  3: 'JD13P',
-  4: 'JD14P',
+  1: ['JD11P', 'JD21P', 'JD31P'],
+  2: ['JD12P', 'JD22P', 'JD32P'],
+  3: ['JD13P', 'JD23P', 'JD33P'],
+  4: ['JD14P', 'JD24P', 'JD34P'],
 }
 
 export const BEHAVIUR = {
@@ -128,4 +128,20 @@ export const SUBJECTS10 = [
     name: 'FILOSOFÍA',
     key: 'FILOSOFÍA_',
   },
+]
+
+export const BASIC_SUBJECTS = [
+  'FÍSICA_',
+  'QUIMICA_',
+  'CIENCIAS_SOCIALES_',
+  'EDUCACIÓN_ARTÍSTICA_',
+  'EDUCACION_ETICA_Y_VALORES_HUMANOS_',
+  'EDUCACIÓN_FÍSICA_',
+  'EDUCACIÓN_RELIGIOSA_Y_MORAL_',
+  'ESPAÑOL_',
+  'INGLÉS_',
+  'MATEMÁTICAS_',
+  'TECNOLOGÍA_E_INFORMÁTICA_',
+  'FUNDAMENTOS_DE_ADMINISTRACIÓN_',
+  'FILOSOFÍA_',
 ]

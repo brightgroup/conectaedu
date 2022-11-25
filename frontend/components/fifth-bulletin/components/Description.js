@@ -14,7 +14,7 @@ export const Description = ({ status = '', grade = '', student }) => {
           los estudios correspondientes al grado
           <Text style={stylesDescription.text_bold_center}>{` ${grade} `}</Text> de
           <Text style={stylesDescription.text_bold_center}>
-            {grade.length ? 'Educacion basica secundaria' : 'Educacion basica primaria'}
+            {grade.length ? ' Educacion basica secundaria ' : ' Educacion basica primaria '}
           </Text>
           durante el año colectivo
           <Text>{` ${new Date().getFullYear()} `}</Text>
