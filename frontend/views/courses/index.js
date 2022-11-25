@@ -10,7 +10,7 @@ export const getStudentNotes = (data = {}) => {
     const items = data[key]
     items?.forEach(({ student, Notas: notes, lastname, Status }) => {
       const average = notes?.find(({ Itemname: average }) => average)?.Nota
-      const isLostSubject = average < 3
+      const isLostSubject = Number(average.replace(',', '.')) && average < 3
       const [newItem, currentItem] = [{ notes, average, isLostSubject, lastname, Status }, students[student]]
       students[student] = { ...(currentItem && { ...currentItem }), [key]: newItem }
     })
@@ -70,5 +70,6 @@ export const getSubjects = (item = {}, table = '') => {
 
 export const getStudents = (data = {}) => {
   const students = createStudentArray(getStudentNotes(data))
+  console.log('la students', students)
   return getStudentsRanking(students)
 }
