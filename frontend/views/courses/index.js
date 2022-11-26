@@ -70,6 +70,5 @@ export const getSubjects = (item = {}, table = '') => {
 
 export const getStudents = (data = {}) => {
   const students = createStudentArray(getStudentNotes(data))
-  console.log('la students', students)
   return getStudentsRanking(students)
 }

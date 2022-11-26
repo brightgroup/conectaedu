@@ -21,7 +21,7 @@ export const Description = ({ status = '', grade = '', student }) => {
           jornada
           <Text> Mañana </Text> en concordancia con los fines y objetivos de la Ley 115 de 1.994, los Decretos 1290 del
           16 de abril de 2009 y los criterios de evaluación y promociones del SIEE ( Sistema Institucional de Evaluación
-          Escolar), con las valoraciones e intensidad horaria relacionala a continuación:
+          Escolar)
         </Text>
       </View>
     </View>
