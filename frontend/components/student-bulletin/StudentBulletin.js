@@ -2,10 +2,10 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { Document, Image, Page, Text, View } from '@react-pdf/renderer'
 import { PerformanceTable } from './PerformanceTable'
 import { TableNotes } from './TableNotes'
-import { coursesList, getCourseDescription, getInstitutionDescription, getValue } from 'utils/Bulletin'
+import { coursesList, getBehaviator, getCourseDescription, getInstitutionDescription } from 'utils/Bulletin'
 import { SignaturesSection } from './components'
-import { styles } from '.'
 import { URLS } from 'api/Urls'
+import { styles } from '.'
 
 export const StudentBulletin = ({ studentReport, period = 1, course, institutions, courseAverage }) => {
   const courses = useMemo(() => Object.keys(studentReport), [studentReport])
@@ -110,6 +110,7 @@ export const StudentBulletin = ({ studentReport, period = 1, course, institution
                   studentReport={studentReport}
                   period={period}
                   getPosition={getPosition}
+                  behaviour={getBehaviator(studentReport)}
                 />
               </View>
               <View>

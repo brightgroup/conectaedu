@@ -22,12 +22,6 @@ export const PROMOTED = {
   Promovido: 'El estudiante ES PROMOVIDO AL SIGUIENTE GRADO',
   Reprobado: 'El estudiante NO ES PROMOVIDO AL SIGUIENTE GRADO',
 }
-export const assessment = note => {
-  if (Number(note) < 3) return 'Bajo'
-  if (Number(note) >= 3 && Number(note) < 4) return 'Basico'
-  if (Number(note) >= 4 && Number(note) <= 4.5) return 'Alto'
-  if (Number(note) > 4.5) return 'Superior'
-}
 
 export const stylesDescription = StyleSheet.create({
   text_center: {

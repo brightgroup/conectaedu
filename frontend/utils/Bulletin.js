@@ -1,4 +1,4 @@
-import { AVERAGES, BASIC_SUBJECTS, PERIOD, SUBJECTS10 } from 'constants/Bulletin'
+import { AVERAGES, BASIC_SUBJECTS, ITEMS_BEHAVITOR, PERIOD, SUBJECTS10 } from 'constants/Bulletin'
 import { sortArray } from './Array'
 
 const { toComparisonKey } = require('./Text')
@@ -143,4 +143,32 @@ const getStudentsRanking = (students = [], period) => {
 export const getStudents = (data = {}, period) => {
   const students = averageByPeriod(getStudentNotes(data))
   return getStudentsRanking(students, period)
+}
+
+export const assessment = note => {
+  if (Number(note) < 3) return 'Bajo'
+  if (Number(note) >= 3 && Number(note) < 4) return 'Basico'
+  if (Number(note) >= 4 && Number(note) <= 4.5) return 'Alto'
+  if (Number(note) > 4.5) return 'Superior'
+}
+
+export const getBehaviator = report => {
+  const respuesta = ''
+  for (const key in report) {
+    const matter = report[key]
+    matter[0].Notas?.map(({ Itemname }) => {
+      if (ITEMS_BEHAVITOR.includes(Itemname)) respuesta = key
+    })
+  }
+  return respuesta
+}
+
+export const behaviorPerformance = studentReport => {
+  let total = 0
+  let counter = 0
+  ITEMS_BEHAVITOR.map((item, index) => {
+    total += parseFloat(getValue(studentReport[getBehaviator(studentReport)], { item }))
+    counter = index
+  })
+  return total / (counter + 1)
 }

@@ -31,7 +31,7 @@ export const COMPETENCES = {
 }
 
 export const BEHAVIUR = {
-  1: 'Calificación comportamental 1 periodo',
+  1: 'Calificación Comportamental Primer Periodo',
   2: 'Calificación comportamental 2 periodo',
   3: 'Calificación comportamental 3 periodo',
   4: 'Calificación comportamental 4 periodo',
@@ -144,4 +144,11 @@ export const BASIC_SUBJECTS = [
   'TECNOLOGÍA_E_INFORMÁTICA_',
   'FUNDAMENTOS_DE_ADMINISTRACIÓN_',
   'FILOSOFÍA_',
+]
+
+export const ITEMS_BEHAVITOR = [
+  'Calificación Comportamental Primer Periodo',
+  'Calificación comportamental 2 periodo',
+  'Calificación comportamental 3 periodo',
+  'Calificación comportamental 4 periodo',
 ]
