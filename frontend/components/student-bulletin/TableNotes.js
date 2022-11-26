@@ -1,12 +1,12 @@
 import { useMemo } from 'react'
 import { Text, View } from '@react-pdf/renderer'
-import { BEHAVIUR, FAULTS, NEWSLETTER_ITEMS, PERIOD } from 'constants/Bulletin'
-import { generalAverageperiod, getValue, replacePerformance } from 'utils/Bulletin'
+import { BEHAVIUR, FAULTS, ITEMS_BEHAVITOR, NEWSLETTER_ITEMS, PERIOD } from 'constants/Bulletin'
+import { assessment, behaviorPerformance, generalAverageperiod, getValue, replacePerformance } from 'utils/Bulletin'
 import { stylesNotes } from '.'
 
-export const TableNotes = ({ courses, studentReport, period, getPosition }) => {
+export const TableNotes = ({ courses, studentReport, period, getPosition, behaviour }) => {
   const average = useMemo(() => generalAverageperiod(courses, studentReport, period), [])
-  
+
   return (
     <View style={stylesNotes.container}>
       <View style={stylesNotes.table__header}>
@@ -114,6 +114,31 @@ export const TableNotes = ({ courses, studentReport, period, getPosition }) => {
           </View>
         ) : null
       )}
+      {period == 4 ? (
+        <View style={stylesNotes.row}>
+          <View style={stylesNotes.column_area}>
+            <Text style={stylesNotes.subtitle}>COMPORTAMIENTO</Text>
+          </View>
+          <View style={stylesNotes.column_notes}>
+            <View style={{ flexDirection: 'row', margin: 'auto 0' }}>
+              {ITEMS_BEHAVITOR.map((item, index) => (
+                <View style={stylesNotes.period_notes} key={index}>
+                  <Text style={stylesNotes.subtitle}>{getValue(studentReport[behaviour], { item })}</Text>
+                </View>
+              ))}
+            </View>
+          </View>
+          <View style={stylesNotes.column_faults}></View>
+          <View style={stylesNotes.column_faults}></View>
+          <View style={stylesNotes.column_faults}></View>
+          <View style={stylesNotes.column_performance}>
+            <Text style={stylesNotes.subtitle}>{assessment(behaviorPerformance(studentReport))}</Text>
+          </View>
+          <View style={stylesNotes.column_pt_hidden}></View>
+          <View style={stylesNotes.prueba}></View>
+          <View style={stylesNotes.item_comport}></View>
+        </View>
+      ) : null}
     </View>
   )
 }

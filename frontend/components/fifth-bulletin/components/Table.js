@@ -1,8 +1,8 @@
 import React from 'react'
 import { Text, View } from '@react-pdf/renderer'
-import { getValue } from 'utils/Bulletin'
+import { assessment, behaviorPerformance, getValue } from 'utils/Bulletin'
 import { NEWSLETTER_ITEMS } from 'constants/Bulletin'
-import { assessment, stylesTable } from '.'
+import { stylesTable } from '.'
 
 export const Table = ({ orderedCourses, studentReport }) => {
   return (
@@ -36,6 +36,17 @@ export const Table = ({ orderedCourses, studentReport }) => {
           </View>
         ) : null
       )}
+      <View style={stylesTable.row}>
+        <View style={stylesTable.row_column1}>
+          <Text>COMPORTAMIENTO</Text>
+        </View>
+        <View style={stylesTable.row_column2}>
+          <Text>{behaviorPerformance(studentReport).toFixed(1)}</Text>
+        </View>
+        <View style={stylesTable.row_column3}>
+          <Text style={{ fontSize: 10 }}>{assessment(behaviorPerformance(studentReport))}</Text>
+        </View>
+      </View>
     </View>
   )
 }
