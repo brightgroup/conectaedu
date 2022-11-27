@@ -26,14 +26,14 @@ export const replacePerformance = text => {
 
 export const generalAverageperiod = (courses, studentReport, period) => {
   const notes = []
-  courses.map(course => {
+  let counter = 0
+  courses.map((course, index) => {
     if (course !== 'COMPORTAMIENTO') {
       notes.push(parseFloat(getValue(studentReport[course], { item: PERIOD[period] })))
+      counter = index
     }
   })
-  const average =
-    notes.filter(item => Number(item)).reduce((previus, current) => (previus += current), 0) /
-    notes.filter(item => Number(item)).length
+  const average = notes.filter(item => Number(item)).reduce((previus, current) => (previus += current), 0) / counter
   return average.toFixed(1)
 }
 
