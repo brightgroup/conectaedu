@@ -161,7 +161,7 @@ export const getBehaviator = report => {
   const respuesta = ''
   for (const key in report) {
     const matter = report[key]
-    matter[0].Notas?.map(({ Itemname }) => {
+    matter?.[0].Notas?.map(({ Itemname }) => {
       if (ITEMS_BEHAVITOR.includes(Itemname)) respuesta = key
     })
   }
