@@ -2,12 +2,13 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { Document, Image, Page, Text, View } from '@react-pdf/renderer'
 import { PerformanceTable } from './PerformanceTable'
 import { TableNotes } from './TableNotes'
-import { coursesList, getCourseDescription, getInstitutionDescription } from 'utils/Bulletin'
+import { coursesList, getBehaviator, getCourseDescription, getInstitutionDescription } from 'utils/Bulletin'
 import { SignaturesSection } from './components'
 import { URLS } from 'api/Urls'
 import { styles } from '.'
 
-export const CourseBulletin = ({ period, course, institutions, courseReport, courseAverage }) => {
+export const CourseBulletin = ({ period, course, institutions, courseReport: report, courseAverage }) => {
+  const [courseReport, setCourseReport] = useState(report)
   const courses = useMemo(() => Object.keys(courseReport?.[0]), [courseReport])
 
   const orderedCourses = useMemo(() => coursesList(courses), [courses])
@@ -21,17 +22,33 @@ export const CourseBulletin = ({ period, course, institutions, courseReport, cou
   useEffect(() => {
     if (orderedCourses.length > 12) {
       setPages({
-        coursesFirstPage: orderedCourses.slice(0, 5),
-        coursesSecondPage: orderedCourses.slice(5, 13),
-        coursesThirdPage: orderedCourses.slice(13, courses.length),
+        coursesFirstPage: orderedCourses.slice(0, 4),
+        coursesSecondPage: orderedCourses.slice(4, 11),
+        coursesThirdPage: orderedCourses.slice(11, courses.length),
       })
     } else {
       setPages({
-        coursesFirstPage: orderedCourses.slice(0, 5),
-        coursesSecondPage: orderedCourses.slice(5, courses.length),
+        coursesFirstPage: orderedCourses.slice(0, 4),
+        coursesSecondPage: orderedCourses.slice(4, courses.length),
       })
     }
   }, [orderedCourses])
+
+  const includeBehavior = () => {
+    let matter = ''
+    const report = []
+    courseReport.map((student, index) => {
+      matter = getBehaviator(student)
+      report.push({ ...student, COMPORTAMIENTO: student[matter] })
+    })
+    return report
+  }
+
+  useEffect(() => {
+    if (period == 4) {
+      setCourseReport(includeBehavior())
+    }
+  }, [period])
 
   return (
     <Document>
@@ -105,6 +122,7 @@ export const CourseBulletin = ({ period, course, institutions, courseReport, cou
                       studentReport={student}
                       period={period}
                       courseAverage={courseAverage}
+                      behaviour={getBehaviator(student)}
                     />
                   </View>
                   <View>

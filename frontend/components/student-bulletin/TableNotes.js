@@ -55,7 +55,31 @@ export const TableNotes = ({ courses, studentReport, period, getPosition, behavi
         </View>
       </View>
       {courses?.map((course, index) =>
-        Array.isArray(studentReport[course]) ? (
+        course === 'COMPORTAMIENTO' ? (
+          <View style={stylesNotes.row}>
+            <View style={stylesNotes.column_area}>
+              <Text style={stylesNotes.subtitle}>COMPORTAMIENTO</Text>
+            </View>
+            <View style={stylesNotes.column_notes}>
+              <View style={{ flexDirection: 'row', margin: 'auto 0' }}>
+                {ITEMS_BEHAVITOR.map((item, index) => (
+                  <View style={stylesNotes.period_notes} key={index}>
+                    <Text style={stylesNotes.subtitle}>{getValue(studentReport[behaviour], { item })}</Text>
+                  </View>
+                ))}
+              </View>
+            </View>
+            <View style={stylesNotes.column_faults}></View>
+            <View style={stylesNotes.column_faults}></View>
+            <View style={stylesNotes.column_faults}></View>
+            <View style={stylesNotes.column_performance}>
+              <Text style={stylesNotes.subtitle}>{assessment(behaviorPerformance(studentReport))}</Text>
+            </View>
+            <View style={stylesNotes.column_pt_hidden}></View>
+            <View style={stylesNotes.prueba}></View>
+            <View style={stylesNotes.item_comport}></View>
+          </View>
+        ) : Array.isArray(studentReport[course]) ? (
           <View style={stylesNotes.row} key={index}>
             <View style={stylesNotes.column_area}>
               <Text style={stylesNotes.subtitle}>{studentReport[course][0].Curso?.replace(/[0-9]/g, '')}</Text>
@@ -114,31 +138,6 @@ export const TableNotes = ({ courses, studentReport, period, getPosition, behavi
           </View>
         ) : null
       )}
-      {period == 4 ? (
-        <View style={stylesNotes.row}>
-          <View style={stylesNotes.column_area}>
-            <Text style={stylesNotes.subtitle}>COMPORTAMIENTO</Text>
-          </View>
-          <View style={stylesNotes.column_notes}>
-            <View style={{ flexDirection: 'row', margin: 'auto 0' }}>
-              {ITEMS_BEHAVITOR.map((item, index) => (
-                <View style={stylesNotes.period_notes} key={index}>
-                  <Text style={stylesNotes.subtitle}>{getValue(studentReport[behaviour], { item })}</Text>
-                </View>
-              ))}
-            </View>
-          </View>
-          <View style={stylesNotes.column_faults}></View>
-          <View style={stylesNotes.column_faults}></View>
-          <View style={stylesNotes.column_faults}></View>
-          <View style={stylesNotes.column_performance}>
-            <Text style={stylesNotes.subtitle}>{assessment(behaviorPerformance(studentReport))}</Text>
-          </View>
-          <View style={stylesNotes.column_pt_hidden}></View>
-          <View style={stylesNotes.prueba}></View>
-          <View style={stylesNotes.item_comport}></View>
-        </View>
-      ) : null}
     </View>
   )
 }

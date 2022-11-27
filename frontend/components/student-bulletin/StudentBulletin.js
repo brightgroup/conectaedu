@@ -7,7 +7,8 @@ import { SignaturesSection } from './components'
 import { URLS } from 'api/Urls'
 import { styles } from '.'
 
-export const StudentBulletin = ({ studentReport, period = 1, course, institutions, courseAverage }) => {
+export const StudentBulletin = ({ studentReport: report, period = 1, course, institutions, courseAverage }) => {
+  const [studentReport, setStudentReport] = useState(report)
   const courses = useMemo(() => Object.keys(studentReport), [studentReport])
 
   const orderedCourses = useMemo(() => coursesList(courses), [courses])
@@ -17,6 +18,15 @@ export const StudentBulletin = ({ studentReport, period = 1, course, institution
     coursesSecondPage: [],
     coursesThirdPage: [],
   })
+
+  useEffect(() => {
+    if (period == 4) {
+      setStudentReport({
+        ...studentReport,
+        COMPORTAMIENTO: studentReport[getBehaviator(studentReport)],
+      })
+    }
+  }, [])
 
   useEffect(() => {
     if (orderedCourses.length > 12) {

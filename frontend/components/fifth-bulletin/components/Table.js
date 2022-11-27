@@ -19,9 +19,9 @@ export const Table = ({ orderedCourses, studentReport }) => {
           <Text>Conceptual</Text>
         </View>
       </View>
-      {orderedCourses.map(course =>
+      {orderedCourses.map((course, index) =>
         Array.isArray(studentReport[course]) ? (
-          <View style={stylesTable.row}>
+          <View style={stylesTable.row} key={index}>
             <View style={stylesTable.row_column1}>
               <Text>{studentReport[course][0].Curso?.replace(/[0-9]/g, '')}</Text>
             </View>

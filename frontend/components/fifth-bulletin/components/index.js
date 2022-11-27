@@ -17,6 +17,7 @@ Font.register({
 export const response = {
   Promovido: 'Aprobó',
   Reprobado: 'Reprobó',
+  Promovidoporpromedio: 'Aprobó por promedio'
 }
 export const PROMOTED = {
   Promovido: 'El estudiante ES PROMOVIDO AL SIGUIENTE GRADO',

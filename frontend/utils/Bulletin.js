@@ -1,7 +1,8 @@
 import { AVERAGES, BASIC_SUBJECTS, ITEMS_BEHAVITOR, PERIOD, SUBJECTS10 } from 'constants/Bulletin'
 import { sortArray } from './Array'
+import { toComparisonKey } from './Text'
 
-const { toComparisonKey } = require('./Text')
+// const { toComparisonKey } = require('./Text')
 
 export const getValue = (notes, { item, valueKey = 'Nota', decimals = 1 }) => {
   if (Array.isArray(notes) && notes.length) {

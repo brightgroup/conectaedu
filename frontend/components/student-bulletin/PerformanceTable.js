@@ -1,8 +1,8 @@
 import React from 'react'
 import { Text, View } from '@react-pdf/renderer'
-import { COMPETENCES, FAULTS, NEWSLETTER_ITEMS, PERIOD } from 'constants/Bulletin'
+import { COMPETENCES, FAULTS, ITEMS_BEHAVITOR, NEWSLETTER_ITEMS, PERIOD } from 'constants/Bulletin'
 import { stylesPerformance } from '.'
-import { getValue } from 'utils/Bulletin'
+import { assessment, behaviorPerformance, getValue } from 'utils/Bulletin'
 
 export const PerformanceTable = ({ courses, studentReport, period }) => {
   const replacePerformance = text => {
@@ -36,7 +36,40 @@ export const PerformanceTable = ({ courses, studentReport, period }) => {
         </View>
       </View>
       {courses?.map((course, index) =>
-        Array.isArray(studentReport[course]) ? (
+        course === 'COMPORTAMIENTO' ? (
+          <View style={stylesPerformance.row} key={index}>
+            <View style={stylesPerformance.areaDescription}>
+              <Text style={stylesPerformance.subtitle_matter}>COMPORTAMIENTO</Text>
+            </View>
+            <View style={stylesPerformance.studentDescription}>
+              <View style={{ flexDirection: 'row' }}>
+                <View style={stylesPerformance.fpDescription}></View>
+                <View style={stylesPerformance.performance_description}>
+                  <Text style={stylesPerformance.subtitle}>Desempeño del periodo:</Text>
+                  <Text style={stylesPerformance.subtitle_bold}>{assessment(behaviorPerformance(studentReport))}</Text>
+                </View>
+                {ITEMS_BEHAVITOR.map((item, index) => (
+                  <View style={stylesPerformance.note_description} key={index}>
+                    <Text style={stylesPerformance.subtitle}>
+                      .
+                      {getValue(studentReport[course], {
+                        item: item,
+                      })}
+                    </Text>
+                  </View>
+                ))}
+              </View>
+              <View style={stylesPerformance.container_indicators}>
+                <Text style={stylesPerformance.title_indicators}>INDICADOR DE DESEMPEÑO:</Text>
+                {COMPETENCES[period]?.map(index => (
+                  <Text style={stylesPerformance.text_competences} key={index}>
+                    -
+                  </Text>
+                ))}
+              </View>
+            </View>
+          </View>
+        ) : Array.isArray(studentReport[course]) ? (
           <View style={stylesPerformance.row} key={index}>
             <View style={stylesPerformance.areaDescription}>
               <Text style={stylesPerformance.subtitle_matter}>

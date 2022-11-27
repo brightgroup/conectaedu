@@ -10,7 +10,7 @@ export const Description = ({ status = '', grade = '', student }) => {
 
       <View style={{ marginTop: '10px' }}>
         <Text style={stylesDescription.text_center}>
-          Cursó y<Text style={stylesDescription.text_bold_center}>{` ${response[status]} `}</Text>
+          Cursó y<Text style={stylesDescription.text_bold_center}>{` ${response[status.replace(/\s+/g, '')]} `}</Text>
           los estudios correspondientes al grado
           <Text style={stylesDescription.text_bold_center}>{` ${grade} `}</Text> de
           <Text style={stylesDescription.text_bold_center}>
