@@ -26,7 +26,11 @@ export const replacePerformance = text => {
 
 export const generalAverageperiod = (courses, studentReport, period) => {
   const notes = []
-  courses.map(course => notes.push(parseFloat(getValue(studentReport[course], { item: PERIOD[period] }))))
+  courses.map(course => {
+    if (course !== 'COMPORTAMIENTO') {
+      notes.push(parseFloat(getValue(studentReport[course], { item: PERIOD[period] })))
+    }
+  })
   const average =
     notes.filter(item => Number(item)).reduce((previus, current) => (previus += current), 0) /
     notes.filter(item => Number(item)).length
@@ -168,7 +172,7 @@ export const behaviorPerformance = studentReport => {
   let total = 0
   let counter = 0
   ITEMS_BEHAVITOR.map((item, index) => {
-    total += parseFloat(getValue(studentReport[getBehaviator(studentReport)], { item }))
+    total += parseFloat(getValue(studentReport[getBehaviator(studentReport)], { item }) || 0)
     counter = index
   })
   return total / (counter + 1)
