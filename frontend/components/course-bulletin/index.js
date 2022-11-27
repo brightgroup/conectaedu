@@ -26,21 +26,24 @@ export const styles = StyleSheet.create({
     border: 1,
     borderColor: '#D0CECE',
     justifyContent: 'center',
+    alignItems:'center',
     borderRight: 'none',
     width: 70,
   },
 
   backgroundImage: {
     objectFit: 'cover',
-    width: '100%',
+    margin: '0 auto',
+    width: '80%',
     opacity: 0.2,
-    marginTop: 100,
+    marginTop: 120,
     zIndex: '10',
   },
 
   image: {
-    width: '100%',
-    heigth: '100%',
+    width: '90%',
+    heigth: '90%',
+    objectFit: 'cover',
   },
 
   container__description: {

@@ -1,8 +1,8 @@
 import React from 'react'
 import { Text, View } from '@react-pdf/renderer'
 import { COMPETENCES, FAULTS, ITEMS_BEHAVITOR, NEWSLETTER_ITEMS, PERIOD } from 'constants/Bulletin'
-import { stylesPerformance } from '.'
 import { assessment, behaviorPerformance, getValue } from 'utils/Bulletin'
+import { stylesPerformance } from '.'
 
 export const PerformanceTable = ({ courses, studentReport, period }) => {
   const replacePerformance = text => {
@@ -51,7 +51,6 @@ export const PerformanceTable = ({ courses, studentReport, period }) => {
                 {ITEMS_BEHAVITOR.map((item, index) => (
                   <View style={stylesPerformance.note_description} key={index}>
                     <Text style={stylesPerformance.subtitle}>
-                      .
                       {getValue(studentReport[course], {
                         item: item,
                       })}

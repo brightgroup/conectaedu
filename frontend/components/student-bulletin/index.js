@@ -33,14 +33,16 @@ export const styles = StyleSheet.create({
   backgroundImage: {
     objectFit: 'cover',
     width: '80%',
+    margin: '0 auto',
     opacity: 0.2,
-    marginTop: 70,
+    marginTop: 120,
     zIndex: '10',
   },
 
   image: {
-    width: '100%',
-    heigth: '100%',
+    width: '90%',
+    heigth: '90%',
+    objectFit: 'cover',
   },
 
   container__description: {
