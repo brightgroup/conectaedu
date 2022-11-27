@@ -1,10 +1,10 @@
 import { useMemo } from 'react'
 import { Text, View } from '@react-pdf/renderer'
-import { BEHAVIUR, FAULTS, NEWSLETTER_ITEMS, PERIOD } from 'constants/Bulletin'
-import { generalAverageperiod, getValue } from 'utils/Bulletin'
+import { BEHAVIUR, FAULTS, ITEMS_BEHAVITOR, NEWSLETTER_ITEMS, PERIOD } from 'constants/Bulletin'
+import { assessment, behaviorPerformance, generalAverageperiod, getValue } from 'utils/Bulletin'
 import { stylesNotes } from '.'
 
-export const TableNotes = ({ courses, studentReport, period, courseAverage }) => {
+export const TableNotes = ({ courses, studentReport, period, courseAverage, getPosition, behaviour }) => {
   const replacePerformance = text => text?.replace('Desempeño', '')
 
   const average = useMemo(() => generalAverageperiod(courses, studentReport, period), [])
@@ -56,64 +56,92 @@ export const TableNotes = ({ courses, studentReport, period, courseAverage }) =>
           <Text style={stylesNotes.subtitle}>NOTA COMPORT</Text>
         </View>
       </View>
-      {courses?.map((course, index) => (
-        <View style={stylesNotes.row} key={index}>
-          <View style={stylesNotes.column_area}>
-            <Text style={stylesNotes.subtitle}>{studentReport?.[course]?.[0].Curso?.replace(/[0-9]/g, '')}</Text>
-          </View>
-          <View style={stylesNotes.column_notes}>
-            <View style={{ flexDirection: 'row', margin: 'auto 0' }}>
-              <View style={stylesNotes.period_notes}>
-                <Text style={stylesNotes.subtitle}>
-                  {getValue(studentReport[course], { item: NEWSLETTER_ITEMS.firstPeriod })}
-                </Text>
-              </View>
-              <View style={stylesNotes.period_notes}>
-                <Text style={stylesNotes.subtitle}>
-                  {getValue(studentReport[course], { item: NEWSLETTER_ITEMS.secondPeriod })}
-                </Text>
-              </View>
-              <View style={stylesNotes.period_notes}>
-                <Text style={stylesNotes.subtitle}>
-                  {getValue(studentReport[course], { item: NEWSLETTER_ITEMS.thirdPeriod })}
-                </Text>
-              </View>
-              <View style={stylesNotes.period_last_note}>
-                <Text style={stylesNotes.subtitle}>
-                  {getValue(studentReport[course], { item: NEWSLETTER_ITEMS.fourthPeriod })}
-                </Text>
+      {courses?.map((course, index) =>
+        course === 'COMPORTAMIENTO' ? (
+          <View style={stylesNotes.row} key={index}>
+            <View style={stylesNotes.column_area}>
+              <Text style={stylesNotes.subtitle}>COMPORTAMIENTO</Text>
+            </View>
+            <View style={stylesNotes.column_notes}>
+              <View style={{ flexDirection: 'row', margin: 'auto 0' }}>
+                {ITEMS_BEHAVITOR.map((item, index) => (
+                  <View style={stylesNotes.period_notes} key={index}>
+                    <Text style={stylesNotes.subtitle}>{getValue(studentReport[behaviour], { item })}</Text>
+                  </View>
+                ))}
               </View>
             </View>
+            <View style={stylesNotes.column_faults}></View>
+            <View style={stylesNotes.column_faults}></View>
+            <View style={stylesNotes.column_faults}></View>
+            <View style={stylesNotes.column_performance}>
+              <Text style={stylesNotes.subtitle}>{assessment(behaviorPerformance(studentReport))}</Text>
+            </View>
+            <View style={stylesNotes.column_pt_hidden}></View>
+            <View style={stylesNotes.prueba}></View>
+            <View style={stylesNotes.item_comport}></View>
           </View>
-          <View style={stylesNotes.column_faults}>
-            <Text style={stylesNotes.subtitle}>
-              {getValue(studentReport[course], { item: FAULTS[period], decimals: 0 })}
-            </Text>
+        ) : Array.isArray(studentReport[course]) ? (
+          <View style={stylesNotes.row} key={index}>
+            <View style={stylesNotes.column_area}>
+              <Text style={stylesNotes.subtitle}>{studentReport[course][0].Curso?.replace(/[0-9]/g, '')}</Text>
+            </View>
+            <View style={stylesNotes.column_notes}>
+              <View style={{ flexDirection: 'row', margin: 'auto 0' }}>
+                <View style={stylesNotes.period_notes}>
+                  <Text style={stylesNotes.subtitle}>
+                    {getValue(studentReport[course], { item: NEWSLETTER_ITEMS.firstPeriod })}
+                  </Text>
+                </View>
+                <View style={stylesNotes.period_notes}>
+                  <Text style={stylesNotes.subtitle}>
+                    {getValue(studentReport[course], { item: NEWSLETTER_ITEMS.secondPeriod })}
+                  </Text>
+                </View>
+                <View style={stylesNotes.period_notes}>
+                  <Text style={stylesNotes.subtitle}>
+                    {getValue(studentReport[course], { item: NEWSLETTER_ITEMS.thirdPeriod })}
+                  </Text>
+                </View>
+                <View style={stylesNotes.period_last_note}>
+                  <Text style={stylesNotes.subtitle}>
+                    {getValue(studentReport[course], { item: NEWSLETTER_ITEMS.fourthPeriod })}
+                  </Text>
+                </View>
+              </View>
+            </View>
+            <View style={stylesNotes.column_faults}>
+              <Text style={stylesNotes.subtitle}>
+                {getValue(studentReport[course], { item: FAULTS[period], decimals: 0 })}
+              </Text>
+            </View>
+            <View style={stylesNotes.column_faults}>
+              <Text style={stylesNotes.subtitle}></Text>
+            </View>
+            <View style={stylesNotes.column_faults}>
+              <Text style={stylesNotes.subtitle}></Text>
+            </View>
+            <View style={stylesNotes.column_performance}>
+              <Text style={stylesNotes.subtitle}>
+                {replacePerformance(getValue(studentReport[course], { item: PERIOD[period], valueKey: 'Desempenio' }))}
+              </Text>
+            </View>
+            <View style={index === 0 ? stylesNotes.column_pt : stylesNotes.column_pt_hidden}>
+              <Text style={index === 0 ? stylesNotes.text_pt : stylesNotes.subtitle}>
+                {courseAverage.find(student => student.student === studentReport[courses?.[0]]?.[0]?.student)?.position}
+              </Text>
+            </View>
+            <View style={index === 0 ? stylesNotes.columl_average : stylesNotes.prueba}>
+              <Text style={stylesNotes.subtitle_average}>{average}</Text>
+            </View>
+            <View style={stylesNotes.item_comport}>
+              <Text style={stylesNotes.subtitle_comport}>
+                {getValue(studentReport[course], { item: BEHAVIUR[period] })}
+              </Text>
+            </View>
           </View>
-          <View style={stylesNotes.column_faults}>
-            <Text style={stylesNotes.subtitle}></Text>
-          </View>
-          <View style={stylesNotes.column_faults}>
-            <Text style={stylesNotes.subtitle}></Text>
-          </View>
-          <View style={stylesNotes.column_performance}>
-            <Text style={stylesNotes.subtitle}>
-              {replacePerformance(getValue(studentReport[course], { item: PERIOD[period], valueKey: 'Desempenio' }))}
-            </Text>
-          </View>
-          <View style={index === 0 ? stylesNotes.column_pt : stylesNotes.column_pt_hidden}>
-            <Text style={index === 0 ? stylesNotes.text_pt : stylesNotes.subtitle}>
-              {courseAverage.find(student => student.student === studentReport[courses?.[0]]?.[0]?.student)?.position}
-            </Text>
-          </View>
-          <View style={index === 0 ? stylesNotes.columl_average : stylesNotes.prueba}>
-            <Text style={stylesNotes.subtitle_average}>{average}</Text>
-          </View>
-          <View style={stylesNotes.column_comport}>
-            <Text style={stylesNotes.subtitle}>{getValue(studentReport[course], { item: BEHAVIUR[period] })}</Text>
-          </View>
-        </View>
-      ))}
+        ) : null
+      )}
     </View>
   )
 }

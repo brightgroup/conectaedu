@@ -32,9 +32,9 @@ export const styles = StyleSheet.create({
 
   backgroundImage: {
     objectFit: 'cover',
-    width: '100%',
+    width: '80%',
     opacity: 0.2,
-    marginTop: 100,
+    marginTop: 70,
     zIndex: '10',
   },
 
