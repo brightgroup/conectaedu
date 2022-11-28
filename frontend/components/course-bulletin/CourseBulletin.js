@@ -50,6 +50,8 @@ export const CourseBulletin = ({ period, course, institutions, courseReport: rep
     }
   }, [period])
 
+  console.log(courseAverage, 'ESTE ES EL COURSE ABERAGE  PARA VER POR QUE NO SE RENDERIZA EL CURSO')
+
   return (
     <Document>
       {courseReport?.map((student, id) => (
