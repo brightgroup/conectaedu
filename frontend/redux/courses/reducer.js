@@ -2,6 +2,7 @@ import {
   GET_AVERAGE_COURSE,
   GET_COURSE,
   GET_NOTES_COURSE,
+  GET_NOTES_COURSE2,
   SET_COURSES,
   SET_ERROR,
   SET_FULL_DATA,
@@ -12,6 +13,7 @@ const initialState = {
   courses: [],
   course: [],
   courseNotes: [],
+  courseNotes2: [],
   sheet: {},
   fullData: {},
   courseAverage: [],
@@ -44,6 +46,11 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         courseNotes: action.payload,
+      }
+    case GET_NOTES_COURSE2:
+      return {
+        ...state,
+        courseNotes2: action.payload,
       }
     case GET_AVERAGE_COURSE:
       return {
