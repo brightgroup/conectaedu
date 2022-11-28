@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Select } from 'components/select'
 import { getCohorts } from 'redux/grade/actions'
 import { PDFDownloadLink } from '@react-pdf/renderer'
-import { getCourse, getCouseAverage, getNotesCourse, getSheets } from 'redux/courses/actions'
+import { getCourse, getCouseAverage, getNotesCourse, getNotesCourse2, getSheets } from 'redux/courses/actions'
 import { getInstitutions } from 'redux/institutions/actions'
 import { getStudentsCohort } from 'redux/students/actions'
 import { CourseBulletin } from 'components/course-bulletin'
@@ -37,7 +37,7 @@ export const BulletinCourse = () => {
   useEffect(() => {}, [course.period])
 
   useEffect(() => {
-    if (course.period && courseNotes2) setToggleDownload(true)
+    if (course.period && courseNotes2.length) setToggleDownload(true)
   }, [course.period, courseNotes2])
 
   const getCourses = () => {
@@ -61,11 +61,12 @@ export const BulletinCourse = () => {
 
     if (name === 'period') {
       dispatch(setLoaderStatus(true))
-      await dispatch(getNotesCourse(getvalueObject(students2, 'id'), course.course))
+      await dispatch(getNotesCourse2(getvalueObject(students2, 'id'), course.course))
       dispatch(setLoaderStatus(false))
-      const sheet = await dispatch(getSheets(value))
+      // const sheet = await dispatch(getSheets(value))
 
       if (sheet) {
+
         dispatch(getCouseAverage(getStudents(sheet, value)))
       }
     } else {
@@ -73,6 +74,9 @@ export const BulletinCourse = () => {
       const students = await dispatch(getStudentsCohort(value))
       const half = getHalfArray(students)
       const firstHalf = students.slice(0, half)
+      await dispatch(getSheets(value))
+
+     
 
       if (firstHalf.length) {
         dispatch(setLoaderStatus(true))
@@ -85,6 +89,8 @@ export const BulletinCourse = () => {
 
   const getHalfArray = array => Math.round(array.length / 2)
 
+  console.log([...courseNotes, ...courseNotes2], 'esta es la data que se le esta pasando al componente')
+  console.log(courseAverage, 'este es el course average')
   return (
     <div className="h-full w-full flex justify-center items-center flex-col">
       <div className="w-6/12 min-w-min h-50 bg-white p-10 rounded">
