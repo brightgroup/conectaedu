@@ -6,6 +6,7 @@ import {
   GET_AVERAGE_COURSE,
   GET_COURSE,
   GET_NOTES_COURSE,
+  GET_NOTES_COURSE2,
   SET_COURSES,
   SET_ERROR,
   SET_FULL_DATA,
@@ -34,6 +35,11 @@ export const setcourse = course => ({
 
 export const setcourseNotes = notesCourse => ({
   type: GET_NOTES_COURSE,
+  payload: notesCourse,
+})
+
+export const setcourseNotes2 = notesCourse => ({
+  type: GET_NOTES_COURSE2,
   payload: notesCourse,
 })
 
@@ -102,10 +108,29 @@ export const getNotesCourse = (student, cohort) => {
   return async dispatch => {
     dispatch(setLoaderStatus(true))
     try {
-      await Promise.all(student.map(item => Axios(URLS.getReport, { cohort, student: item })))
+      await Promise.all(
+        student.map(item => Axios(URLS.getReport, { cohort, student: item }, 'get', 'application/json', false))
+      )
         .then(res => {
           const data = res.map(item => item.data)
           dispatch(setcourseNotes(data.some(item => item) ? data : []))
+        })
+        .catch(error => dispatch(setError(error)))
+    } catch (error) {
+      dispatch(setError())
+    }
+    dispatch(setLoaderStatus(false))
+  }
+}
+
+export const getNotesCourse2 = (student, cohort) => {
+  return async dispatch => {
+    dispatch(setLoaderStatus(true))
+    try {
+      await Promise.all(student.map(item => Axios(URLS.getReport, { cohort, student: item })))
+        .then(res => {
+          const data = res.map(item => item.data)
+          dispatch(setcourseNotes2(data.some(item => item) ? data : []))
         })
         .catch(error => dispatch(setError(error)))
     } catch (error) {

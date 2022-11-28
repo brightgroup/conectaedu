@@ -9,19 +9,21 @@ import { getStudentsCohort } from 'redux/students/actions'
 import { CourseBulletin } from 'components/course-bulletin'
 import { getCourseDescription, getStudents } from 'utils/Bulletin'
 import { PERIODS } from '.'
+import { setLoaderStatus } from 'redux/loader/actions'
 
 export const BulletinCourse = () => {
   const dispatch = useDispatch()
 
   const {
     grades: { cohorts },
-    courses: { course: infocourse, courseNotes, sheet, courseAverage },
+    courses: { course: infocourse, courseNotes, courseNotes2 = [], sheet, courseAverage },
     institutions: { institutions },
     students: { cohortStudent },
   } = useSelector(state => state)
 
   const [course, setCourse] = useState({})
   const [toggleDownload, setToggleDownload] = useState(false)
+  const [students2, setStudents2] = useState([])
 
   useEffect(() => {
     dispatch(getCohorts())
@@ -30,20 +32,13 @@ export const BulletinCourse = () => {
 
   useEffect(() => {
     setToggleDownload(false)
-    if (course.course) {
-      dispatch(getCourse(course.course))
-      dispatch(getStudentsCohort(course.course))
-    }
   }, [course.course])
 
-  useEffect(() => {
-    if (cohortStudent?.length && course.course)
-      dispatch(getNotesCourse(getvalueObject(cohortStudent, 'id'), course.course))
-  }, [cohortStudent])
+  useEffect(() => {}, [course.period])
 
   useEffect(() => {
-    if (courseNotes?.length) setToggleDownload(true)
-  }, [courseNotes])
+    if (course.period && courseNotes2) setToggleDownload(true)
+  }, [course.period, courseNotes2])
 
   const getCourses = () => {
     const grades = []
@@ -59,16 +54,36 @@ export const BulletinCourse = () => {
 
   const selectCohort = async ({ target }, name) => {
     const { value } = target
-
     setCourse({
       ...course,
       [name]: value,
     })
-    const sheet = await dispatch(getSheets(value))
-    if (sheet) {
-      dispatch(getCouseAverage(getStudents(sheet, value)))
+
+    if (name === 'period') {
+      dispatch(setLoaderStatus(true))
+      await dispatch(getNotesCourse(getvalueObject(students2, 'id'), course.course))
+      dispatch(setLoaderStatus(false))
+      const sheet = await dispatch(getSheets(value))
+
+      if (sheet) {
+        dispatch(getCouseAverage(getStudents(sheet, value)))
+      }
+    } else {
+      dispatch(getCourse(value))
+      const students = await dispatch(getStudentsCohort(value))
+      const half = getHalfArray(students)
+      const firstHalf = students.slice(0, half)
+
+      if (firstHalf.length) {
+        dispatch(setLoaderStatus(true))
+        await dispatch(getNotesCourse(getvalueObject(firstHalf, 'id'), value))
+        dispatch(setLoaderStatus(false))
+        setStudents2(students.slice(half, students.length))
+      }
     }
   }
+
+  const getHalfArray = array => Math.round(array.length / 2)
 
   return (
     <div className="h-full w-full flex justify-center items-center flex-col">
@@ -100,7 +115,7 @@ export const BulletinCourse = () => {
               period={course.period || 1}
               course={infocourse}
               institutions={institutions}
-              courseReport={courseNotes}
+              courseReport={[...courseNotes, ...courseNotes2]}
               courseAverage={courseAverage}
             />
           ) : course.course && course.period ? (

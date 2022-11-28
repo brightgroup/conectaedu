@@ -8,10 +8,16 @@ import { store } from 'redux/store'
 
 const baseUrl = process.env.REACT_APP_API_URL
 
-export const Axios = async (endpoint, data = {}, method = 'get', contentType = 'application/json') => {
+export const Axios = async (
+  endpoint,
+  data = {},
+  method = 'get',
+  contentType = 'application/json',
+  showLoader = true
+) => {
   const url = `${baseUrl}/${endpoint}`
   const token = localStorage[TOKEN] || ''
-  store.dispatch(setLoaderStatus(true))
+  showLoader && store.dispatch(setLoaderStatus(true))
   if (token) {
     if (method === 'get') {
       try {
@@ -21,16 +27,16 @@ export const Axios = async (endpoint, data = {}, method = 'get', contentType = '
           headers: { authorization: `Bearer ${token}` },
           params: data,
         })
-        store.dispatch(setLoaderStatus(false))
+        showLoader && store.dispatch(setLoaderStatus(false))
         return res?.data || res
       } catch (error) {
         if (TOKEN_ERRORS.includes(error.response.data)) {
-          store.dispatch(setLoaderStatus(false))
+          showLoader && store.dispatch(setLoaderStatus(false))
 
           clearSession()
           toast('Token inválido')
         }
-        store.dispatch(setLoaderStatus(false))
+        showLoader && store.dispatch(setLoaderStatus(false))
       }
     } else {
       try {
@@ -42,10 +48,10 @@ export const Axios = async (endpoint, data = {}, method = 'get', contentType = '
           },
           data: contentType === 'application/json' ? JSON.stringify(data) : data,
         })
-        store.dispatch(setLoaderStatus(false))
+        showLoader && store.dispatch(setLoaderStatus(false))
         return res?.data || res
       } catch (error) {
-        store.dispatch(setLoaderStatus(false))
+        showLoader && store.dispatch(setLoaderStatus(false))
         return error
       }
     }

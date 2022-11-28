@@ -100,6 +100,7 @@ export const getStudentsCohort = cohort => {
       const { data } = await Axios(URLS.getStudentsByCohort(cohort))
       if (data) {
         dispatch(setStudentsCohort(data || []))
+        return data
       }
     } catch (error) {
       dispatch(setError(error))
