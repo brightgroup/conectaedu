@@ -57,13 +57,14 @@ export const BulletinCourse = () => {
     return listKeys
   }
 
-  const selectCohort = ({ target }, name) => {
+  const selectCohort = async ({ target }, name) => {
     const { value } = target
-    dispatch(getSheets(value))
+
     setCourse({
       ...course,
       [name]: value,
     })
+    const sheet = await dispatch(getSheets(value))
     if (sheet) {
       dispatch(getCouseAverage(getStudents(sheet, value)))
     }

@@ -63,6 +63,7 @@ export const getSheets = (course = 64) => {
     try {
       const { data } = await Axios(URLS.getSheets, { cohort: course })
       if (data) dispatch(setSheets(data))
+      return data
     } catch (error) {
       dispatch(setError(error))
     }
