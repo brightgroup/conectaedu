@@ -21,7 +21,8 @@ export const styles = StyleSheet.create({
     width: 70,
   },
   image: {
-    width: '90%',
+    width: 'auto',
+    maxWidth:'90%',
     heigth: '90%',
     objectFit: 'cover',
   },

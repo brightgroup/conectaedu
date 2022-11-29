@@ -13,8 +13,10 @@ export const Description = ({ status = '', course = '', student }) => {
         <Text style={stylesDescription.text_center}>
           Cursó y<Text style={stylesDescription.text_bold_center}>{` ${response[status.replace(/\s+/g, '')]} `}</Text>
           los estudios correspondientes al grado
-          <Text style={stylesDescription.text_bold_center}>{` ${GRADES[course].name}`}</Text> de
-          <Text style={stylesDescription.text_bold_center}>{` ${GRADES[course].educationLevel} `}</Text>
+          <Text style={stylesDescription.text_bold_center}>{` ${GRADES[course].name
+            .replace('RONDON', '')
+            .replace('LIBERTADOR', '')}`}</Text>
+          -<Text style={stylesDescription.text_bold_center}>{` ${GRADES[course].educationLevel} `}</Text>
           durante el año colectivo
           <Text>{` ${new Date().getFullYear()} `}</Text>
           jornada

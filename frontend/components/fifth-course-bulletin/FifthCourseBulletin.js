@@ -70,7 +70,11 @@ export const FifthCourseBulletin = ({ courseReport, institutions, course }) => {
               status={student.status}
               course={getCourseDescription(course, 'name').replace(/\s+/g, '')}
             />
-            <Table studentReport={student} orderedCourses={orderedCourses} />
+            <Table
+              studentReport={student}
+              orderedCourses={orderedCourses}
+              course={getCourseDescription(course, 'name').replace(/\s+/g, '')}
+            />
             <View style={{ width: '100%', height: '50%', position: 'relative' }}>
               <Contancy status={student.status} />
             </View>

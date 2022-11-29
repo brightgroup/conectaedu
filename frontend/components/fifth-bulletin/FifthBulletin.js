@@ -69,7 +69,11 @@ export const FifthBulletin = ({ studentReport, institutions, course }) => {
             status={studentReport.status}
             course={getCourseDescription(course, 'name').replace(/\s+/g, '')}
           />
-          <Table studentReport={studentReport} orderedCourses={orderedCourses} />
+          <Table
+            studentReport={studentReport}
+            orderedCourses={orderedCourses}
+            course={getCourseDescription(course, 'name').replace(/\s+/g, '')}
+          />
           <View style={{ width: '100%', height: '50%', position: 'relative' }}>
             <Contancy status={studentReport.status} />
           </View>
