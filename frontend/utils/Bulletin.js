@@ -158,14 +158,14 @@ export const assessment = note => {
 }
 
 export const getBehaviator = report => {
-  const respuesta = ''
+  const response = ''
   for (const key in report) {
     const matter = report[key]
     matter?.[0].Notas?.map(({ Itemname }) => {
-      if (ITEMS_BEHAVITOR.includes(Itemname)) respuesta = key
+      if (ITEMS_BEHAVITOR.includes(Itemname)) response = key
     })
   }
-  return respuesta
+  return response
 }
 
 export const behaviorPerformance = studentReport => {
