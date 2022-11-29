@@ -5,6 +5,7 @@ import { TableNotes } from './TableNotes'
 import { coursesList, getBehaviator, getCourseDescription, getInstitutionDescription } from 'utils/Bulletin'
 import { SignaturesSection } from './components'
 import { URLS } from 'api/Urls'
+import { GRADES } from 'constants/Bulletin'
 import { styles } from '.'
 
 export const StudentBulletin = ({ studentReport: report, period = 1, course, institutions, courseAverage }) => {
@@ -82,7 +83,9 @@ export const StudentBulletin = ({ studentReport: report, period = 1, course, ins
                 </View>
                 <View style={styles.information__name}>
                   <Text style={styles.subtitle}>Director de Grupo:</Text>
-                  <Text style={styles.text__student}>{getCourseDescription(course, 'director')}</Text>
+                  <Text style={styles.text__student}>
+                    {GRADES[getCourseDescription(course, 'name').replace(/\s+/g, '')].director}
+                  </Text>
                 </View>
                 <View style={{ width: '27.5%', fontSize: 10 }}>
                   <View style={{ paddingLeft: 6 }}>
@@ -94,7 +97,9 @@ export const StudentBulletin = ({ studentReport: report, period = 1, course, ins
                     <Text style={styles.title}>GRADO</Text>
                   </View>
                   <View style={{ paddingLeft: 6, paddingTop: 2 }}>
-                    <Text style={styles.subtitle}>{getCourseDescription(course, 'name')}</Text>
+                    <Text style={styles.subtitle}>
+                      {GRADES[getCourseDescription(course, 'name').replace(/\s+/g, '')].name}
+                    </Text>
                   </View>
                 </View>
                 <View style={{ width: '14%' }}>
@@ -105,7 +110,9 @@ export const StudentBulletin = ({ studentReport: report, period = 1, course, ins
                     <Text style={styles.title}>JORNADA</Text>
                   </View>
                   <View style={{ paddingLeft: 6, paddingTop: 2 }}>
-                    <Text style={styles.subtitle}>{getCourseDescription(course, 'day_trip')}</Text>
+                    <Text style={styles.subtitle}>
+                      {GRADES[getCourseDescription(course, 'name').replace(/\s+/g, '')].time}
+                    </Text>
                   </View>
                 </View>
               </View>

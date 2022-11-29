@@ -3,7 +3,8 @@ import { Document, Image, Page, Text, View } from '@react-pdf/renderer'
 import { URLS } from 'api/Urls'
 import { coursesList, getCourseDescription, getInstitutionDescription } from 'utils/Bulletin'
 import { Contancy, Description, Table } from './components'
-import { GRADES, styles } from '.'
+import { GRADES } from 'constants/Bulletin'
+import { styles } from '.'
 
 export const FifthBulletin = ({ studentReport, institutions, course }) => {
   const courses = useMemo(() => Object.keys(studentReport), [studentReport])
@@ -41,7 +42,9 @@ export const FifthBulletin = ({ studentReport, institutions, course }) => {
                 </View>
                 <View style={styles.information__name}>
                   <Text style={styles.subtitleLeft}>Director de Grupo:</Text>
-                  <Text style={styles.text__student}>{getCourseDescription(course, 'director')}</Text>
+                  <Text style={styles.text__student}>
+                    {GRADES[getCourseDescription(course, 'name').replace(/\s+/g, '')].director}
+                  </Text>
                 </View>
                 <View style={{ width: '20%', fontSize: 10 }}>
                   <View style={{ paddingLeft: 6 }}>
@@ -53,7 +56,9 @@ export const FifthBulletin = ({ studentReport, institutions, course }) => {
                     <Text style={styles.title}>GRADO</Text>
                   </View>
                   <View style={{ paddingLeft: 6, paddingTop: 2 }}>
-                    <Text style={styles.subtitle}>{GRADES[getCourseDescription(course, 'name')]}</Text>
+                    <Text style={styles.subtitle}>
+                      {GRADES[getCourseDescription(course, 'name').replace(/\s+/g, '')].name}
+                    </Text>
                   </View>
                 </View>
               </View>
@@ -62,10 +67,10 @@ export const FifthBulletin = ({ studentReport, institutions, course }) => {
           <Description
             student={getNameStudent()}
             status={studentReport.status}
-            grade={GRADES[getCourseDescription(course, 'name')]}
+            course={getCourseDescription(course, 'name').replace(/\s+/g, '')}
           />
           <Table studentReport={studentReport} orderedCourses={orderedCourses} />
-          <View style={{ width: '100%', height: '45%', position: 'relative' }}>
+          <View style={{ width: '100%', height: '50%', position: 'relative' }}>
             <Contancy status={studentReport.status} />
           </View>
         </View>

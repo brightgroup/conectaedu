@@ -8,8 +8,9 @@ import { getInstitutions } from 'redux/institutions/actions'
 import { getStudentsCohort } from 'redux/students/actions'
 import { CourseBulletin } from 'components/course-bulletin'
 import { getCourseDescription, getStudents } from 'utils/Bulletin'
-import { PERIODS } from '.'
 import { setLoaderStatus } from 'redux/loader/actions'
+import { FifthCourseBulletin } from 'components/fifth-course-bulletin'
+import { PERIODS } from '.'
 
 export const BulletinCourse = () => {
   const dispatch = useDispatch()
@@ -31,14 +32,12 @@ export const BulletinCourse = () => {
   }, [])
 
   useEffect(() => {
-    setToggleDownload(false)
-  }, [course.course])
-
-  useEffect(() => {}, [course.period])
-
-  useEffect(() => {
     if (course.period && courseNotes2.length) setToggleDownload(true)
   }, [course.period, courseNotes2])
+
+  useEffect(() => {
+    if (course.period) setToggleDownload(true)
+  }, [course.period])
 
   const getCourses = () => {
     const grades = []
@@ -63,10 +62,8 @@ export const BulletinCourse = () => {
       dispatch(setLoaderStatus(true))
       await dispatch(getNotesCourse2(getvalueObject(students2, 'id'), course.course))
       dispatch(setLoaderStatus(false))
-      // const sheet = await dispatch(getSheets(value))
 
       if (sheet) {
-
         dispatch(getCouseAverage(getStudents(sheet, value)))
       }
     } else {
@@ -75,8 +72,6 @@ export const BulletinCourse = () => {
       const half = getHalfArray(students)
       const firstHalf = students.slice(0, half)
       await dispatch(getSheets(value))
-
-     
 
       if (firstHalf.length) {
         dispatch(setLoaderStatus(true))
@@ -89,8 +84,6 @@ export const BulletinCourse = () => {
 
   const getHalfArray = array => Math.round(array.length / 2)
 
-  console.log([...courseNotes, ...courseNotes2], 'esta es la data que se le esta pasando al componente')
-  console.log(courseAverage, 'este es el course average')
   return (
     <div className="h-full w-full flex justify-center items-center flex-col">
       <div className="w-6/12 min-w-min h-50 bg-white p-10 rounded">
@@ -116,7 +109,7 @@ export const BulletinCourse = () => {
           </div>
         </div>
         <div className="flex justify-center">
-          {toggleDownload ? (
+          {course.period !== '5' && toggleDownload ? (
             <PDFDownload
               period={course.period || 1}
               course={infocourse}
@@ -124,8 +117,12 @@ export const BulletinCourse = () => {
               courseReport={[...courseNotes, ...courseNotes2]}
               courseAverage={courseAverage}
             />
-          ) : course.course && course.period ? (
-            <label className="ml-6 font-bold text-[#354052]">Generando PDF, por favor espere...</label>
+          ) : toggleDownload ? (
+            <PDFFifthBulletin
+              courseReport={[...courseNotes, ...courseNotes2]}
+              course={infocourse}
+              institutions={institutions}
+            />
           ) : null}
         </div>
       </div>
@@ -139,7 +136,7 @@ const PDFDownload = ({ courseReport, institutions, course, period, courseAverage
   const toggleViwe = () => {
     setTimeout(() => {
       setViewComponet(true)
-    }, 1)
+    }, 17000)
   }
 
   useEffect(() => {
@@ -166,6 +163,35 @@ const PDFDownload = ({ courseReport, institutions, course, period, courseAverage
       </PDFDownloadLink>
       <label className={`ml-6 font-bold text-[#354052] ${viewComponet ? 'hidden' : null}`}>
         Generando PDF, por favor espere...
+      </label>
+    </>
+  )
+}
+
+const PDFFifthBulletin = ({ courseReport, institutions, course }) => {
+  const [viewComponet, setViewComponet] = useState(false)
+
+  const toggleViwe = () => {
+    setTimeout(() => {
+      setViewComponet(true)
+    }, 2000)
+  }
+
+  useEffect(() => {
+    toggleViwe()
+  }, [])
+  return (
+    <>
+      <PDFDownloadLink
+        document={<FifthCourseBulletin course={course} institutions={institutions} courseReport={courseReport} />}
+        fileName={`${getCourseDescription(course, 'name')} - Boletines`}
+      >
+        <button className={`px-3 py-1 text-white bg-gray-600 rounded pointer ${!viewComponet ? 'hidden' : null}`}>
+          Descargar Informe
+        </button>
+      </PDFDownloadLink>
+      <label className={`ml-6 font-bold text-[#354052] ${viewComponet ? 'hidden' : null}`}>
+        Generando informe, por favor espere...
       </label>
     </>
   )
