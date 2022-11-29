@@ -1,4 +1,4 @@
-export * from './FifthBulletin'
+export * from './FifthCourseBulletin'
 
 import { StyleSheet } from '@react-pdf/renderer'
 
@@ -20,17 +20,16 @@ export const styles = StyleSheet.create({
     borderRight: 'none',
     width: 70,
   },
-  container__header_title: {
-    flex: 1,
-    border: 1,
-    borderColor: '#D0CECE',
-  },
   image: {
     width: '90%',
     heigth: '90%',
     objectFit: 'cover',
   },
-
+  container__header_title: {
+    flex: 1,
+    border: 1,
+    borderColor: '#D0CECE',
+  },
   container__description: {
     textAlign: 'center',
   },
@@ -40,7 +39,6 @@ export const styles = StyleSheet.create({
   subtitle: {
     fontSize: 9,
     textAlign: 'center',
-    wordBreak: 'break-all',
   },
   subtitleLeft: {
     fontSize: 9,

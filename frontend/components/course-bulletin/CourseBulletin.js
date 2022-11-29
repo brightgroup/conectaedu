@@ -6,6 +6,7 @@ import { coursesList, getBehaviator, getCourseDescription, getInstitutionDescrip
 import { SignaturesSection } from './components'
 import { URLS } from 'api/Urls'
 import { styles } from '.'
+import { GRADES } from 'constants/Bulletin'
 
 export const CourseBulletin = ({ period, course, institutions, courseReport: report, courseAverage }) => {
   const [courseReport, setCourseReport] = useState(report)
@@ -50,8 +51,6 @@ export const CourseBulletin = ({ period, course, institutions, courseReport: rep
     }
   }, [period])
 
-  console.log(courseAverage, 'ESTE ES EL COURSE ABERAGE  PARA VER POR QUE NO SE RENDERIZA EL CURSO')
-
   return (
     <Document>
       {courseReport?.map((student, id) => (
@@ -86,7 +85,9 @@ export const CourseBulletin = ({ period, course, institutions, courseReport: rep
                     </View>
                     <View style={styles.information__name}>
                       <Text style={styles.subtitle}>Director de Grupo:</Text>
-                      <Text style={styles.text__student}>{getCourseDescription(course, 'director')}</Text>
+                      <Text style={styles.text__student}>
+                        {GRADES[getCourseDescription(course, 'name').replace(/\s+/g, '')].director}
+                      </Text>
                     </View>
                     <View style={{ width: '27.5%', fontSize: 10 }}>
                       <View style={{ paddingLeft: 6 }}>
@@ -98,7 +99,9 @@ export const CourseBulletin = ({ period, course, institutions, courseReport: rep
                         <Text style={styles.title}>GRADO</Text>
                       </View>
                       <View style={{ paddingLeft: 6, paddingTop: 2 }}>
-                        <Text style={styles.subtitle}>{getCourseDescription(course, 'name')}</Text>
+                        <Text style={styles.subtitle}>
+                          {GRADES[getCourseDescription(course, 'name').replace(/\s+/g, '')].name}
+                        </Text>
                       </View>
                     </View>
                     <View style={{ width: '14%' }}>
@@ -109,7 +112,9 @@ export const CourseBulletin = ({ period, course, institutions, courseReport: rep
                         <Text style={styles.title}>JORNADA</Text>
                       </View>
                       <View style={{ paddingLeft: 6, paddingTop: 2 }}>
-                        <Text style={styles.subtitle}>{getCourseDescription(course, 'day_trip')}</Text>
+                        <Text style={styles.subtitle}>
+                          {GRADES[getCourseDescription(course, 'name').replace(/\s+/g, '')].time}
+                        </Text>
                       </View>
                     </View>
                   </View>
