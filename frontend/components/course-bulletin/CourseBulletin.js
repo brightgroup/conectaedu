@@ -125,6 +125,7 @@ export const CourseBulletin = ({ period, course, institutions, courseReport: rep
                 <View style={{ width: '100%', position: 'absolute' }}>
                   <View>
                     <TableNotes
+                      courses={orderedCourses}
                       studentReport={student}
                       period={period}
                       courseAverage={courseAverage}

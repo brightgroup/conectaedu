@@ -4,12 +4,12 @@ import { BEHAVIUR, FAULTS, ITEMS_BEHAVITOR, NEWSLETTER_ITEMS, PERIOD } from 'con
 import { assessment, behaviorPerformance, coursesList, generalAverageperiod, getValue } from 'utils/Bulletin'
 import { stylesNotes } from '.'
 
-export const TableNotes = ({ studentReport, period, courseAverage, getPosition, behaviour }) => {
+export const TableNotes = ({ courses: list, studentReport, period, courseAverage, getPosition, behaviour }) => {
   const replacePerformance = text => text?.replace('Desempeño', '')
 
-  const average = useMemo(() => generalAverageperiod(courses, studentReport, period), [])
+  const average = useMemo(() => generalAverageperiod(list, studentReport, period), [])
 
-  const courses = useMemo(() => Object.keys(studentReport), [courseReport])
+  const courses = useMemo(() => Object.keys(studentReport), [studentReport])
 
   const orderedCourses = useMemo(() => coursesList(courses), [courses])
 
