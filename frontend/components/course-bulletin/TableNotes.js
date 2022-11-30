@@ -4,10 +4,14 @@ import { BEHAVIUR, FAULTS, ITEMS_BEHAVITOR, NEWSLETTER_ITEMS, PERIOD } from 'con
 import { assessment, behaviorPerformance, generalAverageperiod, getValue } from 'utils/Bulletin'
 import { stylesNotes } from '.'
 
-export const TableNotes = ({ courses, studentReport, period, courseAverage, getPosition, behaviour }) => {
+export const TableNotes = ({ studentReport, period, courseAverage, getPosition, behaviour }) => {
   const replacePerformance = text => text?.replace('Desempeño', '')
 
   const average = useMemo(() => generalAverageperiod(courses, studentReport, period), [])
+
+  const courses = useMemo(() => Object.keys(studentReport), [courseReport])
+
+  const orderedCourses = useMemo(() => coursesList(courses), [courses])
 
   return (
     <View style={stylesNotes.container}>
@@ -56,7 +60,7 @@ export const TableNotes = ({ courses, studentReport, period, courseAverage, getP
           <Text style={stylesNotes.subtitle}>NOTA COMPORT</Text>
         </View>
       </View>
-      {courses?.map((course, index) =>
+      {orderedCourses?.map((course, index) =>
         course === 'COMPORTAMIENTO' ? (
           <View style={stylesNotes.row} key={index}>
             <View style={stylesNotes.column_area}>
