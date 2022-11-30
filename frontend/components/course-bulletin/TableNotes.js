@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { Text, View } from '@react-pdf/renderer'
 import { BEHAVIUR, FAULTS, ITEMS_BEHAVITOR, NEWSLETTER_ITEMS, PERIOD } from 'constants/Bulletin'
-import { assessment, behaviorPerformance, generalAverageperiod, getValue } from 'utils/Bulletin'
+import { assessment, behaviorPerformance, coursesList, generalAverageperiod, getValue } from 'utils/Bulletin'
 import { stylesNotes } from '.'
 
 export const TableNotes = ({ studentReport, period, courseAverage, getPosition, behaviour }) => {
