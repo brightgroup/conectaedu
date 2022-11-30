@@ -20,6 +20,7 @@ export const BulletinCourse = () => {
     courses: { course: infocourse, courseNotes, courseNotes2 = [], sheet, courseAverage },
     institutions: { institutions },
     students: { cohortStudent },
+    auth: { user },
   } = useSelector(state => state)
 
   const [course, setCourse] = useState({})
@@ -88,43 +89,49 @@ export const BulletinCourse = () => {
     <div className="h-full w-full flex justify-center items-center flex-col">
       <div className="w-6/12 min-w-min h-50 bg-white p-10 rounded">
         <h2 className="text-center form__title text-blue">Descargar boletin por curso</h2>
-        <div className="flex gap-5 justify-center mb-4">
-          <div className="flex flex-col gap-2">
-            <label className="ml-6 font-bold text-[#354052]">Seleccione grado</label>
-            <Select
-              options={getCourses()}
-              initialValue="Grado"
-              handleChange={e => selectCohort(e, 'course')}
-              value={course.course}
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <label className="ml-6 font-bold text-[#354052]">Seleccione periodo</label>
-            <Select
-              options={PERIODS}
-              initialValue="Periodo"
-              handleChange={e => selectCohort(e, 'period')}
-              value={course.period}
-            />
-          </div>
-        </div>
-        <div className="flex justify-center">
-          {course.period !== '5' && toggleDownload ? (
-            <PDFDownload
-              period={course.period || 1}
-              course={infocourse}
-              institutions={institutions}
-              courseReport={[...courseNotes, ...courseNotes2]}
-              courseAverage={courseAverage}
-            />
-          ) : toggleDownload ? (
-            <PDFFifthBulletin
-              courseReport={[...courseNotes, ...courseNotes2]}
-              course={infocourse}
-              institutions={institutions}
-            />
-          ) : null}
-        </div>
+        {user.role === 'admin' ? (
+          <>
+            <div className="flex gap-5 justify-center mb-4">
+              <div className="flex flex-col gap-2">
+                <label className="ml-6 font-bold text-[#354052]">Seleccione grado</label>
+                <Select
+                  options={getCourses()}
+                  initialValue="Grado"
+                  handleChange={e => selectCohort(e, 'course')}
+                  value={course.course}
+                />
+              </div>
+              <div className="flex flex-col gap-2">
+                <label className="ml-6 font-bold text-[#354052]">Seleccione periodo</label>
+                <Select
+                  options={PERIODS}
+                  initialValue="Periodo"
+                  handleChange={e => selectCohort(e, 'period')}
+                  value={course.period}
+                />
+              </div>
+            </div>
+            <div className="flex justify-center">
+              {course.period !== '5' && toggleDownload ? (
+                <PDFDownload
+                  period={course.period || 1}
+                  course={infocourse}
+                  institutions={institutions}
+                  courseReport={[...courseNotes, ...courseNotes2]}
+                  courseAverage={courseAverage}
+                />
+              ) : toggleDownload ? (
+                <PDFFifthBulletin
+                  courseReport={[...courseNotes, ...courseNotes2]}
+                  course={infocourse}
+                  institutions={institutions}
+                />
+              ) : null}
+            </div>
+          </>
+        ) : (
+          <h2 className="text-center form__title text-blue">campo no disponible</h2>
+        )}
       </div>
     </div>
   )
