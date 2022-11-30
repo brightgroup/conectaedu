@@ -65,68 +65,78 @@ export const ORDER_SUBJECTS10 = [
 export const SUBJECTS10 = [
   {
     place: 1,
+    name: 'QUIMICA',
+    key: 'CIENCIAS_NATURALES_',
+  },
+  {
+    place: 2,
     name: 'FISICA',
     key: 'FÍSICA_',
   },
   {
-    place: 2,
+    place: 3,
     name: 'QUIMICA',
     key: 'QUIMICA_',
   },
   {
-    place: 3,
+    place: 4,
     name: 'CIENCIAS SOCIALES',
     key: 'CIENCIAS_SOCIALES_',
   },
   {
-    place: 4,
+    place: 5,
     name: 'EDUCACIÓN ARTÍSTICA',
     key: 'EDUCACIÓN_ARTÍSTICA_',
   },
   {
-    place: 5,
+    place: 6,
     name: 'EDUCACION ETICA Y VALORES HUMANOS',
     key: 'EDUCACION_ETICA_Y_VALORES_HUMANOS_',
   },
   {
-    place: 6,
+    place: 7,
     name: 'EDUCACIÓN FÍSICA',
     key: 'EDUCACIÓN_FÍSICA_',
   },
   {
-    place: 7,
+    place: 8,
     name: 'EDUCACIÓN RELIGIOSA Y MORAL',
     key: 'EDUCACIÓN_RELIGIOSA_Y_MORAL_',
   },
   {
-    place: 8,
+    place: 9,
     name: 'ESPAÑOL',
     key: 'ESPAÑOL_',
   },
   {
-    place: 9,
+    place: 10,
     name: 'INGLÉS',
     key: 'INGLÉS_',
   },
   {
-    place: 10,
+    place: 11,
     name: 'MATEMÁTICAS',
     key: 'MATEMÁTICAS_',
   },
   {
-    place: 11,
+    place: 12,
     name: 'TECNOLOGÍA E INFORMÁTICA',
     key: 'TECNOLOGÍA_E_INFORMÁTICA_',
   },
   {
-    place: 12,
-    name: 'FUNDAMENTOS DE ADMINISTRACIÓN',
-    key: 'FUNDAMENTOS_DE_ADMINISTRACIÓN_',
+    place: 13,
+    name: 'TECNOLOGÍA E INFORMÁTICA',
+    key: 'EMPRENDIMIENTO_',
   },
   {
     place: 13,
     name: 'FILOSOFÍA',
     key: 'FILOSOFÍA_',
+  },
+  {
+    place: 12,
+    name: 'FUNDAMENTOS DE ADMINISTRACIÓN',
+    key: 'FUNDAMENTOS_DE_ADMINISTRACIÓN_',
   },
 ]
 

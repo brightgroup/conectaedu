@@ -58,7 +58,7 @@ export const TableNotes = ({ courses, studentReport, period, getPosition, behavi
         course === 'COMPORTAMIENTO' ? (
           <View style={stylesNotes.row}>
             <View style={stylesNotes.column_area}>
-              <Text style={stylesNotes.subtitle}>COMPORTAMIENTO</Text>
+              <Text style={stylesNotes.subtitle}>Comportamiento</Text>
             </View>
             <View style={stylesNotes.column_notes}>
               <View style={{ flexDirection: 'row', margin: 'auto 0' }}>

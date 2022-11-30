@@ -43,7 +43,7 @@ export const Table = ({ studentReport, course }) => {
       {!PRESCHOOL_GRADE.includes(course) ? (
         <View style={stylesTable.row}>
           <View style={stylesTable.row_column1}>
-            <Text>COMPORTAMIENTO</Text>
+            <Text>Comportamiento</Text>
           </View>
           <View style={stylesTable.row_column2}>
             <Text>{behaviorPerformance(studentReport).toFixed(1)}</Text>
@@ -55,7 +55,7 @@ export const Table = ({ studentReport, course }) => {
       ) : null}
       <View style={stylesTable.row}>
         <View style={stylesTable.row_column1}>
-          <Text>PROMEDIO GENERAL</Text>
+          <Text>Promedio general</Text>
         </View>
         <View style={stylesTable.row_column2}>
           <Text>{parseFloat(studentReport?.final).toFixed(1)}</Text>

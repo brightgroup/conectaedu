@@ -36,7 +36,7 @@ export const PerformanceTable = ({ courses, studentReport, period }) => {
         course === 'COMPORTAMIENTO' ? (
           <View style={stylesPerformance.row} key={index}>
             <View style={stylesPerformance.areaDescription}>
-              <Text style={stylesPerformance.subtitle_matter}>COMPORTAMIENTO</Text>
+              <Text style={stylesPerformance.subtitle_matter}>Comportamiento</Text>
             </View>
             <View style={stylesPerformance.studentDescription}>
               <View style={{ flexDirection: 'row' }}>
