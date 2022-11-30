@@ -18,24 +18,43 @@ export const getStudentNotes = (data = {}) => {
   return students
 }
 
+const SPECIALTIES = [
+  'CONTABILIDAD',
+  'FENOMENOLOGÍA_DE_LA_EMPRESA',
+  'FUNDAMENTOS_DE_ADMINISTRACIÓN',
+  'SISTEMAS_I',
+  'MH_FUNDAMENTOS_DE_ADMINISTRACIÓN',
+  'ARQUITECTURA_DE_COMPUTADORES',
+  'PROYECTO_EMPRESARIAL',
+  'SISTEMAS_II',
+]
+
 const createStudentArray = (students = {}) => {
   const result = []
 
   for (const key in students) {
     let average = 0
+
     const lostAverages = []
     const subjects = students[key]
     let lastname = ''
+
     for (const subject in subjects) {
-      if (!lastname) lastname = subjects[subject]?.lastname
-      average += Number(subjects[subject]?.average) || 0
-      if (subjects[subject]?.isLostSubject) lostAverages.push(subject)
+      if (SPECIALTIES.every(item => !subject.includes(item))) {
+        if (!lastname) lastname = subjects[subject]?.lastname
+        average += Number(subjects[subject]?.average) || 0
+        if (subjects[subject]?.isLostSubject) lostAverages.push(subject)
+      }
     }
+
+    const averageSubjects = Object.keys(subjects).filter(subject =>
+      SPECIALTIES.every(item => !subject.includes(item))
+    ).length
 
     result.push({
       ...subjects,
       student: key,
-      average: (average / Object.keys(subjects).length).toFixed(1),
+      average: (average / averageSubjects).toFixed(1),
       lostAverages,
       lastname,
       isRetired: Object.values(students[key])?.length ? !!Object.values(students[key])[0]?.Status || false : false,
