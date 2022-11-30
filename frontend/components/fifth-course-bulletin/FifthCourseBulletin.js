@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import { Document, Image, Page, Text, View } from '@react-pdf/renderer'
 import { URLS } from 'api/Urls'
 import { coursesList, getCourseDescription, getInstitutionDescription } from 'utils/Bulletin'
@@ -6,8 +6,9 @@ import { Contancy, Description, Table } from './components'
 import { GRADES } from 'constants/Bulletin'
 import { styles } from '.'
 
-export const FifthCourseBulletin = ({ courseReport, institutions, course }) => {
-  const courses = useMemo(() => Object.keys(courseReport?.[0]), [courseReport])
+export const FifthCourseBulletin = ({ courseReport , institutions, course }) => {
+
+  const courses = useMemo(() => (Object.keys(courseReport?.[0])), [courseReport])  
 
   const orderedCourses = useMemo(() => coursesList(courses), [courses])
 
@@ -70,11 +71,7 @@ export const FifthCourseBulletin = ({ courseReport, institutions, course }) => {
               status={student.status}
               course={getCourseDescription(course, 'name').replace(/\s+/g, '')}
             />
-            <Table
-              studentReport={student}
-              orderedCourses={orderedCourses}
-              course={getCourseDescription(course, 'name').replace(/\s+/g, '')}
-            />
+            <Table studentReport={student} course={getCourseDescription(course, 'name').replace(/\s+/g, '')} />
             <View style={{ width: '100%', height: '50%', position: 'relative' }}>
               <Contancy status={student.status} />
             </View>

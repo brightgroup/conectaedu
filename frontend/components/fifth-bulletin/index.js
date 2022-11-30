@@ -26,9 +26,8 @@ export const styles = StyleSheet.create({
     borderColor: '#D0CECE',
   },
   image: {
-    width: 'auto',
     maxWidth:'90%',
-    heigth: '90%',
+    maxHeigth: '90%',
     objectFit: 'cover',
   },
 

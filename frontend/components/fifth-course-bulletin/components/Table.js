@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { Text, View } from '@react-pdf/renderer'
-import { assessment, behaviorPerformance, getValue } from 'utils/Bulletin'
+import { assessment, behaviorPerformance, coursesList, getValue } from 'utils/Bulletin'
 import { NEWSLETTER_ITEMS, PRESCHOOL_GRADE } from 'constants/Bulletin'
 import { stylesTable } from '.'
 
-export const Table = ({ orderedCourses, studentReport, course }) => {
+export const Table = ({ studentReport, course }) => {
+  const courses = useMemo(() => Object.keys(studentReport), [studentReport])
+
+  const orderedCourses = useMemo(() => coursesList(courses), [courses])
+
   return (
     <View style={stylesTable.container}>
       <View style={stylesTable.container_header}>
@@ -54,7 +58,7 @@ export const Table = ({ orderedCourses, studentReport, course }) => {
           <Text>PROMEDIO GENERAL</Text>
         </View>
         <View style={stylesTable.row_column2}>
-          <Text>{studentReport?.final}</Text>
+          <Text>{parseFloat(studentReport?.final).toFixed(1)}</Text>
         </View>
         <View style={stylesTable.row_column3}>
           <Text style={{ fontSize: 10 }}>{assessment(studentReport?.final)}</Text>
