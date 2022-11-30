@@ -54,7 +54,7 @@ export const Table = ({ orderedCourses, studentReport, course }) => {
           <Text>PROMEDIO GENERAL</Text>
         </View>
         <View style={stylesTable.row_column2}>
-          <Text>{studentReport?.final}</Text>
+          <Text>{parseFloat(studentReport?.final).toFixed(1)}</Text>
         </View>
         <View style={stylesTable.row_column3}>
           <Text style={{ fontSize: 10 }}>{assessment(studentReport?.final)}</Text>
