@@ -43,6 +43,8 @@ const deleteWord = item => {
   }
 }
 
+const sedes = ['_QUINTO_LIBERTADOR_MAÑANA','_QUINTO_LIBERTADOR_TARDE','_QUINTO_RONDON_MAÑANA']
+
 export const coursesList = (courses = []) => {
   const newList = []
   const orderList = []
@@ -52,6 +54,7 @@ export const coursesList = (courses = []) => {
   SUBJECTS10.map(item => orderSubjects.push(item.key))
 
   courses.map(course => {
+    console.log(course.replace(/\d+/g, ''))
     if (orderSubjects.includes(course.replace(/\d+/g, ''))) {
       newList.push({
         name: course,

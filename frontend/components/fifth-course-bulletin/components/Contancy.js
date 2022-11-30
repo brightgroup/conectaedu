@@ -20,7 +20,7 @@ export const Contancy = ({ status }) => {
         </View>
       </View>
       <Text style={stylescontancy.text_note}>
-        NOTA: El presente documento no requiere de sells ni autenticaciones de firmas, segun decreto 2150 de diciembre 5
+        NOTA: El presente documento no requiere de sellos ni autenticaciones de firmas, segun decreto 2150 de diciembre 5
         de 1995
       </Text>
     </View>
