@@ -276,7 +276,7 @@ export const GRADES = {
     educationLevel: 'Educación basica primaria',
   },
   QUINTOLIBERTADORMAÑANA: {
-    name: 'QUINTO RONDON',
+    name: 'QUINTO LIBERTADOR',
     time: 'Mañana',
     director: 'MARIA AMPARO ROA BARRETO',
     educationLevel: 'Educación basica primaria',
