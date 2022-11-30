@@ -37,6 +37,12 @@ export const generalAverageperiod = (courses, studentReport, period) => {
   return average.toFixed(1)
 }
 
+const deleteWord = item => {
+  if (item.replace(/\d+/g, '').includes('QUINTO_LIBERTADOR')) {
+    return item.replace('_QUINTO_LIBERTADOR_MAÑANA', '')
+  }
+}
+
 export const coursesList = (courses = []) => {
   const newList = []
   const orderList = []
