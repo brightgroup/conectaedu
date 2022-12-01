@@ -33,6 +33,80 @@ export const PerformanceTable = ({ courses, studentReport, period }) => {
         </View>
       </View>
       {courses?.map((course, index) =>
+        Array.isArray(studentReport[course]) ? (
+          <View style={stylesPerformance.row} key={index}>
+            <View style={stylesPerformance.areaDescription}>
+              <Text style={stylesPerformance.subtitle_matter}>
+                {studentReport[course]?.[0]?.Curso.replace(/[0-9]/g, '')}
+              </Text>
+            </View>
+            <View style={stylesPerformance.studentDescription}>
+              <View style={{ flexDirection: 'row' }}>
+                <View style={stylesPerformance.fpDescription}>
+                  <Text style={stylesPerformance.subtitle}>
+                    {getValue(studentReport[course], {
+                      item: FAULTS[period],
+                      decimals: 0,
+                    })}
+                  </Text>
+                </View>
+                <View style={stylesPerformance.performance_description}>
+                  <Text style={stylesPerformance.subtitle}>Desempeño del periodo:</Text>
+                  <Text style={stylesPerformance.subtitle_bold}>
+                    {replacePerformance(
+                      getValue(studentReport[course], {
+                        item: PERIOD[period],
+                        valueKey: 'Desempenio',
+                      })
+                    )}
+                  </Text>
+                </View>
+                <View style={stylesPerformance.note_description}>
+                  <Text style={stylesPerformance.subtitle}>
+                    {getValue(studentReport[course], {
+                      item: NEWSLETTER_ITEMS.firstPeriod,
+                    })}
+                  </Text>
+                </View>
+                <View style={stylesPerformance.note_description}>
+                  <Text style={stylesPerformance.subtitle}>
+                    {getValue(studentReport[course], {
+                      item: NEWSLETTER_ITEMS.secondPeriod,
+                    })}
+                  </Text>
+                </View>
+                <View style={stylesPerformance.note_description}>
+                  <Text style={stylesPerformance.subtitle}>
+                    {getValue(studentReport[course], {
+                      item: NEWSLETTER_ITEMS.thirdPeriod,
+                    })}
+                  </Text>
+                </View>
+                <View style={stylesPerformance.last_note}>
+                  <Text style={stylesPerformance.subtitle}>
+                    {getValue(studentReport[course], {
+                      item: NEWSLETTER_ITEMS.fourthPeriod,
+                    })}
+                  </Text>
+                </View>
+              </View>
+              <View style={stylesPerformance.container_indicators}>
+                <Text style={stylesPerformance.title_indicators}>INDICADOR DE DESEMPEÑO:</Text>
+                {COMPETENCES[period]?.map((indicator, index) => (
+                  <Text style={stylesPerformance.text_competences} key={index}>
+                    -
+                    {getValue(studentReport[course], {
+                      item: indicator,
+                      valueKey: 'Description',
+                    })}
+                  </Text>
+                ))}
+              </View>
+            </View>
+          </View>
+        ) : null
+      )}
+      {/* {courses?.map((course, index) =>
         course === 'COMPORTAMIENTO' ? (
           <View style={stylesPerformance.row} key={index}>
             <View style={stylesPerformance.areaDescription}>
@@ -137,7 +211,7 @@ export const PerformanceTable = ({ courses, studentReport, period }) => {
             </View>
           </View>
         ) : null
-      )}
+      )} */}
     </View>
   )
 }
