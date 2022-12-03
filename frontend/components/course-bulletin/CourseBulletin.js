@@ -5,7 +5,7 @@ import { TableNotes } from './TableNotes'
 import { coursesList, getBehaviator, getCourseDescription, getInstitutionDescription } from 'utils/Bulletin'
 import { SignaturesSection } from './components'
 import { URLS } from 'api/Urls'
-import { styles } from '.'
+import { includesMatters, styles } from '.'
 import { GRADES } from 'constants/Bulletin'
 
 export const CourseBulletin = ({ period, course, institutions, courseReport: report, courseAverage }) => {
@@ -81,7 +81,7 @@ export const CourseBulletin = ({ period, course, institutions, courseReport: rep
                   <View style={styles.container__information}>
                     <View style={styles.information__name}>
                       <Text style={styles.subtitle}>Alumno:</Text>
-                      <Text style={styles.text__student}>{student[courses?.[0]]?.[0]?.student}</Text>
+                      <Text style={styles.text__student}>{student[courses?.[1]]?.[0]?.student}</Text>
                     </View>
                     <View style={styles.information__name}>
                       <Text style={styles.subtitle}>Director de Grupo:</Text>
@@ -165,7 +165,11 @@ export const CourseBulletin = ({ period, course, institutions, courseReport: rep
                   {WithDynamicImage(getInstitutionDescription(institutions, 'brand'))}
                   <View style={{ width: '100%', position: 'absolute' }}>
                     <View>
-                      <PerformanceTable courses={coursesThirdPage} studentReport={student} period={period} />
+                      <PerformanceTable
+                        courses={includesMatters(coursesThirdPage, student)}
+                        studentReport={student}
+                        period={period}
+                      />
                     </View>
                   </View>
                   <SignaturesSection />

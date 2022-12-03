@@ -91,7 +91,7 @@ export const SUBJECTS10 = [
   {
     place: 6,
     name: 'EDUCACION ETICA Y VALORES HUMANOS',
-    key: 'EDUCACION_ETICA_Y_VALORES_HUMANOS_',
+    key: 'EDUCACIÓN_ÉTICA_Y_VALORES_HUMANOS_',
   },
   {
     place: 7,
@@ -129,12 +129,12 @@ export const SUBJECTS10 = [
     key: 'EMPRENDIMIENTO_',
   },
   {
-    place: 13,
+    place: 14,
     name: 'FILOSOFÍA',
     key: 'FILOSOFÍA_',
   },
   {
-    place: 12,
+    place: 15,
     name: 'FUNDAMENTOS DE ADMINISTRACIÓN',
     key: 'FUNDAMENTOS_DE_ADMINISTRACIÓN_',
   },

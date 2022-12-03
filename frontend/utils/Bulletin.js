@@ -2,8 +2,6 @@ import { AVERAGES, BASIC_SUBJECTS, ITEMS_BEHAVITOR, PERIOD, SUBJECTS10 } from 'c
 import { sortArray } from './Array'
 import { toComparisonKey } from './Text'
 
-// const { toComparisonKey } = require('./Text')
-
 export const getValue = (notes, { item, valueKey = 'Nota', decimals = 1 }) => {
   if (Array.isArray(notes) && notes.length) {
     const value = notes[0]?.Notas.find(note => toComparisonKey(note.Itemname) === toComparisonKey(item))?.[valueKey]
@@ -44,7 +42,7 @@ const deleteWord = item => {
   }
 }
 
-const sedes = ['_QUINTO_LIBERTADOR_MAÑANA', '_QUINTO_LIBERTADOR_TARDE', '_QUINTO_RONDON_MAÑANA']
+// const sedes = ['_QUINTO_LIBERTADOR_MAÑANA', '_QUINTO_LIBERTADOR_TARDE', '_QUINTO_RONDON_MAÑANA']
 
 export const coursesList = (courses = []) => {
   const newList = []
@@ -52,13 +50,13 @@ export const coursesList = (courses = []) => {
   const messySubjects = []
   const orderSubjects = []
 
-  SUBJECTS10.map(item => orderSubjects.push(item.key))
+  SUBJECTS10.map(item => orderSubjects.push(toComparisonKey(item.key)))
 
   courses.map(course => {
-    if (orderSubjects.includes(course.replace(/\d+/g, ''))) {
+    if (orderSubjects.includes(toComparisonKey(course.replace(/\d+/g, '')))) {
       newList.push({
         name: course,
-        place: SUBJECTS10.find(item => item.key === course.replace(/\d+/g, '')).place,
+        place: SUBJECTS10.find(item => toComparisonKey(item.key) === toComparisonKey(course.replace(/\d+/g, ''))).place,
       })
     } else {
       messySubjects.push(course)
@@ -175,7 +173,7 @@ export const getBehaviator = report => {
   const response = ''
   for (const key in report) {
     const matter = report[key]
-    matter?.[0].Notas?.map(({ Itemname }) => {
+    matter?.[0]?.Notas?.map(({ Itemname }) => {
       if (ITEMS_BEHAVITOR.includes(Itemname)) response = key
     })
   }
