@@ -123,7 +123,7 @@ export const SummaryTable = ({ subjects: allSubjects = [], data = [], setData = 
                         {isRetired && <span className="text-tiny font-bold">&nbsp;(Retirado)</span>}
                       </td>
                       <td className="text-center">{position}</td>
-                      <td className="text-center">{average}</td>
+                      <td className="text-center">{average.slice(0, 3) || 0}</td>
                       <td className="text-center">
                         <div className="flex gap-1 justify-center">
                           {lostAverages.length

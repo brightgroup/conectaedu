@@ -89,7 +89,7 @@ export const getAverageByPeriod = (data, period) => {
 
     return {
       ...item,
-      average: (total / subjects).toFixed(1),
+      average: total / subjects > 0 ? (total / subjects).toFixed(4) : '1.0',
       lostAverages: lostItems,
       student,
     }
@@ -99,7 +99,6 @@ export const getAverageByPeriod = (data, period) => {
     ...item,
     position: index + 1,
   }))
-
   return sortArray(orderedList, { key: 'student' })
 }
 

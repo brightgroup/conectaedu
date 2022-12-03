@@ -26,15 +26,16 @@ export const replacePerformance = text => {
 
 export const generalAverageperiod = (courses, studentReport, period) => {
   const notes = []
-  let counter = 0
   courses.map((course, index) => {
     if (course !== 'COMPORTAMIENTO') {
-      notes.push(parseFloat(getValue(studentReport[course], { item: PERIOD[period] })))
-      counter = index
+      if (Array.isArray(studentReport[course])) {
+        notes.push(parseFloat(getValue(studentReport[course], { item: PERIOD[period] })))
+      }
     }
   })
-  const average = notes.filter(item => Number(item)).reduce((previus, current) => (previus += current), 0) / counter
-  return average.toFixed(1)
+  const average =
+    notes.filter(item => Number(item)).reduce((previus, current) => (previus += current), 0) / notes.length
+  return average.toFixed(4)
 }
 
 const deleteWord = item => {
@@ -43,7 +44,7 @@ const deleteWord = item => {
   }
 }
 
-const sedes = ['_QUINTO_LIBERTADOR_MAÑANA','_QUINTO_LIBERTADOR_TARDE','_QUINTO_RONDON_MAÑANA']
+const sedes = ['_QUINTO_LIBERTADOR_MAÑANA', '_QUINTO_LIBERTADOR_TARDE', '_QUINTO_RONDON_MAÑANA']
 
 export const coursesList = (courses = []) => {
   const newList = []
@@ -54,7 +55,6 @@ export const coursesList = (courses = []) => {
   SUBJECTS10.map(item => orderSubjects.push(item.key))
 
   courses.map(course => {
-    console.log(course.replace(/\d+/g, ''))
     if (orderSubjects.includes(course.replace(/\d+/g, ''))) {
       newList.push({
         name: course,
@@ -104,7 +104,8 @@ const averageByPeriod = (students = {}) => {
     let lastname = ''
 
     for (const subject in subjects) {
-      if (BASIC_SUBJECTS.includes(subject.replace(/[0-9]/g, ''))) {
+      const matter = Object.keys(subjects)
+      if (matter.includes(subject)) {
         if (!lastname) lastname = subjects[subject]?.lastname
         const { notes } = subjects[subject]
         const firstPeriod =
@@ -123,22 +124,26 @@ const averageByPeriod = (students = {}) => {
         const thirdPeriod =
           notes?.find(({ Itemname: name }) => toComparisonKey(name) === toComparisonKey('Notas Finales Tercer Periodo'))
             ?.Nota || 0
-        averageThirdPeriod += Number(thirdPeriod)
+        averageThirdPeriod += parseFloat(thirdPeriod)
         if (Number(thirdPeriod) !== 0) itemsThirdPeriod += 1
 
         const fourthPeriod =
           notes?.find(({ Itemname: name }) => toComparisonKey(name) === toComparisonKey('Notas Finales Cuarto Periodo'))
             ?.Nota || 0
-        averageFourthPeriod += Number(fourthPeriod)
+        averageFourthPeriod += parseFloat(fourthPeriod)
         if (Number(fourthPeriod) !== 0) itemsFourthPeriod += 1
       }
     }
     result.push({
       ...subjects,
-      firstPeriodAverage: (averageFirstPeriod / itemsFirstPeriod).toFixed(1),
-      secondPeriodAverage: (averageSecondPeriod / itemsSecondPeriod).toFixed(1),
-      thirdPeriodAverage: (averageThirdPeriod / itemsThirdPeriod).toFixed(1),
-      fourthPeriodAverage: (averageFourthPeriod / itemsFourthPeriod).toFixed(1),
+      firstPeriodAverage:
+        averageFirstPeriod / itemsFirstPeriod > 0 ? (averageFirstPeriod / itemsFirstPeriod).toFixed(4) : '1.0',
+      secondPeriodAverage:
+        averageSecondPeriod / itemsSecondPeriod > 0 ? (averageSecondPeriod / itemsSecondPeriod).toFixed(4) : '1.0',
+      thirdPeriodAverage:
+        averageThirdPeriod / itemsThirdPeriod > 0 ? (averageThirdPeriod / itemsThirdPeriod).toFixed(4) : '1.0',
+      fourthPeriodAverage:
+        averageFourthPeriod / itemsFourthPeriod > 0 ? (averageFourthPeriod / itemsFourthPeriod).toFixed(4) : '1.0',
       student: key,
       lastname,
     })

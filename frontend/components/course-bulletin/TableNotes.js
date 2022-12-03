@@ -136,7 +136,7 @@ export const TableNotes = ({ courses: list, studentReport, period, courseAverage
               </Text>
             </View>
             <View style={index === 0 ? stylesNotes.columl_average : stylesNotes.prueba}>
-              <Text style={stylesNotes.subtitle_average}>{average}</Text>
+              <Text style={stylesNotes.subtitle_average}>{average.slice(0, 3)}</Text>
             </View>
             <View style={stylesNotes.item_comport}>
               <Text style={stylesNotes.subtitle_comport}>

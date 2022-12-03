@@ -6,7 +6,6 @@ import { stylesNotes } from '.'
 
 export const TableNotes = ({ courses, studentReport, period, getPosition, behaviour, course }) => {
   const average = useMemo(() => generalAverageperiod(courses, studentReport, period), [])
-
   return (
     <View style={stylesNotes.container}>
       <View style={stylesNotes.table__header}>
@@ -128,7 +127,7 @@ export const TableNotes = ({ courses, studentReport, period, getPosition, behavi
               <Text style={index === 0 ? stylesNotes.text_pt : stylesNotes.subtitle}>{getPosition}</Text>
             </View>
             <View style={index === 0 ? stylesNotes.columl_average : stylesNotes.prueba}>
-              <Text style={stylesNotes.subtitle_average}>{average}</Text>
+              <Text style={stylesNotes.subtitle_average}>{average.slice(0, 3)}</Text>
             </View>
             <View style={stylesNotes.item_comport}>
               <Text style={stylesNotes.subtitle_comport}>
