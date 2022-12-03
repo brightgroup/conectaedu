@@ -26,7 +26,7 @@ export const styles = StyleSheet.create({
     border: 1,
     borderColor: '#D0CECE',
     justifyContent: 'center',
-    alignItems:'center',
+    alignItems: 'center',
     borderRight: 'none',
     width: 70,
   },
@@ -432,3 +432,16 @@ export const stylesPerformance = StyleSheet.create({
     textAlign: 'left',
   },
 })
+
+const tenthTechnique = ['CONTABILIDAD_1001', 'FENOMENOLOGÍA_DE_LA_EMPRESA_1001']
+const eleventhTechnique = ['CONTABILIDAD_1101', 'PROYECTO_EMPRESARIAL_1101', 'FUNDAMENTOS_DE_ADMINISTRACIÓN_1101']
+
+export const includesMatters = (coursesThirdPage, student) => {
+  if (Object.keys(student).includes('CONTABILIDAD_1001')) {
+    return [...coursesThirdPage, ...tenthTechnique]
+  }
+  if (Object.keys(student).includes('CONTABILIDAD_1101')) {
+    return [...coursesThirdPage, ...eleventhTechnique]
+  }
+  return coursesThirdPage
+}
