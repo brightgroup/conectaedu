@@ -4,7 +4,7 @@ import { BEHAVIUR, FAULTS, ITEMS_BEHAVITOR, NEWSLETTER_ITEMS, PERIOD } from 'con
 import { assessment, behaviorPerformance, generalAverageperiod, getValue, replacePerformance } from 'utils/Bulletin'
 import { stylesNotes } from '.'
 
-export const TableNotes = ({ courses, studentReport, period, getPosition, behaviour, course }) => {
+export const TableNotes = ({ courses, studentReport, period, getPosition, behaviour, isPreschoolCourse }) => {
   const average = useMemo(() => generalAverageperiod(courses, studentReport, period), [])
   return (
     <View style={stylesNotes.container}>
@@ -54,8 +54,8 @@ export const TableNotes = ({ courses, studentReport, period, getPosition, behavi
         </View>
       </View>
       {courses?.map((course, index) =>
-        course === 'COMPORTAMIENTO' ? (
-          <View style={stylesNotes.row}>
+        course === 'COMPORTAMIENTO' && !isPreschoolCourse ? (
+          <View style={stylesNotes.row} key={index}>
             <View style={stylesNotes.column_area}>
               <Text style={stylesNotes.subtitle}>Comportamiento</Text>
             </View>

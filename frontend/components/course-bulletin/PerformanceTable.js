@@ -4,7 +4,7 @@ import { COMPETENCES, FAULTS, ITEMS_BEHAVITOR, NEWSLETTER_ITEMS, PERIOD } from '
 import { assessment, behaviorPerformance, getValue } from 'utils/Bulletin'
 import { stylesPerformance } from '.'
 
-export const PerformanceTable = ({ courses, studentReport, period }) => {
+export const PerformanceTable = ({ courses, studentReport, period, isPreschoolCourse }) => {
   const replacePerformance = text => text?.replace('Desempeño', '')
 
   return (
@@ -33,7 +33,7 @@ export const PerformanceTable = ({ courses, studentReport, period }) => {
         </View>
       </View>
       {courses?.map((course, index) =>
-        course === 'COMPORTAMIENTO' ? (
+        course === 'COMPORTAMIENTO' && !isPreschoolCourse ? (
           <View style={stylesPerformance.row} key={index}>
             <View style={stylesPerformance.areaDescription}>
               <Text style={stylesPerformance.subtitle_matter}>Comportamiento</Text>

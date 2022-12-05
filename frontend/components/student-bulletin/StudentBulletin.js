@@ -2,7 +2,13 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { Document, Image, Page, Text, View } from '@react-pdf/renderer'
 import { PerformanceTable } from './PerformanceTable'
 import { TableNotes } from './TableNotes'
-import { coursesList, getBehaviator, getCourseDescription, getInstitutionDescription } from 'utils/Bulletin'
+import {
+  coursesList,
+  getBehaviator,
+  getCourseDescription,
+  getInstitutionDescription,
+  isPreschoolCourse,
+} from 'utils/Bulletin'
 import { SignaturesSection } from './components'
 import { URLS } from 'api/Urls'
 import { GRADES } from 'constants/Bulletin'
@@ -128,6 +134,7 @@ export const StudentBulletin = ({ studentReport: report, period = 1, course, ins
                   period={period}
                   getPosition={getPosition}
                   behaviour={getBehaviator(studentReport)}
+                  isPreschoolCourse={isPreschoolCourse(course)}
                 />
               </View>
               <View>
@@ -137,7 +144,12 @@ export const StudentBulletin = ({ studentReport: report, period = 1, course, ins
                 </Text>
               </View>
               <View>
-                <PerformanceTable courses={coursesFirstPage} studentReport={studentReport} period={period} />
+                <PerformanceTable
+                  courses={coursesFirstPage}
+                  studentReport={studentReport}
+                  period={period}
+                  isPreschoolCourse={isPreschoolCourse(course)}
+                />
               </View>
             </View>
           </View>
@@ -149,7 +161,12 @@ export const StudentBulletin = ({ studentReport: report, period = 1, course, ins
             {WithDynamicImage(getInstitutionDescription(institutions, 'brand'))}
             <View style={{ width: '100%', position: 'absolute' }}>
               <View>
-                <PerformanceTable courses={coursesSecondPage} studentReport={studentReport} period={period} />
+                <PerformanceTable
+                  courses={coursesSecondPage}
+                  studentReport={studentReport}
+                  period={period}
+                  isPreschoolCourse={isPreschoolCourse(course)}
+                />
               </View>
             </View>
             {coursesThirdPage ? null : <SignaturesSection />}
@@ -163,7 +180,12 @@ export const StudentBulletin = ({ studentReport: report, period = 1, course, ins
               {WithDynamicImage(getInstitutionDescription(institutions, 'brand'))}
               <View style={{ width: '100%', position: 'absolute' }}>
                 <View>
-                  <PerformanceTable courses={coursesThirdPage} studentReport={studentReport} period={period} />
+                  <PerformanceTable
+                    courses={coursesThirdPage}
+                    studentReport={studentReport}
+                    period={period}
+                    isPreschoolCourse={isPreschoolCourse(course)}
+                  />
                 </View>
               </View>
               <SignaturesSection />

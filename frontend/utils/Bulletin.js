@@ -189,3 +189,9 @@ export const behaviorPerformance = studentReport => {
   })
   return total / (counter + 1)
 }
+
+export const isPreschoolCourse = course => {
+  if (course[0]?.name?.includes('PREESCOLAR')) return true
+  if (course[0]?.name?.includes('PRESCOLAR')) return true
+  return false
+}
