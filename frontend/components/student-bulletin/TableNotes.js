@@ -131,7 +131,8 @@ export const TableNotes = ({ courses, studentReport, period, getPosition, behavi
             </View>
             <View style={stylesNotes.item_comport}>
               <Text style={stylesNotes.subtitle_comport}>
-                {getValue(studentReport[course], { item: BEHAVIUR[period] })}
+                {course !== 'TECNOLOGÍA_E_INFORMÁTICA_CUARTO_LIBERTADOR_TARDE' &&
+                  getValue(studentReport[course], { item: BEHAVIUR[period] })}
               </Text>
             </View>
           </View>
