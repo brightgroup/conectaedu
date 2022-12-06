@@ -56,9 +56,6 @@ export const TableNotes = ({ courses: list, studentReport, period, courseAverage
         <View style={stylesNotes.columl_average}>
           <Text style={stylesNotes.subtitle}>{`PROMEDIO GENERAL ${period}P`}</Text>
         </View>
-        <View style={stylesNotes.column_comport}>
-          <Text style={stylesNotes.subtitle}>NOTA COMPORT</Text>
-        </View>
       </View>
       {orderedCourses?.map((course, index) =>
         course === 'COMPORTAMIENTO' && !isPreschoolCourse ? (
@@ -137,12 +134,6 @@ export const TableNotes = ({ courses: list, studentReport, period, courseAverage
             </View>
             <View style={index === 0 ? stylesNotes.columl_average : stylesNotes.prueba}>
               <Text style={stylesNotes.subtitle_average}>{average.slice(0, 3)}</Text>
-            </View>
-            <View style={stylesNotes.item_comport}>
-              <Text style={stylesNotes.subtitle_comport}>
-                {course !== 'TECNOLOGÍA_E_INFORMÁTICA_CUARTO_LIBERTADOR_TARDE' &&
-                  getValue(studentReport[course], { item: BEHAVIUR[period] })}
-              </Text>
             </View>
           </View>
         ) : null

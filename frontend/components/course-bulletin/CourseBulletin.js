@@ -52,9 +52,7 @@ export const CourseBulletin = ({ period, course, institutions, courseReport: rep
   }
 
   useEffect(() => {
-    if (period == 4) {
-      setCourseReport(includeBehavior())
-    }
+    setCourseReport(includeBehavior())
   }, [period])
 
   return (

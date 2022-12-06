@@ -184,7 +184,7 @@ export const stylesNotes = StyleSheet.create({
   },
 
   column_area: {
-    width: '29%',
+    width: '35%',
     alignItems: 'start',
     justifyContent: 'center',
     paddingLeft: 6,
@@ -211,7 +211,7 @@ export const stylesNotes = StyleSheet.create({
   },
 
   column_performance: {
-    width: '10.5%',
+    width: '14.5%',
     borderRight: 1,
     borderBottom: 1,
     alignItems: 'center',
@@ -220,20 +220,20 @@ export const stylesNotes = StyleSheet.create({
   },
 
   columl_average: {
-    width: '10.5%',
-    borderRight: 1,
+    width: '13%',
+    // borderRight: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    borderColor: '#D0CECE',
+    // borderColor: '#D0CECE',
   },
 
   prueba: {
-    width: '10.5%',
-    borderRight: 1,
+    width: '13%',
+    // borderRight: 1,
     alignItems: 'center',
     justifyContent: 'center',
     color: 'transparent',
-    borderColor: '#D0CECE',
+    // borderColor: '#D0CECE',
   },
 
   column_pt: {
