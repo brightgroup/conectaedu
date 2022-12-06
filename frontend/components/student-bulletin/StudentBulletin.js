@@ -27,12 +27,10 @@ export const StudentBulletin = ({ studentReport: report, period = 1, course, ins
   })
 
   useEffect(() => {
-    if (period == 4) {
-      setStudentReport({
-        ...studentReport,
-        COMPORTAMIENTO: studentReport[getBehaviator(studentReport)],
-      })
-    }
+    setStudentReport({
+      ...studentReport,
+      COMPORTAMIENTO: studentReport[getBehaviator(studentReport)],
+    })
   }, [])
 
   useEffect(() => {
