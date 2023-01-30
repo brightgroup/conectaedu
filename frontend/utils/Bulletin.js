@@ -1,3 +1,4 @@
+import { options } from 'components/chart'
 import { AVERAGES, BASIC_SUBJECTS, ITEMS_BEHAVITOR, PERIOD, SUBJECTS10 } from 'constants/Bulletin'
 import { sortArray } from './Array'
 import { toComparisonKey } from './Text'
@@ -170,14 +171,39 @@ export const assessment = note => {
 }
 
 export const getBehaviator = report => {
-  const response = ''
+  const response = []
+  const options = {}
+  const behaviorMatter = {
+    name: '',
+    notes: 0,
+  }
+
   for (const key in report) {
     const matter = report[key]
     matter?.[0]?.Notas?.map(({ Itemname }) => {
-      if (ITEMS_BEHAVITOR.includes(Itemname)) response = key
+      if (ITEMS_BEHAVITOR.includes(Itemname) && !response.includes(key)) response.push(key)
     })
   }
-  return response
+  response.forEach(item => {
+    const matter = report[item]
+    let counter = 0
+    matter?.[0]?.Notas?.map(({ Itemname }) => {
+      ITEMS_BEHAVITOR.forEach(behator => {
+        if (Itemname === behator) {
+          counter += 1
+          options[item] = counter
+        }
+      })
+    })
+  })
+
+  for (const key in options) {
+    if (options[key] > behaviorMatter.notes) {
+      behaviorMatter.name = key
+      behaviorMatter.notes = options[key]
+    }
+  }
+  return behaviorMatter.name
 }
 
 export const behaviorPerformance = studentReport => {
