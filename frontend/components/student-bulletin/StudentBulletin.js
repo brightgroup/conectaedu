@@ -93,9 +93,7 @@ export const StudentBulletin = ({ studentReport: report, period = 1, course, ins
                 </View>
                 <View style={{ width: '27.5%', fontSize: 10 }}>
                   <View style={{ paddingLeft: 6 }}>
-                    <Text style={styles.subtitle}>
-                      {getCourseDescription(course, 'year') || new Date().getFullYear()}
-                    </Text>
+                    <Text style={styles.subtitle}>2022</Text>
                   </View>
                   <View style={styles.box_background}>
                     <Text style={styles.title}>GRADO</Text>

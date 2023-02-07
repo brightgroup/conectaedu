@@ -49,7 +49,7 @@ export const FifthBulletin = ({ studentReport, institutions, course }) => {
                 <View style={{ width: '20%', fontSize: 10 }}>
                   <View style={{ paddingLeft: 6 }}>
                     <Text style={styles.subtitle}>
-                      {getCourseDescription(course, 'year') || new Date().getFullYear()}
+                      2022
                     </Text>
                   </View>
                   <View style={styles.box_background}>
