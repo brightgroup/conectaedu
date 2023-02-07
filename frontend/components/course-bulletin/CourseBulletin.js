@@ -96,7 +96,7 @@ export const CourseBulletin = ({ period, course, institutions, courseReport: rep
                     <View style={{ width: '27.5%', fontSize: 10 }}>
                       <View style={{ paddingLeft: 6 }}>
                         <Text style={styles.subtitle}>
-                          {getCourseDescription(course, 'year') || new Date().getFullYear()}
+                          2022
                         </Text>
                       </View>
                       <View style={styles.box_background}>
