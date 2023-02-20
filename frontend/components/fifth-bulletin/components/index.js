@@ -124,6 +124,23 @@ export const stylesTable = StyleSheet.create({
     fontSize: 10,
     textAlign: 'center',
   },
+  header_column1_preschool: {
+    width: '70%',
+    fontSize: 10,
+    textAlign: 'center',
+    borderRight: '1px solid gray',
+  },
+  header_column2_preschool: {
+    width: '10%',
+    fontSize: 10,
+    textAlign: 'center',
+    borderRight: '1px solid gray',
+  },
+  header_column3_preeschool: {
+    width: '20%',
+    fontSize: 10,
+    textAlign: 'center',
+  },
   row: {
     display: 'flex',
     flexDirection: 'row',
@@ -134,7 +151,6 @@ export const stylesTable = StyleSheet.create({
     width: '70%',
     fontSize: 10,
     textAlign: 'left',
-    // borderRight: '1px solid gray',
     paddingLeft: '8px',
   },
   row_column1: {
@@ -158,6 +174,24 @@ export const stylesTable = StyleSheet.create({
   },
   row_column4: {
     width: '14%',
+    fontSize: 10,
+    textAlign: 'center',
+  },
+  row_column1_preschool: {
+    width: '70%',
+    fontSize: 10,
+    textAlign: 'left',
+    borderRight: '1px solid gray',
+    paddingLeft: '8px',
+  },
+  row_column2_preschool: {
+    width: '10%',
+    fontSize: 10,
+    textAlign: 'center',
+    borderRight: '1px solid gray',
+  },
+  row_column3_preschool: {
+    width: '20%',
     fontSize: 10,
     textAlign: 'center',
   },
