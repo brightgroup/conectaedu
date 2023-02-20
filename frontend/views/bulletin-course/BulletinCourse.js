@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Select } from 'components/select'
-import { getCohorts } from 'redux/grade/actions'
+import { getCohorts, getCoursesCohort } from 'redux/grade/actions'
 import { PDFDownloadLink } from '@react-pdf/renderer'
 import { getCourse, getCouseAverage, getNotesCourse, getNotesCourse2, getSheets } from 'redux/courses/actions'
 import { getInstitutions } from 'redux/institutions/actions'
@@ -16,7 +16,7 @@ export const BulletinCourse = () => {
   const dispatch = useDispatch()
 
   const {
-    grades: { cohorts },
+    grades: { cohorts, courses },
     courses: { course: infocourse, courseNotes, courseNotes2 = [], sheet, courseAverage },
     institutions: { institutions },
     students: { cohortStudent },
@@ -81,6 +81,7 @@ export const BulletinCourse = () => {
         setStudents2(students.slice(half, students.length))
       }
     }
+    dispatch(getCoursesCohort(value))
   }
 
   const getHalfArray = array => Math.round(array.length / 2)
@@ -125,6 +126,7 @@ export const BulletinCourse = () => {
                   courseReport={[...courseNotes, ...courseNotes2]}
                   course={infocourse}
                   institutions={institutions}
+                  hoursCourse={courses}
                 />
               ) : null}
             </div>
@@ -175,7 +177,7 @@ const PDFDownload = ({ courseReport, institutions, course, period, courseAverage
   )
 }
 
-const PDFFifthBulletin = ({ courseReport, institutions, course }) => {
+const PDFFifthBulletin = ({ courseReport, institutions, course, hoursCourse }) => {
   const [viewComponet, setViewComponet] = useState(false)
 
   const toggleViwe = () => {
@@ -190,7 +192,14 @@ const PDFFifthBulletin = ({ courseReport, institutions, course }) => {
   return (
     <>
       <PDFDownloadLink
-        document={<FifthCourseBulletin course={course} institutions={institutions} courseReport={courseReport} />}
+        document={
+          <FifthCourseBulletin
+            course={course}
+            institutions={institutions}
+            courseReport={courseReport}
+            hoursCourse={hoursCourse}
+          />
+        }
         fileName={`${getCourseDescription(course, 'name')} - Boletines`}
       >
         <button className={`px-3 py-1 text-white bg-gray-600 rounded pointer ${!viewComponet ? 'hidden' : null}`}>

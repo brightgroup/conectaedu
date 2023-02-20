@@ -6,9 +6,8 @@ import { Contancy, Description, Table } from './components'
 import { GRADES } from 'constants/Bulletin'
 import { styles } from '.'
 
-export const FifthCourseBulletin = ({ courseReport , institutions, course }) => {
-
-  const courses = useMemo(() => (Object.keys(courseReport?.[0])), [courseReport])  
+export const FifthCourseBulletin = ({ courseReport, institutions, course, hoursCourse }) => {
+  const courses = useMemo(() => Object.keys(courseReport?.[0]), [courseReport])
 
   const orderedCourses = useMemo(() => coursesList(courses), [courses])
 
@@ -50,9 +49,7 @@ export const FifthCourseBulletin = ({ courseReport , institutions, course }) => 
                   </View>
                   <View style={{ width: '20%', fontSize: 10 }}>
                     <View style={{ paddingLeft: 6 }}>
-                      <Text style={styles.subtitle}>
-                       2022
-                      </Text>
+                      <Text style={styles.subtitle}>2022</Text>
                     </View>
                     <View style={styles.box_background}>
                       <Text style={styles.title}>GRADO</Text>
@@ -71,7 +68,11 @@ export const FifthCourseBulletin = ({ courseReport , institutions, course }) => 
               status={student.status}
               course={getCourseDescription(course, 'name').replace(/\s+/g, '')}
             />
-            <Table studentReport={student} course={getCourseDescription(course, 'name').replace(/\s+/g, '')} />
+            <Table
+              studentReport={student}
+              course={getCourseDescription(course, 'name').replace(/\s+/g, '')}
+              hoursCourse={hoursCourse}
+            />
             <View style={{ width: '100%', height: '50%', position: 'relative' }}>
               <Contancy status={student.status} />
             </View>

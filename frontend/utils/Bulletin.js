@@ -221,3 +221,10 @@ export const isPreschoolCourse = course => {
   if (course[0]?.name?.includes('PRESCOLAR')) return true
   return false
 }
+
+export const Hourlyintensity = (course, courses) => {
+  const courseInfo = courses.find(item => item.fullname === course)
+  if (courseInfo) {
+    return courseInfo.hours
+  }
+}

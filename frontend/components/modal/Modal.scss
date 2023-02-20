@@ -1,38 +1,41 @@
 .modal {
-    @apply absolute left-0 top-0 w-full h-screen flex justify-center items-center opacity-100;
+  @apply absolute left-0 top-0 w-full h-screen flex justify-center items-center opacity-100;
 
-    background-color: rgba($color: #354052, $alpha: 0.2);
+  background-color: rgba($color: #354052, $alpha: 0.2);
 
-    &__content {
-        // @apply p-5 rounded-md bg-blue text-white absolute m-auto inset-0 h-max w-max;
-        @apply p-5 rounded-md bg-white absolute m-auto inset-0 h-max w-max z-50;
+  &__content {
+    // @apply p-5 rounded-md bg-blue text-white absolute m-auto inset-0 w-max;
+    @apply p-5 rounded-md bg-white absolute m-auto inset-0  w-max z-50;
 
-        min-width: 400px;
-        animation: 1.2s moveModal;
-        box-shadow: 0 0 1.25rem rgba(0, 0, 0, 0.15);
-    }
+    min-width: 400px;
+    animation: 1.2s moveModal;
+    box-shadow: 0 0 1.25rem rgba(0, 0, 0, 0.15);
+    // max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+  }
 
-    &__close-icon {
-        @apply absolute right-2 top-2 cursor-pointer transition-all hover:rotate-90 text-lg;
-    }
+  &__close-icon {
+    @apply absolute right-2 top-2 cursor-pointer transition-all hover:rotate-90 text-lg;
+  }
 }
 
 @keyframes showModal {
-    from {
-        opacity: 1;
-    }
+  from {
+    opacity: 1;
+  }
 
-    to {
-        opacity: 0;
-    }
+  to {
+    opacity: 0;
+  }
 }
 
 @keyframes moveModal {
-    from {
-        top: -100%;
-    }
+  from {
+    top: -100%;
+  }
 
-    to {
-        inset: 0;
-    }
+  to {
+    inset: 0;
+  }
 }

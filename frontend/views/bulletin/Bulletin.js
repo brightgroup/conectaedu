@@ -17,6 +17,7 @@ export const Bulletin = () => {
     students: { studentReport },
     courses: { course, courseAverage },
     institutions: { institutions },
+    grades: { courses },
   } = useSelector(state => state)
 
   const [finalReport, setFinalReport] = useState('')
@@ -43,7 +44,7 @@ export const Bulletin = () => {
 
     return (
       <PDFViewer style={styles.page}>
-        <FifthBulletin studentReport={studentReport} institutions={institutions} course={course} />
+        <FifthBulletin studentReport={studentReport} institutions={institutions} course={course} hoursCourse={courses}/>
       </PDFViewer>
     )
   }
