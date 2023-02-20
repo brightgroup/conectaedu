@@ -20,6 +20,10 @@ $dark-blue: #354052;
     margin-bottom: 20px;
   }
 
+  &__setting {
+    color: $dark-blue;
+  }
+
   &__input {
     border: 1px solid rgba($color: #354052, $alpha: 0.2);
     border-radius: 6px;
@@ -53,5 +57,25 @@ $dark-blue: #354052;
     color: red;
     text-align: center;
     margin-bottom: 4px;
+  }
+}
+.list_courses_time_scroll {
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #cccbcb; 
+    border-radius: 4px;
+}
+}
+
+.list_courses_time::-webkit-outer-spin-button,
+.list_courses_time::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+
+  input[type='number'] {
+    -moz-appearance: textfield;
   }
 }

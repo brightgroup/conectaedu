@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
-import { getCohorts } from 'redux/grade/actions'
+import { getCohorts, getCoursesCohort } from 'redux/grade/actions'
 import {
   getCompleteStudents,
   getStudentData,
@@ -70,6 +70,7 @@ export const StudentsTable = () => {
     setNewCohort(true)
     dispatch(getStudentsCohort(value))
     dispatch(getSheets(value))
+    dispatch(getCoursesCohort(value))
   }
 
   const handleChangeSelect = ({ target }, idStedent) => {

@@ -17,7 +17,7 @@ Font.register({
 export const response = {
   Promovido: 'Aprobó',
   Reprobado: 'Reprobó',
-  Promovidoporpromedio: 'Aprobó por promedio'
+  Promovidoporpromedio: 'Aprobó por promedio',
 }
 export const PROMOTED = {
   Promovido: 'El estudiante ES PROMOVIDO AL SIGUIENTE GRADO',
@@ -108,13 +108,19 @@ export const stylesTable = StyleSheet.create({
     borderRight: '1px solid gray',
   },
   header_column2: {
-    width: '10%',
+    width: '7%',
     fontSize: 10,
     textAlign: 'center',
     borderRight: '1px solid gray',
   },
   header_column3: {
-    width: '20%',
+    width: '7%',
+    fontSize: 10,
+    textAlign: 'center',
+    borderRight: '1px solid gray',
+  },
+  header_column4: {
+    width: '14%',
     fontSize: 10,
     textAlign: 'center',
   },
@@ -124,6 +130,13 @@ export const stylesTable = StyleSheet.create({
     borderTop: '1px solid gray',
     paddingBottom: '3px',
   },
+  row_column1_no_margin: {
+    width: '70%',
+    fontSize: 10,
+    textAlign: 'left',
+    // borderRight: '1px solid gray',
+    paddingLeft: '8px',
+  },
   row_column1: {
     width: '70%',
     fontSize: 10,
@@ -132,13 +145,19 @@ export const stylesTable = StyleSheet.create({
     paddingLeft: '8px',
   },
   row_column2: {
-    width: '10%',
+    width: '7%',
     fontSize: 10,
     textAlign: 'center',
     borderRight: '1px solid gray',
   },
   row_column3: {
-    width: '20%',
+    width: '7%',
+    fontSize: 10,
+    textAlign: 'center',
+    borderRight: '1px solid gray',
+  },
+  row_column4: {
+    width: '14%',
     fontSize: 10,
     textAlign: 'center',
   },

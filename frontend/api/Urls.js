@@ -6,7 +6,7 @@ export const URLS = {
   getCourses: 'get-cohorts',
   getCourse: cohort => `course-info?id=${cohort}`,
   getStudentsByCohort: cohort => `get-getstudentbycohorts?cohort=${cohort}`,
-  getCoursesByCohort: 'get-getcoursesbycohorts',
+  getCoursesByCohort: cohort => `get-getcoursesbycohorts?cohort=${cohort}`,
   getSheets: 'getfulldata',
   getFullData: 'getfulldataByReport',
   getCohort: 'get-cohorts',
@@ -15,6 +15,7 @@ export const URLS = {
   getReport: 'getreport',
   postInstitution: 'institution-info',
   updateInstitution: 'institution-info-update/1',
+  updateCourse:'update-course',
   getInstitutions: 'institution-info',
   assets: institution => `/assets/${institution}`,
 }
