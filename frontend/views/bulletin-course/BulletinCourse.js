@@ -52,7 +52,7 @@ export const BulletinCourse = () => {
     return listKeys
   }
 
-  const selectCohort = async ({ target }, name) => {
+  const selectCohort = async ({ target }, name, selectGrade = false) => {
     const { value } = target
     setCourse({
       ...course,
@@ -81,7 +81,9 @@ export const BulletinCourse = () => {
         setStudents2(students.slice(half, students.length))
       }
     }
-    dispatch(getCoursesCohort(value))
+    if (selectGrade) {
+      dispatch(getCoursesCohort(value))
+    }
   }
 
   const getHalfArray = array => Math.round(array.length / 2)
@@ -98,7 +100,7 @@ export const BulletinCourse = () => {
                 <Select
                   options={getCourses()}
                   initialValue="Grado"
-                  handleChange={e => selectCohort(e, 'course')}
+                  handleChange={e => selectCohort(e, 'course', true)}
                   value={course.course}
                 />
               </div>
@@ -127,6 +129,7 @@ export const BulletinCourse = () => {
                   course={infocourse}
                   institutions={institutions}
                   hoursCourse={courses}
+                  setCourse={setCourse}
                 />
               ) : null}
             </div>
@@ -179,11 +182,12 @@ const PDFDownload = ({ courseReport, institutions, course, period, courseAverage
 
 const PDFFifthBulletin = ({ courseReport, institutions, course, hoursCourse }) => {
   const [viewComponet, setViewComponet] = useState(false)
+  const dispatch = useDispatch()
 
   const toggleViwe = () => {
     setTimeout(() => {
       setViewComponet(true)
-    }, 2000)
+    }, 28000)
   }
 
   useEffect(() => {
@@ -201,6 +205,9 @@ const PDFFifthBulletin = ({ courseReport, institutions, course, hoursCourse }) =
           />
         }
         fileName={`${getCourseDescription(course, 'name')} - Boletines`}
+        onClick={() => {
+          dispatch(getCoursesCohort('reset'))
+        }}
       >
         <button className={`px-3 py-1 text-white bg-gray-600 rounded pointer ${!viewComponet ? 'hidden' : null}`}>
           Descargar Informe

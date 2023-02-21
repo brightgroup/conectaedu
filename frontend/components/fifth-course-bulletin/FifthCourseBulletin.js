@@ -15,8 +15,8 @@ export const FifthCourseBulletin = ({ courseReport, institutions, course, hoursC
 
   return (
     <Document>
-      {courseReport.map(student => (
-        <Page>
+      {courseReport.map((student, index) => (
+        <Page key={index}>
           <View style={styles.container}>
             <View style={styles.container__header}>
               <View style={styles.container__header_image}>
