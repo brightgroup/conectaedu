@@ -31,6 +31,9 @@ export const getCohorts = () => {
 export const getCoursesCohort = id => {
   return async dispatch => {
     try {
+      if (id === 'reset') {
+        dispatch(setCoursesByCohort([]))
+      }
       const { data } = await Axios(URLS.getCoursesByCohort(id))
       dispatch(setCoursesByCohort(data || []))
     } catch (error) {
