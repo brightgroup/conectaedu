@@ -187,7 +187,7 @@ const PDFFifthBulletin = ({ courseReport, institutions, course, hoursCourse }) =
   const toggleViwe = () => {
     setTimeout(() => {
       setViewComponet(true)
-    }, 28000)
+    }, 16000)
   }
 
   useEffect(() => {
