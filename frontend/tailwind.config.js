@@ -16,6 +16,7 @@ module.exports = {
         blue: { DEFAULT: '#354052' },
         error: 'rgb(220,38,38)',
         transparent: 'rgba(255,255,255,0.1)',
+        blueKing: '#BDD6EE',
       },
       fontSize: {
         tiny: '0.625rem', //10px
