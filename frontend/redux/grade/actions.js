@@ -1,6 +1,6 @@
 import { URLS } from 'api/Urls'
 import { Axios } from 'utils/Axios'
-import { GET_COURSES_COHORT, SET_COHORT, SET_ERROR } from './types'
+import { GET_COURSES_COHORT, GET_REPORT_FOLIO_MORNING, SET_COHORT, SET_ERROR } from './types'
 
 export const setCohorts = cohorts => ({
   type: SET_COHORT,
@@ -9,6 +9,11 @@ export const setCohorts = cohorts => ({
 
 export const setCoursesByCohort = courses => ({
   type: GET_COURSES_COHORT,
+  payload: courses,
+})
+
+export const setFolios = courses => ({
+  type: GET_REPORT_FOLIO_MORNING,
   payload: courses,
 })
 
@@ -36,6 +41,27 @@ export const getCoursesCohort = id => {
       }
       const { data } = await Axios(URLS.getCoursesByCohort(id))
       dispatch(setCoursesByCohort(data || []))
+    } catch (error) {
+      dispatch(setError(error))
+    }
+  }
+}
+
+export const getFoliosMorning = (information = '') => {
+  return async dispatch => {
+    try {
+      const data = await Axios(URLS.getAllFolios, information)
+      dispatch(setFolios(data || {}))
+    } catch (error) {
+      dispatch(setError(error))
+    }
+  }
+}
+
+export const clearFolios = (information = '') => {
+  return async dispatch => {
+    try {
+      dispatch(setFolios({}))
     } catch (error) {
       dispatch(setError(error))
     }

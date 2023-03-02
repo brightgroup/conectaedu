@@ -1,8 +1,9 @@
-import { GET_COURSES_COHORT, SET_COHORT, SET_ERROR } from './types'
+import { GET_COURSES_COHORT, GET_REPORT_FOLIO_MORNING, SET_COHORT, SET_ERROR } from './types'
 
 const initialState = {
   cohorts: [],
   courses: [],
+  folios: {},
   error: '',
 }
 
@@ -18,6 +19,12 @@ export const reducer = (state = initialState, action) => {
         ...state,
         courses: action.payload,
       }
+    case GET_REPORT_FOLIO_MORNING:
+      return {
+        ...state,
+        folios: action.payload,
+      }
+
     case SET_ERROR:
       return {
         ...state,

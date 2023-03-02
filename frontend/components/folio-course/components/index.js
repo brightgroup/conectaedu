@@ -1,4 +1,5 @@
 export * from './Header'
+export * from './Table'
 
 import { StyleSheet } from '@react-pdf/renderer'
 
@@ -54,13 +55,13 @@ export const styles = StyleSheet.create({
   },
 
   container__header_col1: {
-    width: '60%',
+    width: '50%',
     borderRight: 1,
     borderColor: '#D0CECE',
   },
 
   container__header_col2: {
-    width: '30%',
+    width: '40%',
     borderRight: 1,
     borderColor: '#D0CECE',
   },
@@ -83,5 +84,73 @@ export const styles = StyleSheet.create({
     fontSize: 9,
     paddingLeft: 4,
     paddingTop: 4,
+  },
+
+  table: {
+    width: '100%',
+    marginTop: 20,
+    border: 1,
+    borderColor: '#D0CECE',
+    borderTop: 0,
+  },
+})
+
+export const stylesRow = StyleSheet.create({
+  container_row: {
+    display: 'flex',
+    flexDirection: 'row',
+    width: '100%',
+    fontSize: 9,
+    borderTop: 1,
+    borderColor: '#D0CECE',
+  },
+
+  container_row: {
+    display: 'flex',
+    flexDirection: 'row',
+    width: '100%',
+    fontSize: 9,
+    borderTop: 1,
+    borderColor: '#D0CECE',
+  },
+
+  col_item: {
+    borderRight: 1,
+    width: '5%',
+    borderColor: '#D0CECE',
+    padding: '1px 0 1px 4px',
+  },
+
+  col_name: {
+    width: '42%',
+    borderRight: 1,
+    borderColor: '#D0CECE',
+    padding: '1px 0 1px 4px',
+  },
+
+  col_folio: {
+    width: '8%',
+    borderRight: 1,
+    borderColor: '#D0CECE',
+    padding: '1px 0 1px 4px',
+  },
+
+  col_observation: {
+    width: '31%',
+    borderRight: 1,
+    borderColor: '#D0CECE',
+    padding: '1px 0 1px 4px',
+  },
+
+  col_approve: {
+    width: '7%',
+    borderRight: 1,
+    borderColor: '#D0CECE',
+    padding: '1px 0 1px 4px',
+  },
+
+  col_fail: {
+    width: '7%',
+    padding: '1px 0 1px 4px',
   },
 })
