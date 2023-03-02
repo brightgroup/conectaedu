@@ -23,7 +23,7 @@ export const FolioCourse = ({ institutions, folios }) => {
 
   return (
     <Document>
-      {courses.map((course, index) => (
+      {courses?.map((course, index) => (
         <Page className="" key={index}>
           <View style={styles.container}>
             <Header institutions={institutions} course={folios[course]?.[0].curso} />

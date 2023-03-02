@@ -18,11 +18,12 @@ export const FoliosCourse = () => {
 
   useEffect(() => {
     dispatch(getInstitutions())
-    // dispatch(getFoliosMorning())
   }, [])
 
   useEffect(() => {
-    Object.keys(folios).length ? setShow(true) : setShow(false)
+    if (folios) {
+      Object.keys(folios).length ? setShow(true) : setShow(false)
+    }
   }, [folios])
 
   const requestFolio = (information = '') => {
@@ -49,10 +50,7 @@ export const FoliosCourse = () => {
         ))}
         <div className="flex justify-center">
           {show && (
-            <PDFDownloadLink
-              fileName={`FOLIOS`}
-              document={<FolioCourse institutions={institutions} folios={folios} onClick />}
-            >
+            <PDFDownloadLink fileName={`FOLIOS`} document={<FolioCourse institutions={institutions} folios={folios} />}>
               <button className={`px-3 py-1 text-white bg-gray-600 rounded pointer`}>Descargar</button>
             </PDFDownloadLink>
           )}
