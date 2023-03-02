@@ -59,7 +59,10 @@ export const StudentsTable = () => {
 
   const getCourses = () => {
     const grades = []
-    cohorts?.map(cohort => grades.push({ value: cohort.id, label: cohort.name }))
+    if (Array.isArray(cohorts)) {
+      cohorts?.map(cohort => grades.push({ value: cohort.id, label: cohort.name }))
+    }
+
     return grades
   }
 

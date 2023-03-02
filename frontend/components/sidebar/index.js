@@ -36,4 +36,9 @@ export const NAV_ITEMS = [
     label: 'Boletin por curso',
     icon: 'fa-solid fa-book',
   },
+  {
+    route: '/indice-folios',
+    label: 'folios por curso',
+    icon: 'fa-solid fa-users-viewfinder',
+  },
 ]
