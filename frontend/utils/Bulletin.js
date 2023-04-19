@@ -206,11 +206,42 @@ export const getBehaviator = report => {
   return behaviorMatter.name
 }
 
+const getValueFolios = (report, search, key = '') => {
+  const option = report?.find(item => item.Itemname?.includes(search))
+
+  if (option) {
+    return option[key]
+  }
+}
+
 export const behaviorPerformance = studentReport => {
   let total = 0
   let counter = 0
   ITEMS_BEHAVITOR.map((item, index) => {
     total += parseFloat(getValue(studentReport[getBehaviator(studentReport)], { item }) || 0)
+    counter = index
+  })
+  return total / (counter + 1)
+}
+
+export const getBehaviatorFolio = report => {
+  const response = []
+
+  for (const key in report) {
+    const matter = report[key]
+    matter?.map(({ Itemname }) => {
+      if (ITEMS_BEHAVITOR.includes(Itemname) && !response.length) response = matter
+    })
+  }
+
+  return response
+}
+
+export const behaviorPerformanceFolio = studentReport => {
+  let total = 0
+  let counter = 0
+  ITEMS_BEHAVITOR.map((item, index) => {
+    total += parseFloat(getValueFolios(getBehaviatorFolio(studentReport), item, 'Nota') || 0)
     counter = index
   })
   return total / (counter + 1)
@@ -224,6 +255,13 @@ export const isPreschoolCourse = course => {
 
 export const Hourlyintensity = (course, courses) => {
   const courseInfo = courses.find(item => item.fullname === course)
+  if (courseInfo) {
+    return courseInfo.hours
+  }
+}
+
+export const HourlyintensityFolio = (course, courses) => {
+  const courseInfo = courses.find(item => item.name === course)
   if (courseInfo) {
     return courseInfo.hours
   }

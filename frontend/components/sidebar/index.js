@@ -38,7 +38,12 @@ export const NAV_ITEMS = [
   },
   {
     route: '/indice-folios',
-    label: 'folios por curso',
+    label: 'Folios por curso',
     icon: 'fa-solid fa-users-viewfinder',
+  },
+  {
+    route: '/certificado-final',
+    label: 'Certificado final',
+    icon: 'fa-solid fa-book-open',
   },
 ]

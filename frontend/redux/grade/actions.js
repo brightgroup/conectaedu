@@ -1,6 +1,6 @@
 import { URLS } from 'api/Urls'
 import { Axios } from 'utils/Axios'
-import { GET_COURSES_COHORT, GET_REPORT_FOLIO_MORNING, SET_COHORT, SET_ERROR } from './types'
+import { GET_COURSES_COHORT, GET_REPORT_FOLIO_MORNING, GET_TOTAL_FOLIOS, SET_COHORT, SET_ERROR } from './types'
 
 export const setCohorts = cohorts => ({
   type: SET_COHORT,
@@ -14,6 +14,11 @@ export const setCoursesByCohort = courses => ({
 
 export const setFolios = courses => ({
   type: GET_REPORT_FOLIO_MORNING,
+  payload: courses,
+})
+
+export const setTotalFolios = courses => ({
+  type: GET_TOTAL_FOLIOS,
   payload: courses,
 })
 
@@ -58,10 +63,29 @@ export const getFoliosMorning = (information = '') => {
   }
 }
 
-export const clearFolios = (information = '') => {
+export const clearFolios = () => {
   return async dispatch => {
     try {
       dispatch(setFolios({}))
+    } catch (error) {
+      dispatch(setError(error))
+    }
+  }
+}
+
+export const getTotalFolios = () => {
+  return async dispatch => {
+    try {
+      await Promise.all([
+        Axios(URLS.getAllFolios, { colegio: 'LIBERTADOR', jornada: 'MANANA', secundaria: true }),
+        Axios(URLS.getAllFolios, { colegio: 'LIBERTADOR', jornada: 'TARDE' }),
+        Axios(URLS.getAllFolios, { colegio: 'RONDON', jornada: 'MANANA' }),
+      ])
+        .then(res => {
+          const data = { ...res[0], ...res[1], ...res[2] }
+          dispatch(setTotalFolios(data))
+        })
+        .catch(err => new Error(err))
     } catch (error) {
       dispatch(setError(error))
     }

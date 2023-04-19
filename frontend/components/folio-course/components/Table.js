@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { View } from '@react-pdf/renderer'
 import { Row } from './Row'
 import { styles } from '.'
@@ -7,6 +6,7 @@ export const Table = ({ students }) => {
   return (
     <View style={styles.table}>
       <Row item="N°" name="NOMBRE ESTUDIANTE" folio="FOLIO" observation="OBSERVACIÓN" approve="SI" fail="NO" />
+
       {students?.map((student, index) => (
         <Row
           key={index}
