@@ -41,7 +41,7 @@ export const FoliosCourse = () => {
             className="bg-gray-400 mb-8 rounded px-4 py-2"
             onClick={
               index !== 0
-                ? () => requestFolio({ colegio: buton.colegio, jornada: buton.jornada })
+                ? () => requestFolio({ colegio: buton.colegio, jornada: buton.jornada, secundaria: true })
                 : () => requestFolio()
             }
           >
