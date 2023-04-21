@@ -35,7 +35,7 @@ export const Header = ({ institutions, student, course, code, folio }) => {
           </View>
           <View style={styles.information__name}>
             <Text style={styles.subtitleLeft}>Director de Grupo:</Text>
-            <Text style={styles.text__student}>{GRADES['C601'].director}</Text>
+            <Text style={styles.text__student}>{GRADES[course]?.director}</Text>
           </View>
           <View style={{ width: '15%', fontSize: 10 }}>
             <View style={{ paddingLeft: 6 }}>
@@ -45,7 +45,7 @@ export const Header = ({ institutions, student, course, code, folio }) => {
               <Text style={styles.title}>GRADO</Text>
             </View>
             <View style={{ paddingLeft: 6, paddingTop: 2 }}>
-              <Text style={styles.subtitle}>SEXTO-1</Text>
+              <Text style={styles.subtitle}>{GRADES[course]?.name}</Text>
             </View>
           </View>
           <View style={{ width: '15%', fontSize: 10 }}>

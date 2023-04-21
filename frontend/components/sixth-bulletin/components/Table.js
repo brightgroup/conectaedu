@@ -96,7 +96,20 @@ export const Table = ({ final, studentReport, course, hoursCourse, subjects }) =
               </View>
             </>
           ) : (
-            ''
+            <>
+              //----
+              <View style={stylesTable.row_column1_preschool}>
+                <Text>{getSubjectName(studentReport[index], course, 'curso') || subject}</Text>
+              </View>
+              <View style={stylesTable.row_column2_preschool}>
+                <Text>{getValueFolios(studentReport[index], 'Final', 'Nota')}</Text>
+              </View>
+              <View style={stylesTable.row_column3_preschool}>
+                <Text style={{ fontSize: 10 }}>
+                  {assessment(getValueFolios(studentReport[index], 'Final', 'Nota'))}
+                </Text>
+              </View>
+            </>
           )}
         </View>
       ))}
@@ -135,12 +148,12 @@ export const Table = ({ final, studentReport, course, hoursCourse, subjects }) =
           </>
         ) : (
           <>
-            <View style={stylesTable.row_column1_no_margin}>
+            <View style={stylesTable.row_column1_preschool}>
               <Text>Promedio general</Text>
             </View>
 
             <View style={stylesTable.row_column2_preschool}>
-              <Text>{parseFloat(studentReport?.final).toFixed(1)}</Text>
+              <Text>{parseFloat(final).toFixed(1)}</Text>
             </View>
             <View style={stylesTable.row_column3_preschool}>
               <Text style={{ fontSize: 10 }}>{assessment(final)}</Text>
