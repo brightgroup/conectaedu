@@ -19,7 +19,7 @@ export const Header = ({ institutions, student, course, code, folio }) => {
         </View>
         <View style={styles.container__subtitle}>
           <View style={styles.container__subtitle_comulmn1}>
-            <Text style={styles.title_bold}>INFORME FINAL DE EVALUACION</Text>
+            <Text style={styles.title_bold}>INFORME FINAL DE EVALUACIÓN</Text>
           </View>
           <View style={styles.container__subtitle_comulmn2}>
             <Text style={styles.title}>AÑO</Text>

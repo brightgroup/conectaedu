@@ -87,7 +87,7 @@ export const Table = ({ final, studentReport, course, hoursCourse, subjects }) =
                 <Text>{HourlyintensityFolio(coursesHours[index], filterSubjectsHours)?.toString()}</Text>
               </View>
               <View style={stylesTable.row_column3}>
-                <Text>{getValueFolios(studentReport[index], 'Final', 'Nota')}</Text>
+                <Text>{Number(getValueFolios(studentReport[index], 'Final', 'Nota')).toFixed(1)}</Text>
               </View>
               <View style={stylesTable.row_column4}>
                 <Text style={{ fontSize: 10 }}>
@@ -97,12 +97,11 @@ export const Table = ({ final, studentReport, course, hoursCourse, subjects }) =
             </>
           ) : (
             <>
-              //----
               <View style={stylesTable.row_column1_preschool}>
                 <Text>{getSubjectName(studentReport[index], course, 'curso') || subject}</Text>
               </View>
               <View style={stylesTable.row_column2_preschool}>
-                <Text>{getValueFolios(studentReport[index], 'Final', 'Nota')}</Text>
+                <Text>{Number(getValueFolios(studentReport[index], 'Final', 'Nota')).toFixed(1)}</Text>
               </View>
               <View style={stylesTable.row_column3_preschool}>
                 <Text style={{ fontSize: 10 }}>

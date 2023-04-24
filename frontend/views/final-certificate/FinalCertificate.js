@@ -65,13 +65,22 @@ export const FinalCertificate = () => {
 
   return (
     <>
-      <div className="flex flex-col bg-white w-fit p-20 mx-auto mt-20">
-        <h2 className="text-center form__title text-blue mb-6">Descargar folio por jornada</h2>
+      <div className="flex flex-col bg-white w-fit p-20 mx-auto mb-4">
+        <h2 className="text-center form__title text-blue mb-6">Descargar informe final</h2>
 
-        <button className="bg-gray-400 mb-8 rounded px-4 py-2">Descargar informe final</button>
-        {!!courses.length && (
-          <Select options={courses} initialValue="Seleciona curso" handleChange={e => handleSelect(e)} value={course} />
-        )}
+        <div className="flex justify-center flex-col items-center mb-4">
+          <p className="mb-3">
+            {!!courses.length ? 'Selecciona un curso de la lista para descargar' : 'Cargando información de cursos...'}
+          </p>
+          {!!courses.length && (
+            <Select
+              options={courses}
+              initialValue="Seleciona curso"
+              handleChange={e => handleSelect(e)}
+              value={course}
+            />
+          )}
+        </div>
 
         <div className="flex justify-center">
           {/* {show && (
