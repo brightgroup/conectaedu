@@ -10,3 +10,13 @@ export const toComparisonKey = (key = '') => removeAccents(key ? key?.trim().toL
 export const toSnakeCase = text => (text ? `${text.split(' ').join('_')}` : '')
 
 export const capitalized = word => (word ? word[0].toUpperCase() + word.slice(1) : '')
+
+export const capitalizeWords = text => {
+  // Split the text into words
+  let words = text.split(' ')
+  // iterate and capitalize each word
+  words?.forEach((word, index) => {
+    words[index] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+  })
+  return words.join(' ')
+}

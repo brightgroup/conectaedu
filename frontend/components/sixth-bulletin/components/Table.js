@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Text, View } from '@react-pdf/renderer'
 import { assessment, behaviorPerformanceFolio, HourlyintensityFolio } from 'utils/Bulletin'
 import { PRESCHOOL_GRADE } from 'constants/Bulletin'
+import { capitalizeWords } from 'utils/Text'
 import { stylesTable } from '.'
 import { FILTER_COURSES } from '..'
 
@@ -98,7 +99,7 @@ export const Table = ({ final, studentReport, course, hoursCourse, subjects }) =
           ) : (
             <>
               <View style={stylesTable.row_column1_preschool}>
-                <Text>{getSubjectName(studentReport[index], course, 'curso') || subject}</Text>
+                <Text>{capitalizeWords(getSubjectName(studentReport[index], course, 'curso') || subject)}</Text>
               </View>
               <View style={stylesTable.row_column2_preschool}>
                 <Text>{Number(getValueFolios(studentReport[index], 'Final', 'Nota')).toFixed(1)}</Text>
