@@ -26,7 +26,7 @@ export const FolioCourse = ({ institutions, folios }) => {
       {courses?.map((course, index) => (
         <Page className="" key={index}>
           <View style={styles.container}>
-            <Header institutions={institutions} course={folios[course]?.[0].curso} />
+            <Header institutions={institutions} course={course} />
             <Table students={folios[course]} />
           </View>
         </Page>

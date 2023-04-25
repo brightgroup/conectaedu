@@ -11,7 +11,7 @@ export const SixthBulletin = ({ institutions, subjects, course, folios, hoursCou
           <Header
             institutions={institutions}
             student={student.student}
-            course={FILTER_COURSES[course]}
+            course={course}
             code={index + 1}
             folio={student.folio}
           />
