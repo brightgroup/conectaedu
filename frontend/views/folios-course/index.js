@@ -4,17 +4,16 @@ import { StyleSheet } from '@react-pdf/renderer'
 
 export const buttons = [
   {
-    name: 'Generar Folios Libertador Mañana',
+    name: 'Libertador',
+    key: 'libertador'
   },
   {
-    name: 'Generar Folios Libertador Tarde',
-    colegio: 'LIBERTADOR',
-    jornada: 'TARDE',
+    name: 'Rondon',
+    key: 'rondon'
   },
   {
-    name: 'Generar Folios Rondon Mañana',
-    colegio: 'RONDON',
-    jornada: 'MAÑANA',
+    name: 'Sede central',
+    key: 'sedeCentral'
   },
 ]
 
