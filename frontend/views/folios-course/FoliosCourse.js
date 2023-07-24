@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { clearFolios, getFoliosMorning } from 'redux/grade/actions'
 import { getInstitutions } from 'redux/institutions/actions'
-import { DUPLICATE_STUDENTS, buttons } from '.'
+import { DUPLICATE_STUDENTS, buttons, orderCoursesHeadquarters } from '.'
 
 export const FoliosCourse = () => {
   const [show, setShow] = useState(false)
@@ -41,7 +41,7 @@ export const FoliosCourse = () => {
       name: 'Generar Folios Libertador Mañana',
     }))
   }
-
+  console.log("se esta ejecutando sirve el console")
   const filterFolios = () => {
     const libertador = Object.keys(folios).filter(item => item.includes("LIBERTADOR")).reduce((result, key) => {
       result[key] = folios[key];
@@ -56,11 +56,19 @@ export const FoliosCourse = () => {
       return result;
     }, {})
     setCampus({
-      libertador: deleteStudents(libertador),
+      libertador,
       rondon,
-      sedeCentral
+      sedeCentral: setOrder(sedeCentral)
     })
   }
+  const setOrder = (cohort) => {
+    const orderCourses = {}
+    orderCoursesHeadquarters.flatMap(item => {
+      orderCourses[item] = cohort[item]
+    })
+    return orderCourses
+  }
+
 
   const timerender = (button) => {
     setSelect(button)
@@ -68,14 +76,6 @@ export const FoliosCourse = () => {
     setTimeout(() => {
       setShowDownload(true)
     }, 5000);
-  }
-
-  const deleteStudents = (object) => {
-    const filterCourses = {}
-    const keys = Object.keys(object)
-    const filter = Object.keys(object).map(course => Object.keys(DUPLICATE_STUDENTS).includes(course) ? object?.[course].flatMap(item => DUPLICATE_STUDENTS?.[course].includes(item.student) && item.retirado === 0 ? [] : item) : object[course])
-    keys.forEach(item => { filterCourses[item] = filter[keys.indexOf(item)] })
-    return filterCourses
   }
 
   return (
