@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { clearFolios, getFoliosMorning } from 'redux/grade/actions'
 import { getInstitutions } from 'redux/institutions/actions'
-import { DUPLICATE_STUDENTS, buttons, orderCoursesHeadquarters } from '.'
+import { buttons, orderCoursesHeadquarters } from '.'
 
 export const FoliosCourse = () => {
   const [show, setShow] = useState(false)
@@ -41,7 +41,7 @@ export const FoliosCourse = () => {
       name: 'Generar Folios Libertador Mañana',
     }))
   }
-  console.log("se esta ejecutando sirve el console")
+
   const filterFolios = () => {
     const libertador = Object.keys(folios).filter(item => item.includes("LIBERTADOR")).reduce((result, key) => {
       result[key] = folios[key];
@@ -58,9 +58,10 @@ export const FoliosCourse = () => {
     setCampus({
       libertador,
       rondon,
-      sedeCentral: setOrder(sedeCentral)
+      sedeCentral:setOrder(sedeCentral)
     })
   }
+
   const setOrder = (cohort) => {
     const orderCourses = {}
     orderCoursesHeadquarters.flatMap(item => {
@@ -68,7 +69,6 @@ export const FoliosCourse = () => {
     })
     return orderCourses
   }
-
 
   const timerender = (button) => {
     setSelect(button)
