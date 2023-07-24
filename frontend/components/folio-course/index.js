@@ -9,3 +9,24 @@ export const styles = StyleSheet.create({
     width: '100%',
   },
 })
+
+export const initialFolioValue = {
+  libertador: 1,
+  rondon: 260,
+  sedeCentral: 366
+}
+
+export const orderCoursesHeadquarters = [
+  "C601",
+  "C602",
+  "C701",
+  "C702",
+  "C703",
+  "C801",
+  "C802",
+  "C901",
+  "C902",
+  "C1001",
+  "C1101",
+]
+

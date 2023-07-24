@@ -17,9 +17,7 @@ export const Header = ({ institutions, course }) => {
           <Text style={styles.subtitle}>{getInstitutionDescription(institutions, 'municipality')}</Text>
         </View>
         <View style={styles.container__header_color}>
-          <View style={styles.container__header_col1}>
-            <Text style={styles.subtitle}>TEMA</Text>
-          </View>
+          <View style={styles.container__header_col1} />
           <View style={styles.container__header_col2}>
             <Text style={styles.subtitle}>GRADO</Text>
           </View>

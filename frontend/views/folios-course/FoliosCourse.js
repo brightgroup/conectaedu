@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { clearFolios, getFoliosMorning } from 'redux/grade/actions'
 import { getInstitutions } from 'redux/institutions/actions'
-import { buttons, styles } from '.'
+import { DUPLICATE_STUDENTS, buttons } from '.'
 
 export const FoliosCourse = () => {
   const [show, setShow] = useState(false)
@@ -56,7 +56,7 @@ export const FoliosCourse = () => {
       return result;
     }, {})
     setCampus({
-      libertador,
+      libertador: deleteStudents(libertador),
       rondon,
       sedeCentral
     })
@@ -68,6 +68,14 @@ export const FoliosCourse = () => {
     setTimeout(() => {
       setShowDownload(true)
     }, 5000);
+  }
+
+  const deleteStudents = (object) => {
+    const filterCourses = {}
+    const keys = Object.keys(object)
+    const filter = Object.keys(object).map(course => Object.keys(DUPLICATE_STUDENTS).includes(course) ? object?.[course].flatMap(item => DUPLICATE_STUDENTS?.[course].includes(item.student) && item.retirado === 0 ? [] : item) : object[course])
+    keys.forEach(item => { filterCourses[item] = filter[keys.indexOf(item)] })
+    return filterCourses
   }
 
   return (
@@ -92,7 +100,7 @@ export const FoliosCourse = () => {
               {
                 select && showDownload ? <div className="flex justify-center">
                   {show && (
-                    <PDFDownloadLink fileName={`FOLIOS`} document={<FolioCourse institutions={institutions} folios={campus[select]} />}>
+                    <PDFDownloadLink fileName={`FOLIOS`} document={<FolioCourse institutions={institutions} folios={campus[select]} render={select} />}>
                       <button className={`px-3 py-1 text-white bg-gray-600 rounded pointer`}>Descargar</button>
                     </PDFDownloadLink>
                   )}
