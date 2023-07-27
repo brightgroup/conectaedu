@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getFoliosMorning } from 'redux/grade/actions'
 import { SixthBulletin } from 'components/sixth-bulletin'
 import { getInstitutions } from 'redux/institutions/actions'
-import { styles } from '.'
+import { FOLIO_NUMBER, styles } from '.'
 import { getSubjects } from 'redux/subjects/actions'
 import { Select } from 'components/select'
 
@@ -53,15 +53,7 @@ export const FinalCertificate = () => {
     setShow(true)
   }
 
-  let folio = 1
-
-  for (const course in folios) {
-    const students = folios[course]
-    for (const studet of students) {
-      studet.folio = folio
-      folio++
-    }
-  }
+  console.log(course ,FOLIO_NUMBER[course])
 
   return (
     <>
@@ -81,13 +73,7 @@ export const FinalCertificate = () => {
             />
           )}
         </div>
-
         <div className="flex justify-center">
-          {/* {show && (
-            <PDFDownloadLink fileName={`FOLIOS`} document={<FolioCourse institutions={institutions} folios={folios} />}>
-            <button className={`px-3 py-1 text-white bg-gray-600 rounded pointer`}>Descargar</button>
-            </PDFDownloadLink>
-          )} */}
         </div>
       </div>
       {show && (
@@ -95,6 +81,7 @@ export const FinalCertificate = () => {
           <SixthBulletin
             institutions={institutions}
             folios={folios[course]}
+            folio={FOLIO_NUMBER[course]}
             subjects={subjects}
             course={course.replace(/\s+/g, '')}
           />

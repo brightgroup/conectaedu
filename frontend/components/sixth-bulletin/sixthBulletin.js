@@ -3,7 +3,7 @@ import { Document, Page, View } from '@react-pdf/renderer'
 import { Contancy, Description, Table, Header } from './components'
 import { FILTER_COURSES, styles } from '.'
 
-export const SixthBulletin = ({ institutions, subjects, course, folios, hoursCourse }) => {
+export const SixthBulletin = ({ institutions, subjects, course, folios, hoursCourse, folio }) => {
   return (
     <Document>
       {folios.map((student, index) => (
@@ -13,7 +13,7 @@ export const SixthBulletin = ({ institutions, subjects, course, folios, hoursCou
             student={student.student}
             course={course}
             code={index + 1}
-            folio={student.folio}
+            folio={folio + index}
           />
           <View style={styles.container}>
             <Description
